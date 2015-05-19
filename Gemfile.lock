@@ -91,6 +91,7 @@ GEM
       execjs
     coffee-script-source (1.9.1.1)
     dalli (1.1.5)
+    declarative_authorization (0.5.7)
     devise (3.4.1)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -215,7 +216,10 @@ PLATFORMS
 
 DEPENDENCIES
   af_devise!
+  af_rails (~> 11.1)!
+  af_runtime (~> 5.18)!
   coffee-rails (~> 4.0.0)
+  declarative_authorization (~> 0.5.7)
   jbuilder (~> 1.2)
   jquery-rails
   mysql2 (= 0.3.15)
