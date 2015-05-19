@@ -1,0 +1,18 @@
+<%
+  users_hash = {
+    'admin' => {
+      :email              => 'admin@appfolio.com',
+      :name               => 'Admin User',
+      :mobile_number      => '805-555-1212',
+      :encrypted_password => User.new(:password => 'Appfolio55%').encrypted_password,
+      :user_roles         => 'OpsApp Admin'
+    },
+    'guest' => {
+      :email              => 'guest@appfolio.com',
+      :name               => 'Guest User',
+      :mobile_number      => '805-555-1212',
+      :encrypted_password => User.new(:password => 'Appfolio55%').encrypted_password,
+      :user_roles         => ''
+    }
+  }
+%>
