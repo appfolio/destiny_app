@@ -11,3 +11,8 @@
  *= require_self
  *= require_tree .
  */
+
+.top-buffer
+{
+  margin-top:20px;
+}

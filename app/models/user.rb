@@ -26,7 +26,6 @@ class User < ActiveRecord::Base
     OPSAPP_ADMIN = "OpsApp Admin"
   end
 
-  # Include default devise modules. Others available are:
   attr_accessor :remote_login
 
   devise :database_authenticatable, :rememberable, :trackable, :timeoutable, :timeout_in => 4.hours
