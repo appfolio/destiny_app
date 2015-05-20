@@ -13,7 +13,6 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.string   "authentication_token"
       t.string   "name"
       t.string   "mobile_number"
-      t.string   "user_roles"
       t.timestamps
     end
 

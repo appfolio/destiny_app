@@ -25,7 +25,6 @@ ActiveRecord::Schema.define(version: 20150519170846) do
     t.string   "authentication_token"
     t.string   "name"
     t.string   "mobile_number"
-    t.string   "user_roles"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

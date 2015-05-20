@@ -20,12 +20,6 @@
 #
 
 class User < ActiveRecord::Base
-  using_access_control
-
-  class ROLE
-    OPSAPP_ADMIN = "OpsApp Admin"
-  end
-
   attr_accessor :remote_login
 
   devise :database_authenticatable, :rememberable, :trackable, :timeoutable, :timeout_in => 4.hours
@@ -52,21 +46,5 @@ class User < ActiveRecord::Base
 
   def self.format_options
     { :methods => :name, :only => [:email, :id, :mobile_number, :user_roles] }
-  end
-
-  def roles
-    !user_roles.to_s.empty? ? user_roles.split(',') : []
-  end
-
-  def has_role?(r)
-    roles.include? r
-  end
-
-  def role_symbols
-    if has_role? User::ROLE::OPSAPP_ADMIN
-      [:opsapp_admin]
-    else
-      [:guest]
-    end
   end
 end
