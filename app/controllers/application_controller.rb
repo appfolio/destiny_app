@@ -47,7 +47,7 @@ class ApplicationController < ActionController::Base
   end
 
   def permission_denied
-    msg = "Sorry, but you are not authorized for that content.  Contact WebOps if you think you should be."
+    msg = "Sorry, but you are not authorized for that content."
     respond_to do |format|
       format.json { render :json => { :error => msg, :status => 403 } }
       format.xml { render :xml => { :error => msg, status: 403 } }

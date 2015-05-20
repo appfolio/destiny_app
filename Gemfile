@@ -5,6 +5,11 @@ gem 'af_rails', '~> 11.1', source: "https://gemini.atl.appfolio.net"
 gem 'af_runtime', '~> 5.18', source: "https://gemini.atl.appfolio.net"
 gem 'declarative_authorization', '~> 0.5.7'
 
+# Front end
+gem "therubyracer"
+gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
+gem "twitter-bootstrap-rails"
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.13'
 

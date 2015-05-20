@@ -8,7 +8,27 @@
 </head>
 <body>
 
-<%= yield %>
+  <%= nav_bar brand: "Destiny", brand_link: new_user_session_path,
+    responsive: true, static: :top do %>
+    <%= menu_group do %>
+      <%= menu_item "Home", authenticated_root_path %>
+      <%= menu_item "Reference", "#" %>
+      <%= menu_item "Challenges", "#" %>
+    <% if current_user %>
+      <%= menu_item "Log Out", destroy_user_session_path %>
+    <% else %>
+      <%= menu_group pull: :right do %>
+        <%= menu_item "Sign In", new_user_session_path %>
+      <% end %>
+    <% end %>
+    <% end %>
+  <% end %>
+
+  <%= bootstrap_flash %>
+
+  <div style="text-align:center">
+    <%= yield %>
+  </div>
 
 </body>
 </html>
