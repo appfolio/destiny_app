@@ -1,6 +1,10 @@
 DestinyApp::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  config.after_initialize do
+    Devise::RemoteAuthenticatable::RemoteResource.site = "https://login.admin.appfolio.com"
+  end
+
   # Code is not reloaded between requests.
   config.cache_classes = true
 

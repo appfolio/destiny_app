@@ -1,8 +1,10 @@
 source 'https://rubygems.org'
 
-gem 'af_devise', source: "https://gemini.atl.appfolio.net"
-gem 'af_rails', '~> 11.1', source: "https://gemini.atl.appfolio.net"
-gem 'af_runtime', '~> 5.18', source: "https://gemini.atl.appfolio.net"
+source "https://gemini.atl.appfolio.net" do
+  gem 'af_devise'
+  gem 'af_rails', '~> 11.1'
+  gem 'af_runtime', '~> 5.18', source: "https://gemini.atl.appfolio.net"
+end
 
 # Front end
 gem "therubyracer"
