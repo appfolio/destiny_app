@@ -4,4 +4,8 @@ class ReferencesController < ApplicationController
 
   def sqli
   end
+
+  def exec_sqli
+    Chest.calculate(:sum, params[:column])
+  end
 end

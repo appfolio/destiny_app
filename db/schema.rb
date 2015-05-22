@@ -11,7 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150519170846) do
+ActiveRecord::Schema.define(version: 20150521230315) do
+
+  create_table "chests", force: true do |t|
+    t.string   "size"
+    t.string   "color"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "email",                            default: "", null: false

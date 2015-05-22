@@ -1,3 +1,41 @@
-<h1>Welcome <%= current_user.name %></h1>
-<h2>SQL Injection Reference Page</h2>
-<p></p>
+<script>
+  function submit_sqli()
+  {
+    console.log("sending")
+    $.ajax({
+      method: "POST",
+      url: "exec_sqli",
+      data: { column: $("#sqli").txt }
+    })
+    .done(function(msg){
+      console.log(msg);
+    });
+  }
+
+</script>
+
+<div class="row">
+  <div class="col-xs-4 col-md-offset-4 title">
+    <h1>Welcome <%= current_user.name %></h1>
+    <h2>SQL Injection Reference Page</h2>
+    <hr/>
+  </div>
+  <div class="col-xs-4 col-md-offset-4">
+    <h2>Input Area</h2>
+    <form action="" class="horizontal-form">
+      <input type="text" id="sqli" />
+      <input type="button" class="btn" onclick="submit_sqli()" value="send" />
+    </form>
+    <hr/>
+  </div>
+  <div class="bg-info col-xs-4 col-md-offset-4">
+    <h2>Info</h2>
+    <p>Explain SQL Injection</p>
+    <hr/>
+  </div>
+  <div class="col-xs-4 col-md-offset-4">
+    <h2>Sources and Additional Information</h2>
+    <p>Cite sources and display links to additional resources</p>
+    <hr/>
+  </div>
+</div>
