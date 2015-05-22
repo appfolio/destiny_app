@@ -32,8 +32,7 @@ class User < ActiveRecord::Base
 
   def after_remote_authentication(remote_user)
     self.name       = "#{remote_user.first_name} #{remote_user.last_name}"
-    self.user_roles = remote_user.respond_to?(:user_roles) ? remote_user.user_roles : ''
-    Authorization.current_user = self
+    current_user = self
   end
 
   def to_json(options = {})
