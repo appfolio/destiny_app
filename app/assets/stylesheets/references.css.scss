@@ -2,5 +2,22 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+table.CodeRay
+{
+  width: 100%;
+}
+
+td.line-numbers
+{
+  text-align:center;
+  width:38px;
+}
+
 .title
 {text-align:center;}
+
+.sql-example
+{
+  padding-left:30px;
+  padding-right:30px;
+}

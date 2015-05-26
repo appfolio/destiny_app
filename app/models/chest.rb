@@ -1,3 +1,5 @@
 class Chest < ActiveRecord::Base
-  attr_accessor :size, :color
+  def to_str
+    "#{size} #{color} chest"
+  end
 end
