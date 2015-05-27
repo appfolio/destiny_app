@@ -22,8 +22,8 @@
           Some information provided by other websites regarding sql injection is no
           longer relevant to rails. Specifically you can no longer insert ';' into
           active record method calls and ignore the rest of the activerecord generated
-          query syntax. However, you can still use <kbd>'#'</kbd> and <kbd>'-- '</kbd> to comment out the
-          rest of the query.
+          query. However, you can still use comment delimiters like <kbd>'#'</kbd>
+          and <kbd>'-- '</kbd> for mysql to comment out the rest of the query.
         </p>
         <kbd>') OR '1'='1</kbd><br/>
         <kbd>Large') UNION select id, email, encrypted_password, name, mobile_number from users where ('1'='1</kbd>
