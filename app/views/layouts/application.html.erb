@@ -7,30 +7,47 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-  <% if current_user %>
-    <%= nav_bar brand: "Destiny", brand_link: new_user_session_path,
-      responsive: true, static: :top do %>
-      <%= menu_group do %>
-        <%= menu_item "Home", authenticated_root_path %>
-        <%= menu_item "Reference", references_path %>
-        <%= menu_item "Challenges", "#" %>
-        <%= menu_item "Log Out", destroy_user_session_path %>
+  <nav class="navbar navbar-default navbar-static-top">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <% if current_user %>
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+          <%= link_to "Destiny", authenticated_root_path, class: "navbar-brand" %>
+        <% else %>
+          <%= link_to "Destiny", unauthenticated_root_path, class: "navbar-brand" %>
+        <% end %>
+      </div>
+      <% if current_user %>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li><%= link_to "References", references_path %></li>
+          <li><%= link_to "Challenges", "#" %></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><%= link_to "Log Out", destroy_user_session_path %></li>
+        </ul>
+      </div><!-- /.navbar-collapse -->
       <% end %>
-    <% end %>
-  <% else %>
-    <%= nav_bar brand: "Destiny", brand_link: new_user_session_path, static: :top %>
-  <% end %>
-
+    </div><!-- /.container-fluid -->
+  </nav>
 
   <div class="container">
-    <div class="row top-buffer">
-      <div class="col-xs-4 col-md-offset-4">
-        <%= bootstrap_flash %>
+    <% if flash.present? %>
+      <div class="row">
+        <div class="col-xs-8 col-xs-offset-2">
+          <%= flash_messages %>
+        </div>
       </div>
-    </div>
+    <% end %>
     <div class="row">
-      <div class="col-xs-4 col-md-offset-4">
+      <div class="col-xs-10 col-xs-offset-1">
         <%= yield %>
       </div>
     </div>

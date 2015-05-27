@@ -6,6 +6,8 @@ class ReferencesController < ApplicationController
   end
 
   def exec_sqli
-    Chest.calculate(:sum, params[:column])
+    output = Chest.where("size = '#{params[:column]}'")
+
+    render text: output.to_a
   end
 end

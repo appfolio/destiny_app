@@ -1,27 +1,43 @@
 <div class="row">
-  <div class="col-xs-12" style="text-align:center;">
-    <h2>Log in</h2>
+  <div class="col-xs-12">
 
-    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-      <div class="field">
-        <%= f.label :email %><br />
-        <%= f.email_field :email, autofocus: true %>
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name),
+                 html: {class:"form-horizontal"}) do |f| %>
+      <div class="row text-center">
+        <div class="col-xs-offset-2 cols-xs-10">
+          <h2>Sign in to start</h2>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :email, class: "col-xs-2 control-label" %>
+        <div class="col-xs-10">
+          <%= f.text_field :email, autofocus: true, validate: false, class: "form-control" %>
+        </div>
       </div>
 
-      <div class="field">
-        <%= f.label :password %><br />
-        <%= f.password_field :password, autocomplete: "off" %>
+      <div class="form-group">
+        <%= f.label :password, class: "col-xs-2 control-label" %>
+        <div class="col-xs-10">
+          <%= f.password_field :password, class: "form-control" %>
+        </div>
       </div>
 
       <% if devise_mapping.rememberable? -%>
-        <div class="field">
-          <%= f.label :remember_me, :class => "checkbox inline" %>
-          <%= f.check_box :remember_me %>
+        <div class="form-group">
+          <div class="col-xs-offset-2 col-xs-10">
+            <div class="checkbox">
+              <%= f.label :remember_me do %>
+                <%= f.check_box :remember_me %> Remember me
+              <% end %>
+            </div>
+          </div>
         </div>
       <% end -%>
 
-      <div class="actions">
-        <%= f.submit "Log in" %>
+      <div class="form-group">
+        <div class="col-xs-offset-2 col-xs-10">
+          <%= f.submit "Log in", class: "btn btn-default" %>
+        </div>
       </div>
     <% end %>
 
