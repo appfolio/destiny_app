@@ -1,6 +1,5 @@
 function submit_sqli()
 {
-  console.log("sending");
   $.ajax({
     type: "POST",
     url: "exec_sqli",
@@ -8,5 +7,18 @@ function submit_sqli()
   })
   .done(function(msg){
     console.log(msg);
+    $("#display").hide();
+    $("#display").text(msg);
+    $("#display").show("fast");
   });
 }
+
+$(document).ready(function(){
+  $("#sqli").keypress(function(event) {
+    console.log(event.keyCode);
+    if(event.keyCode == 13)
+    {
+      submit_sqli();
+    }
+  });
+});

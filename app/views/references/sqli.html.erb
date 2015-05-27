@@ -1,28 +1,35 @@
 <div class="row">
-  <div class="col-xs-4 col-md-offset-4 title">
+  <div class="col-xs-12 title">
     <h1>Welcome <%= current_user.name %></h1>
     <h2>SQL Injection Reference Page</h2>
     <hr/>
   </div>
-  <div class="col-xs-4 col-md-offset-4">
-    <h2>Input Area</h2>
-    <div class="horizontal-form">
-      <input type="text" id="sqli" />
-      <input type="button" class="btn" onclick="submit_sqli()" value="send" />
+  <div class="col-xs-12">
+    <div class="input-group">
+      <input type="text" id="sqli" class="form-control" placeholder="Injection goes here">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button" onclick="submit_sqli()">send</button>
+      </span>
+    </div><!-- /input-group -->
+    <div class="alert alert-success" id="display">
     </div>
     <hr/>
   </div>
-  <div class="col-xs-4 col-md-offset-4">
-    <div class="bg-info">
-      <p>
-        Some information provided by other websites regarding sql injection in rails
-        has become outdated. Specifically you can no longer insert ';' or '--' into
-        active record method calls and ignore the rest of the activerecord generated
-        query syntax.
-      </p>
+  <div class="col-xs-12">
+    <div class="panel panel-default">
+      <div class="panel-body alert-warning">
+        <p>
+          Some information provided by other websites regarding sql injection is no
+          longer relevant to rails. Specifically you can no longer insert ';' into
+          active record method calls and ignore the rest of the activerecord generated
+          query syntax. However, you can still use <kbd>'#'</kbd> and <kbd>'-- '</kbd> to comment out the
+          rest of the query.
+        </p>
+        <kbd>') OR '1'='1</kbd><br/>
+        <kbd>Large') UNION select id, email, encrypted_password, name, mobile_number from users where ('1'='1</kbd>
+      </div>
     </div>
-    <div class="sql-example">
-      <%
+    <%
         string = <<-CODE
 def exec_sqli
   # Safe usage of where method
@@ -37,16 +44,14 @@ def exec_sqli
 
   render text: output.to_a
 end
-        CODE
-      %>
-      <%= raw CodeRay.scan(string, :ruby).div(line_numbers: :table) %>
+    CODE
+  %>
+    <%= raw CodeRay.scan(string, :ruby).div(line_numbers: :table) %>
 
+<hr/>
   </div>
-    <hr/>
-  </div>
-  <div class="col-xs-4 col-md-offset-4">
+  <div class="col-xs-12 title">
     <h2>Sources and Additional Information</h2>
     <p>Cite sources and display links to additional resources</p>
-    <hr/>
   </div>
 </div>

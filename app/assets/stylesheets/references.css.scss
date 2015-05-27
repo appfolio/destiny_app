@@ -5,12 +5,21 @@
 table.CodeRay
 {
   width: 100%;
+  border:1px solid #dddddd;
 }
 
 td.line-numbers
 {
   text-align:center;
   width:38px;
+  border-right:1px solid #dddddd;
+}
+
+.CodeRay pre
+{
+  border-radius:0;
+  border:none;
+  margin:0;
 }
 
 .title
@@ -20,4 +29,10 @@ td.line-numbers
 {
   padding-left:30px;
   padding-right:30px;
+}
+
+#display
+{
+  display: none;
+  margin-top:20px;
 }
