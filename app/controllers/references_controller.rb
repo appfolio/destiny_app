@@ -19,13 +19,30 @@ class ReferencesController < ApplicationController
     end
   end
 
-  def where
-    output = Chest.where("size = '#{params[:column]}'")
-
-    render text: output.to_a
+  Queries.each do |q|
+    class_eval <<-RUBY
+      def #{q[:input_form][:action_url]}
+        begin
+          query = #{q[:query]}
+          result = #{q[:output]}
+          @sql = last_sql
+          render partial: "query_result", object: result
+        rescue => e
+          @error = e
+          @sql = last_sql
+          render partial: "query_error"
+        end
+      end
+    RUBY
   end
 
   private
+
+  def last_sql
+    sql = $last_sql
+    $last_sql = nil
+    sql
+  end
 
   def within_queries_range num
     num.is_a?(Fixnum) && num > -1 && num < Queries.size

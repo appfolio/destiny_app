@@ -9,6 +9,10 @@
       </span>
     </div><!-- /input-group -->
     <div class="alert alert-success" id="display" style="margin-bottom:0;">
+      <p id="display-sql">
+      </p>
+      <p id="display-query">
+      </p>
     </div>
   </div>
 </div>
@@ -27,7 +31,7 @@
       </div>
 
       <div class="panel-footer">
-        <span class="label label-info clickable" id="hint-toggle-link">Hint</span>
+        <span class="label label-info clickable" id="hint-toggle-link">Examples</span>
         <div style="display:none;margin-top:10px;" id="hint">
           <% if query[:hint][:input][:name] %>
             <p>The following input is for <%= query[:hint][:input][:name] %></p>

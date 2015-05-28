@@ -3,9 +3,10 @@
 Queries = [
   {
     input_form: {action_url: :where},
+    output: "query.to_a",
     name: "Where method",
     link: "http://api.rubyonrails.org/classes/ActiveRecord/QueryMethods.html#method-i-where",
-    query: "Chest.where(size = '\#{params[:column]}')",
+    query: 'Chest.where("size = \'#{params[:column]}\'")',
     hint: {
       input: {name: "params[:column]", example: ["') OR '1'='1", "Large') UNION select id, email, encrypted_password, name, mobile_number from users where ('1'='1"]},
       text: "This example returns all records, or in the case of the union returns user information."
@@ -34,11 +35,13 @@ end
           and '-- ' for mysql to comment out the rest of the query.
     HTML
   },
+
   {
     input_form: {action_url: :calculate},
+    output: "query",
     name: "Calculate method",
     link: "link to calculate activerecord doc",
-    query: "Chest.calculate(:sum, '\#{params[:column]}')",
+    query: 'Chest.calculate(:sum, "#{params[:column]}")',
     hint: {
       input: {name: "params[:column]", example: ["nothing yet", "nothing yet"]},
       example: "Explain how the injection works, what it accomplishes."
@@ -49,7 +52,7 @@ end
       description: <<-CODE
 def exec_sqli
   # Unsafe use of calculate method
-  output = Chest.calculate(:sum, "\#{params[:column]}")
+  output = Chest.calculate(:sum, '\#{params[:column]}')
 
   render text: output.to_a
 end
