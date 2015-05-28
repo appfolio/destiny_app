@@ -1,0 +1,71 @@
+<div class="row">
+  <div class="col-xs-12">
+    <div class="input-group">
+      <input type="text" id="sqli" target="<%= query[:input_form][:action_url] %>"
+      class="form-control" placeholder="Injection goes here">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button"
+          onclick="submit_sqli('<%= query[:input_form][:action_url] %>')">send</button>
+      </span>
+    </div><!-- /input-group -->
+    <div class="alert alert-success" id="display" style="margin-bottom:0;">
+      <p id="display-sql">
+      </p>
+      <p id="display-query">
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="row top-buffer">
+  <div class="col-xs-12">
+    <div class="panel panel-default">
+      <div class="panel-heading text-right">
+        <b class="pull-left"><%= query[:name] %></b>
+        <%= link_to query[:link], target: "_blank" do %>
+          Documentation <span class="glyphicon glyphicon-book"></span>
+        <% end %>
+      </div>
+      <div class="panel-body">
+        <%= query[:desc] %>
+      </div>
+
+      <div class="panel-footer">
+        <span class="label label-info clickable" id="hint-toggle-link">Examples</span>
+        <div style="display:none;margin-top:10px;" id="hint">
+          <% if query[:hint][:input][:name] %>
+            <p>The following input is for <%= query[:hint][:input][:name] %></p>
+          <% end %>
+          <p><%= query[:hint][:text] %></p>
+          <% query[:hint][:input][:example].each do |ex| %>
+            <p><kbd><%= ex %></kbd></p>
+          <% end %>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="row" style="padding-bottom:20px;">
+  <div class="col-xs-12">
+    <p class="lead text-center">The Activerecord method call...</p>
+    <%= raw CodeRay.scan(query[:query], :ruby).div(line_numbers: :table) %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <p class="lead text-center">Sources and Additional Information</p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <%= raw CodeRay.scan(query[:footer][:description], :ruby).div(line_numbers: :table) %>
+  </div>
+  <div class="col-xs-12 text-center top-buffer">
+    <p><%= query[:footer][:sources] %></p>
+    <p><%= query[:footer][:valid_date] %></p>
+  </div>
+</div>

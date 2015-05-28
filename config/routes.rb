@@ -13,7 +13,10 @@ DestinyApp::Application.routes.draw do
 
   get 'references/' => 'references#index'
   get 'references/sqli' => 'references#sqli'
-  post 'references/exec_sqli' => 'references#exec_sqli'
+
+  Queries.each do |query|
+    post "references/#{query[:input_form][:action_url]}" => "references##{query[:input_form][:action_url]}"
+  end
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
