@@ -1,8 +1,8 @@
-function submit_sqli()
+function submit_sqli(action_url)
 {
   $.ajax({
     type: "POST",
-    url: "exec_sqli",
+    url: action_url,
     data: { column: $("#sqli").val() }
   })
   .done(function(msg){
@@ -13,12 +13,20 @@ function submit_sqli()
   });
 }
 
-$(document).ready(function(){
+function set_listeners()
+{
   $("#sqli").keypress(function(event) {
-    console.log(event.keyCode);
     if(event.keyCode == 13)
     {
-      submit_sqli();
+      var target = $("#sqli").attr('target');
+      submit_sqli(target);
     }
   });
-});
+
+  $("#hint-toggle-link").click(function(){
+    console.log("tog", "fast")
+    $("#hint").toggle();
+  });
+}
+
+$(document).on("ready page:load", set_listeners);

@@ -4,54 +4,42 @@
     <h2>SQL Injection Reference Page</h2>
     <hr/>
   </div>
+</div>
+
+<div class="row">
   <div class="col-xs-12">
-    <div class="input-group">
-      <input type="text" id="sqli" class="form-control" placeholder="Injection goes here">
-      <span class="input-group-btn">
-        <button class="btn btn-default" type="button" onclick="submit_sqli()">send</button>
-      </span>
-    </div><!-- /input-group -->
-    <div class="alert alert-success" id="display">
-    </div>
-    <hr/>
+    <%= render partial: "query_reference", locals: { query: @query } %>
   </div>
+</div>
+
+<div class="row">
   <div class="col-xs-12">
-    <div class="panel panel-default">
-      <div class="panel-body alert-warning">
-        <p>
-          Some information provided by other websites regarding sql injection is no
-          longer relevant to rails. Specifically you can no longer insert ';' into
-          active record method calls and ignore the rest of the activerecord generated
-          query. However, you can still use comment delimiters like <kbd>'#'</kbd>
-          and <kbd>'-- '</kbd> for mysql to comment out the rest of the query.
-        </p>
-        <kbd>') OR '1'='1</kbd><br/>
-        <kbd>Large') UNION select id, email, encrypted_password, name, mobile_number from users where ('1'='1</kbd>
-      </div>
-    </div>
-    <%
-        string = <<-CODE
-def exec_sqli
-  # Safe usage of where method
-  # output = Chest.where(size: params[:column])
-  # output = Chest.where("size = ?", params[:column])
+    <nav>
+      <ul class="pager">
+        <% if @ref_num == 0 %>
+          <li class="previous disabled">
+            <%= link_to "<span aria-hidden='true'>&larr;</span> Previous".html_safe,
+              "#", html_options: {class: "disabled"} %>
+          </li>
+        <% else %>
+          <li class="previous">
+            <%= link_to "<span aria-hidden='true'>&larr;</span> Previous".html_safe,
+              references_sqli_path(ref_num: @ref_num - 1) %>
+          </li>
+        <% end %>
 
-  # Unsafe use of where method
-  output = Chest.where("size = '\#{params[:column]}'")
-
-  # Unsafe use of calculate method
-  # output = Chest.calculate(:sum, "#{params[:column]}")
-
-  render text: output.to_a
-end
-    CODE
-  %>
-    <%= raw CodeRay.scan(string, :ruby).div(line_numbers: :table) %>
-
-<hr/>
-  </div>
-  <div class="col-xs-12 title">
-    <h2>Sources and Additional Information</h2>
-    <p>Cite sources and display links to additional resources</p>
+        <% if @ref_num == Queries.size-1 %>
+          <li class="next disabled">
+            <%= link_to "Next <span aria-hidden='true'>&rarr;</span>".html_safe,
+              "#", html_options: {class: "disabled", onclick: "reset_submit_listener()" } %>
+          </li>
+        <% else %>
+          <li class="next">
+            <%= link_to "Next <span aria-hidden='true'>&rarr;</span>".html_safe,
+              references_sqli_path(ref_num: @ref_num + 1) %>
+          </li>
+        <% end %>
+      </ul>
+    </nav>
   </div>
 </div>
