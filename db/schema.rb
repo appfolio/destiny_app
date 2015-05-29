@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150521230315) do
+ActiveRecord::Schema.define(version: 20150528235337) do
 
   create_table "chests", force: true do |t|
     t.string   "size"
