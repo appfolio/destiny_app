@@ -56,7 +56,7 @@
 
 <div class="row">
   <div class="col-xs-12">
-    <p class="lead text-center">Sources and Additional Information</p>
+    <p class="lead text-center">Countermeasures</p>
   </div>
 </div>
 
@@ -65,7 +65,9 @@
     <%= raw CodeRay.scan(query[:footer][:description], :ruby).div(line_numbers: :table) %>
   </div>
   <div class="col-xs-12 text-center top-buffer">
-    <p><%= query[:footer][:sources] %></p>
-    <p><%= query[:footer][:valid_date] %></p>
+    <% query[:footer][:sources].each do |src| %>
+      <p><%= link_to src, src %></p>
+    <% end %>
+    <p>Valid as of Rails 4.0.13</p>
   </div>
 </div>

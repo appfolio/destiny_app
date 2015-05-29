@@ -3,7 +3,7 @@ function submit_sqli(action_url)
   $.ajax({
     type: "POST",
     url: action_url,
-    data: { column: $("#sqli").val() }
+    data: { column: $("#sqli").val(), id: $("#sqli").val() }
   })
   .done(function(msg){
     //console.log(msg);

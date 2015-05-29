@@ -32,11 +32,18 @@ class ReferencesController < ApplicationController
           @sql = last_sql
           render partial: "query_error"
         end
+
+        reset_db
       end
     RUBY
   end
 
   private
+
+  def reset_db
+    Chest.delete_all
+    load File.join(Rails.root, "db/seeds.rb")
+  end
 
   def last_sql
     sql = $last_sql
