@@ -42,7 +42,8 @@ end
           Some information provided by other websites regarding sql injection is
           not relevant to rails. Specifically you can't insert ';' into Active
           Record method calls and have multiple queries executed in that single
-          method call. However, you can still use comment delimiters like '#'
+          method call (AKA query stacking).
+          However, you can still use comment delimiters like '#'
           and '-- ' for mysql to comment out the rest of the query. Make sure you
           parameterize your input to every Active Record method, or use a hash
           to pass in values. See the countermeasures code.
@@ -156,35 +157,4 @@ end
       and then are deleted. The countermeasures here are the same as for most
       queries.
     HTML
-  },
-
-  {
-    input_form: {action_url: :nowhere},
-    output: "query",
-    name: " method",
-    link: "http://api.rubyonrails.org/classes/ActiveRecord/Relation.html",
-    query: 'Chest.where("id = #{params[:id]}")',
-    hint: {
-      input: {name: "params[:id].",
-              example: ["not done"]}
-    },
-    footer: {
-      sources: ["",
-                ""],
-      description: <<-CODE
-def exec_sqli
-  # Unsafe use of method
-
-  # Safe usage of method
-
-
-  render text: output.to_a
-end
-    CODE
-    },
-    desc: <<-HTML
-      method description
-    HTML
-  }
-
-]
+  }]
