@@ -42,14 +42,13 @@
           <% end %>
         </div>
       </div>
-
     </div>
   </div>
 </div>
 
 <div class="row" style="padding-bottom:20px;">
   <div class="col-xs-12">
-    <p class="lead text-center">The Activerecord method call...</p>
+    <p class="lead text-center">The ActiveRecord method call...</p>
     <%= raw CodeRay.scan(query[:query], :ruby).div(line_numbers: :table) %>
   </div>
 </div>
@@ -66,8 +65,8 @@
   </div>
   <div class="col-xs-12 text-center top-buffer">
     <% query[:footer][:sources].each do |src| %>
-      <p><%= link_to src, src %></p>
+      <p><%= link_to src, src, target: :_blank %></p>
     <% end %>
-    <p>Valid as of Rails 4.0.13</p>
+    <p>Tested on Rails 4.0.13</p>
   </div>
 </div>

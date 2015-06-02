@@ -42,6 +42,7 @@ class ReferencesController < ApplicationController
 
   def reset_db
     Chest.delete_all
+    Item.delete_all
     load File.join(Rails.root, "db/seeds.rb")
   end
 
