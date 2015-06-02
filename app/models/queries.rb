@@ -12,8 +12,7 @@ Queries = [
       text: "This example returns all records, and the union query returns user information."
     },
     footer: {
-      sources: ["http://api.rubyonrails.org/classes/ActiveRecord/QueryMethods.html#method-i-where",
-                "https://dev.mysql.com/doc/refman/5.1/en/comments.html"],
+      sources: ["https://dev.mysql.com/doc/refman/5.1/en/comments.html"],
       description: <<-CODE
 def exec_sqli
   # Safe usages of where method. It is recommended to use
@@ -61,8 +60,7 @@ end
               example: ["`id`) AS sum_id FROM `users`#","id) from users#"]}
     },
     footer: {
-      sources: ["http://api.rubyonrails.org/classes/ActiveRecord/Calculations.html#method-i-calculate",
-                "https://dev.mysql.com/doc/refman/5.1/en/grant.html"],
+      sources: ["https://dev.mysql.com/doc/refman/5.1/en/grant.html"],
       description: <<-CODE
 def exec_sqli
   # Unsafe use of calculate method
@@ -102,8 +100,7 @@ end
               example: ["1 OR 1=1", "1 OR 1=1)--&nbsp;".html_safe]}
     },
     footer: {
-      sources: ["http://api.rubyonrails.org/classes/ActiveRecord/Relation.html#method-i-delete_all",
-                "http://stackoverflow.com/questions/1233451/delete-from-two-tables-in-one-query",
+      sources: ["http://stackoverflow.com/questions/1233451/delete-from-two-tables-in-one-query",
                 "http://www.codeproject.com/KB/database/Visual_SQL_Joins/Visual_SQL_JOINS_orig.jpg",
                 "http://guides.rubyonrails.org/association_basics.html#why-associations-questionmark"],
       description: <<-CODE
