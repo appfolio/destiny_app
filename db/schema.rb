@@ -11,11 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150528235337) do
+ActiveRecord::Schema.define(version: 20150529232137) do
 
   create_table "chests", force: true do |t|
     t.string   "size"
     t.string   "color"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "items", force: true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.string   "token"
+    t.integer  "chest_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -35,6 +44,10 @@ ActiveRecord::Schema.define(version: 20150528235337) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+
+   # Foreign Keys and indexes for items
+   add_index("items", ["chest_id"], :name => "index_items_on_chest_id")
 
 
    # Foreign Keys and indexes for users

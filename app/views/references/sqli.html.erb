@@ -2,13 +2,6 @@
   <div class="col-xs-12 title">
     <h1>Welcome <%= current_user.name %></h1>
     <h2>SQL Injection Reference Page</h2>
-    <hr/>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-xs-12">
-    <%= render partial: "query_reference", locals: { query: @query } %>
   </div>
 </div>
 
@@ -41,5 +34,12 @@
         <% end %>
       </ul>
     </nav>
+    <hr/>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <%= render partial: "query_reference", locals: { query: @query } %>
   </div>
 </div>
