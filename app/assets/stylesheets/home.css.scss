@@ -1,3 +1,80 @@
-// Place all the styles related to the home controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+/* Extra small devices (phones, less than 768px) */
+/* No media query since this is the default in Bootstrap */
+.floaty-box-title
+{
+  display:table-cell;
+  vertical-align:middle;
+}
+
+.floaty-box-title p
+{
+  animation-name: example;
+  animation-duration:4s;
+}
+
+.floaty-box
+{
+  box-shadow:none;
+  display:table;
+  table-layout:fixed;
+  color:white;
+}
+.floaty-box:hover {box-shadow:0 0 9px blue;}
+
+.training-box
+{
+  background-color:#0682E9;
+}
+
+.challenge-box
+{
+  background-color:#05457B;
+}
+
+/* Custom, iPhone Retina */
+@media only screen and (min-width : 320px) {
+  .floaty-box
+  {
+    height:280px;
+    margin-top:20px;
+  }
+
+}
+
+/* Extra Small Devices, Phones */
+@media only screen and (min-width : 480px) {
+  .floaty-box
+  {
+    height:360px;
+    margin-top:40px;
+  }
+
+}
+
+/* Small Devices, Tablets */
+@media only screen and (min-width : 768px) {
+  .floaty-box
+  {
+    height:320px;
+    margin-top:40px;
+  }
+
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (min-width : 992px) {
+  .floaty-box
+  {
+    height:360px;
+  }
+
+}
+
+/* Large Devices, Wide Screens */
+@media only screen and (min-width : 1200px) {
+  .floaty-box
+  {
+    height:400px;
+  }
+
+}

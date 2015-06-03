@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150529232137) do
+ActiveRecord::Schema.define(version: 20150603181826) do
 
   create_table "chests", force: true do |t|
     t.string   "size"
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 20150529232137) do
     t.string   "mobile_number"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "tables_prefix"
   end
 
 

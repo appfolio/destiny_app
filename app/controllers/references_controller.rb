@@ -1,4 +1,6 @@
 class ReferencesController < ApplicationController
+  before_action :set_table_name
+
   def index
   end
 
@@ -39,12 +41,6 @@ class ReferencesController < ApplicationController
   end
 
   private
-
-  def reset_db
-    Chest.delete_all
-    Item.delete_all
-    load File.join(Rails.root, "db/seeds.rb")
-  end
 
   def last_sql
     sql = $last_sql
