@@ -10,14 +10,10 @@ class ChallengesController < ApplicationController
     if @user.tables_prefix
       response_hash = {
         result: :failure,
-        description: "Your environment is already set up.",
-        chest_table: Chest.table_name,
-        item_table: Item.table_name,
-        chests: Chest.all,
-        items: Item.all
+        description: "Your environment is already set up."
       }
 
-      render text: response_hash.to_json
+      render text: response_hash.to_json, status: 400
     else
       tables_prefix = SecureRandom.uuid.gsub('-','').upcase
 
@@ -32,7 +28,7 @@ class ChallengesController < ApplicationController
         tp: tables_prefix
       }
 
-      render text: response_hash.to_json
+      render text: response_hash.to_json, status: 200
     end
   end
 
@@ -54,15 +50,14 @@ class ChallengesController < ApplicationController
         tp: @user.tables_prefix
       }
 
-      render text: response_hash.to_json
+      render text: response_hash.to_json, status: 200
     else
       response_hash = {
         result: :failure,
-        description: "You haven't started a challenge yet.",
-        tp: @user.tables_prefix
+        description: "You haven't started a challenge yet."
       }
 
-      render text: response_hash.to_json
+      render text: response_hash.to_json, status: 400
     end
   end
 
