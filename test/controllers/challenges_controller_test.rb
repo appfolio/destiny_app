@@ -28,6 +28,7 @@ class ChallengesControllerTest < ActionController::TestCase
     assert_not_nil assigns(@user)
     assert_equal "123456789_chests", Chest.table_name
     assert_equal "123456789_items", Item.table_name
+    assert_equal "123456789_key_cards", KeyCard.table_name
   end
 
   test "should have default table name" do
@@ -38,6 +39,7 @@ class ChallengesControllerTest < ActionController::TestCase
     assert_not_nil assigns(@user)
     assert_equal "chests", Chest.table_name
     assert_equal "items", Item.table_name
+    assert_equal "key_cards", KeyCard.table_name
   end
 
   test "should generate challenge tables" do
@@ -45,7 +47,7 @@ class ChallengesControllerTest < ActionController::TestCase
     sign_in @user
 
     #stub out generation of tables_prefix
-    def SecureRandom.uuid; "123456789"; end
+    def SecureRandom.uuid; "123456788"; end
 
     post :setup_challenge_environment
 
@@ -53,17 +55,21 @@ class ChallengesControllerTest < ActionController::TestCase
     @user.reload
 
     msg = "Tables not prefixed correctly"
-    assert_equal "123456789", @user.tables_prefix, msg
-    assert_equal "123456789_chests", Chest.table_name, msg
-    assert_equal "123456789_items", Item.table_name, msg
+    assert_equal "123456788", @user.tables_prefix, msg
+    assert_equal "123456788_chests", Chest.table_name, msg
+    assert_equal "123456788_items", Item.table_name, msg
+    assert_equal "123456788_key_cards", KeyCard.table_name, msg
 
     msg = "Not seeding correctly"
     assert_equal "Large", Chest.first.size, msg
     assert_equal "Green", Chest.first.color, msg
     assert_equal Item.first, Chest.first.item, msg
-    assert_equal "Small", Chest.last.size, msg
+    assert_equal "Medium", Chest.last.size, msg
     assert_equal "Brown", Chest.last.color, msg
     assert_equal Item.last, Chest.last.item, msg
+    assert_equal "Small", Chest.find(2).size, msg
+    assert_equal "Purple", Chest.find(2).color, msg
+    assert_nil Chest.find(2).item, msg
     assert_response 200
   end
 

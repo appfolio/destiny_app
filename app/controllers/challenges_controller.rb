@@ -40,6 +40,7 @@ class ChallengesController < ApplicationController
       ActiveRecord::Schema.define do
         drop_table "#{tables_prefix}_chests"
         drop_table "#{tables_prefix}_items"
+        drop_table "#{tables_prefix}_key_cards"
       end
 
       @user.tables_prefix = nil
@@ -68,6 +69,7 @@ class ChallengesController < ApplicationController
       create_table "#{tables_prefix}_chests" do |t|
         t.string :size
         t.string :color
+        t.string :key_slot
 
         t.timestamps
       end
@@ -76,6 +78,11 @@ class ChallengesController < ApplicationController
         t.string :description
         t.string :token
         t.belongs_to :chest, index: true, foreign_key: true
+
+        t.timestamps
+      end
+      create_table "#{tables_prefix}_key_cards" do |t|
+        t.string :blade
 
         t.timestamps
       end
