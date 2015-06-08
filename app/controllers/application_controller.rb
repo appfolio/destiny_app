@@ -31,4 +31,10 @@ class ApplicationController < ActionController::Base
   def discard_flash_if_xhr
     flash.discard if request.xhr?
   end
+
+  def last_sql
+    sql = $last_sql
+    $last_sql = nil
+    sql
+  end
 end

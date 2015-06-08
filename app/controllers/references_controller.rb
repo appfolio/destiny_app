@@ -42,12 +42,6 @@ class ReferencesController < ApplicationController
 
   private
 
-  def last_sql
-    sql = $last_sql
-    $last_sql = nil
-    sql
-  end
-
   def within_queries_range num
     num.is_a?(Fixnum) && num > -1 && num < Queries.size
   end

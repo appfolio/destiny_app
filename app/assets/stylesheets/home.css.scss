@@ -1,24 +1,5 @@
 /* Extra small devices (phones, less than 768px) */
 /* No media query since this is the default in Bootstrap */
-.floaty-box-title
-{
-  display:table-cell;
-  vertical-align:middle;
-}
-
-.floaty-box-title p
-{
-  animation-name: example;
-  animation-duration:4s;
-}
-
-.floaty-box
-{
-  box-shadow:none;
-  display:table;
-  table-layout:fixed;
-  color:white;
-}
 .floaty-box:hover {box-shadow:0 0 9px blue;}
 
 .training-box

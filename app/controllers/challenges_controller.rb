@@ -4,16 +4,35 @@ class ChallengesController < ApplicationController
   def index
   end
 
+  def start
+    redirect_to :index unless challenges_are_setup
+  end
+
+  def haystack_sql
+    input = params[:column]
+    begin
+      raise "You can't directly access the items table." if input.include? "items"
+      query = Chest.where(input)
+      result = query.to_a
+      @sql = last_sql
+      render partial: "references/query_result", object: result
+    rescue => e
+      @error = e
+      @sql = last_sql
+      render partial: "references/query_error"
+    end
+  end
+
   def setup_challenge_environment
     @user = current_user
 
     if @user.tables_prefix
       response_hash = {
-        result: :failure,
+        result: :Failure,
         description: "Your environment is already set up."
       }
 
-      render text: response_hash.to_json, status: 400
+      render text: response_hash.to_json
     else
       tables_prefix = SecureRandom.uuid.gsub('-','').upcase
 
@@ -24,11 +43,11 @@ class ChallengesController < ApplicationController
       @user.save
 
       response_hash = {
-        result: :success,
-        tp: tables_prefix
+        result: :Success,
+        description: "User, your journey starts here: #{tables_prefix}"
       }
 
-      render text: response_hash.to_json, status: 200
+      render text: response_hash.to_json
     end
   end
 
@@ -47,22 +66,26 @@ class ChallengesController < ApplicationController
       @user.save
 
       response_hash = {
-        result: :success,
-        tp: @user.tables_prefix
+        result: :Success,
+        description: "You have ended your journey!"
       }
 
-      render text: response_hash.to_json, status: 200
+      render text: response_hash.to_json
     else
       response_hash = {
-        result: :failure,
+        result: :Failure,
         description: "You haven't started a challenge yet."
       }
 
-      render text: response_hash.to_json, status: 400
+      render text: response_hash.to_json
     end
   end
 
   private
+
+  def challenges_are_setup
+    current_user.tables_prefix.present?
+  end
 
   def generate_challenge_tables tables_prefix
     ActiveRecord::Schema.define do

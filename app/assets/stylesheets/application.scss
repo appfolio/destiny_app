@@ -19,3 +19,50 @@
 
 .clickable
 {cursor:pointer;}
+
+.floaty-box-title
+{
+  display:table-cell;
+  vertical-align:middle;
+}
+
+.floaty-box
+{
+  box-shadow:none;
+  display:table;
+  table-layout:fixed;
+  color:white;
+}
+
+.treasure-chest-closed
+{
+  margin-left:auto;
+  margin-right:auto;
+  display:block;
+  width:201px;
+  height:162.5px;
+  background:url('treasure_chest.png') 0 0;
+  background-size:200% 100%;
+}
+
+.treasure-chest-open
+{
+  margin-left:auto;
+  margin-right:auto;
+  display:block;
+  width:201px;
+  height:162.5px;
+  background:url('treasure_chest.png') -201px 0;
+  background-size:200% 100%;
+}
+
+.treasure-chest-closed:hover
+{
+  margin-left:auto;
+  margin-right:auto;
+  display:block;
+  width:201px;
+  height:162.5px;
+  background:url('treasure_chest.png') -200px 0;
+  background-size:200% 100%;
+}

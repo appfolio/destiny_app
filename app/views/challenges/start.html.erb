@@ -1,0 +1,42 @@
+<div class="row text-center">
+  <div class="col-xs-12">
+    <h3>Hmmm.... chests</h3>
+    <p>Going to need a key card for those</p>
+  </div>
+</div>
+
+<div class="row top-buffer text-center">
+  <div class="col-xs-4">
+    <div class="treasure-chest-closed"></div>
+  </div>
+  <div class="col-xs-4">
+    <div class="treasure-chest-closed"></div>
+  </div>
+  <div class="col-xs-4">
+    <div class="treasure-chest-closed"></div>
+  </div>
+</div>
+
+<div class="row top-buffer well" style="background:url(/assets/haystack.jpg);min-height:200px;">
+  <div class="col-xs-12">
+    <div class="input-group" style="margin-top:63px;">
+      <input type="text" id="sqli" target="haystack_sql"
+      class="form-control" placeholder="Find the needles">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button" onclick="submit_sqli('haystack_sql');">send</button>
+      </span>
+    </div><!-- /input-group -->
+    <div class="alert alert-success" id="display" style="margin-bottom:0;">
+      <p id="display-sql">
+      </p>
+      <p id="display-query">
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="row top-buffer text-center">
+  <div class="col-xs-12">
+    <small>Finding a needle in a haystack</small>
+  </div>
+</div>

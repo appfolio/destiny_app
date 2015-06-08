@@ -42,7 +42,6 @@ function set_listeners()
   });
 
   $("#hint-toggle-link").click(function(){
-    console.log("tog", "fast")
     $("#hint").toggle();
   });
 }

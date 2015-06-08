@@ -20,7 +20,7 @@ class ChallengesControllerTest < ActionController::TestCase
     DatabaseCleaner.clean
   end
 
-  test "should have users correct table name" do
+  test "assigns the user's unique table name when tables_prefix is present" do
     sign_in FactoryGirl.create(:user_with_tables_prefix)
 
     get :index
@@ -31,7 +31,7 @@ class ChallengesControllerTest < ActionController::TestCase
     assert_equal "123456789_key_cards", KeyCard.table_name
   end
 
-  test "should have default table name" do
+  test "assigns the default table name when tables_prefix is absent" do
     sign_in FactoryGirl.create(:user)
 
     get :index
@@ -42,7 +42,7 @@ class ChallengesControllerTest < ActionController::TestCase
     assert_equal "key_cards", KeyCard.table_name
   end
 
-  test "should generate challenge tables" do
+  test "generates and seeds challenge tables when tables_prefix is absent" do
     @user = FactoryGirl.create(:user)
     sign_in @user
 
@@ -74,7 +74,7 @@ class ChallengesControllerTest < ActionController::TestCase
   end
 
   # Loading fixtures was causing the mysql error
-  test "should NOT generate challenge tables" do
+  test "does not generate challenge tables when tables_prefix is present" do
     def set_table_name; ;end
 
     @user = FactoryGirl.create(:user_with_tables_prefix)
@@ -82,7 +82,11 @@ class ChallengesControllerTest < ActionController::TestCase
 
     post :setup_challenge_environment
 
+    hash = JSON.parse response.body
+
     assert_not_nil @user.tables_prefix
-    assert_response 400
+    assert_equal "Failure", hash["result"]
+    assert_equal "Your environment is already set up.", hash["description"]
+    assert_response 200
   end
 end
