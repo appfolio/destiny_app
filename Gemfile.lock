@@ -98,6 +98,7 @@ GEM
       execjs
     coffee-script-source (1.9.1.1)
     dalli (1.1.5)
+    database_cleaner (1.4.1)
     devise (3.4.1)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -112,6 +113,11 @@ GEM
       rack
     execjs (2.5.2)
     ezcrypto (0.7)
+    factory_girl (4.5.0)
+      activesupport (>= 3.0.0)
+    factory_girl_rails (4.5.0)
+      factory_girl (~> 4.5.0)
+      railties (>= 3.0.0)
     git (1.2.9.1)
     hashie (3.4.1)
     hike (1.2.3)
@@ -130,6 +136,7 @@ GEM
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
     metaclass (0.0.4)
+    method_source (0.8.1)
     mime-types (2.5)
     minitest (4.7.5)
     minitest-reporters (0.14.24)
@@ -149,6 +156,12 @@ GEM
     powerbar (1.0.12)
       ansi (~> 1.5.0)
       hashie (>= 1.1.0)
+    pry (0.10.1)
+      coderay (~> 1.1.0)
+      method_source (~> 0.8.1)
+      slop (~> 3.4)
+    pry-nav (0.2.4)
+      pry (>= 0.9.10, < 0.11.0)
     rack (1.5.3)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -185,6 +198,7 @@ GEM
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
+    slop (3.4.6)
     sprockets (2.12.3)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -228,9 +242,13 @@ DEPENDENCIES
   bootstrap-sass (~> 3.3.4)
   coderay
   coffee-rails (~> 4.0.0)
+  database_cleaner
+  factory_girl_rails (~> 4.0)
   jbuilder (~> 1.2)
   jquery-rails
   mysql2 (= 0.3.15)
+  pry
+  pry-nav
   rails (= 4.0.13)
   sass-rails (~> 4.0.2)
   sdoc

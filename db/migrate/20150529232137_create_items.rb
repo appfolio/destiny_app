@@ -8,12 +8,9 @@ class CreateItems < ActiveRecord::Migration
 
       t.timestamps
     end
-
-    load File.join(Rails.root, "db/seeds.rb")
   end
 
   def down
-    Chest.destroy_all
     drop_table :items
   end
 end

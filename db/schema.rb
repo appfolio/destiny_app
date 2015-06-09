@@ -11,13 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150529232137) do
+ActiveRecord::Schema.define(version: 20150604213901) do
 
   create_table "chests", force: true do |t|
     t.string   "size"
     t.string   "color"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "key_slot"
   end
 
   create_table "items", force: true do |t|
@@ -25,6 +26,12 @@ ActiveRecord::Schema.define(version: 20150529232137) do
     t.string   "description"
     t.string   "token"
     t.integer  "chest_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "key_cards", force: true do |t|
+    t.string   "blade"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -43,6 +50,7 @@ ActiveRecord::Schema.define(version: 20150529232137) do
     t.string   "mobile_number"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "tables_prefix"
   end
 
 

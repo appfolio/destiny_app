@@ -1,4 +1,4 @@
-# Should ONLY contain records used in references or in the game
+# Should ONLY contain records used in references
 Chest.create([
   {
     size: 'Large',

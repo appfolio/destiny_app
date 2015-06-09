@@ -19,3 +19,17 @@
 
 .clickable
 {cursor:pointer;}
+
+.floaty-box-title
+{
+  display:table-cell;
+  vertical-align:middle;
+}
+
+.floaty-box
+{
+  box-shadow:none;
+  display:table;
+  table-layout:fixed;
+  color:white;
+}

@@ -13,6 +13,12 @@ DestinyApp::Application.routes.draw do
 
   get 'references/' => 'references#index'
   get 'references/sqli' => 'references#sqli'
+  get 'challenges/' => 'challenges#index'
+  post 'challenges/setup_challenge_environment' => 'challenges#setup_challenge_environment'
+  post 'challenges/restart' => 'challenges#restart'
+  get 'challenges/start' => 'challenges#start'
+  post 'challenges/start_sql' => 'challenges#start_sql'
+  post 'challenges/unlock_chest_with' => 'challenges#unlock_chest_with'
 
   Queries.each do |query|
     post "references/#{query[:input_form][:action_url]}" => "references##{query[:input_form][:action_url]}"

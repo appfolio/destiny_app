@@ -16,7 +16,7 @@
 #  updated_at           :datetime
 #  name                 :string(255)
 #  mobile_number        :string(255)
-#  user_roles           :string(255)
+#  tables_prefix        :string(255)
 #
 
 class User < ActiveRecord::Base
