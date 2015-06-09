@@ -104,7 +104,7 @@ function submit_key(action_url, target_id)
     $("#display-sql").text();
     $("#display-query").text();
 
-    console.log()
+    console.log(data)
 
     if(data.result == "success")
     {
@@ -112,6 +112,9 @@ function submit_key(action_url, target_id)
       $("#display").addClass("alert-success");
       $("#display-sql").text(unescapeHtml(data.sql));
       $("#display-query").text(unescapeHtml(data.query));
+
+      $("#chest"+target_id).removeClass("treasure-chest-closed");
+      $("#chest"+target_id).addClass("treasure-chest-opened");
     }
     else
     {
@@ -124,3 +127,22 @@ function submit_key(action_url, target_id)
     $("#display").show("fast");
   });
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
