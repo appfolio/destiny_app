@@ -25,7 +25,7 @@ class ChallengesControllerTest < ActionController::TestCase
     sign_in @user
 
     #stub out generation of tables_prefix
-    def SecureRandom.uuid; "123456788"; end
+    def SecureRandom.uuid; "haha"; end
 
     post :setup_challenge_environment
 
@@ -33,10 +33,10 @@ class ChallengesControllerTest < ActionController::TestCase
     @user.reload
 
     msg = "Tables not prefixed correctly"
-    assert_equal "123456788", @user.tables_prefix, msg
-    assert_equal "123456788_chests", Chest.table_name, msg
-    assert_equal "123456788_items", Item.table_name, msg
-    assert_equal "123456788_key_cards", KeyCard.table_name, msg
+    assert_equal "HAHA", @user.tables_prefix, msg
+    assert_equal "HAHA_chests", Chest.table_name, msg
+    assert_equal "HAHA_items", Item.table_name, msg
+    assert_equal "HAHA_key_cards", KeyCard.table_name, msg
 
     msg = "Not seeding correctly"
     assert_equal "Large", Chest.first.size, msg

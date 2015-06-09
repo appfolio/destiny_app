@@ -31,9 +31,7 @@ class ChallengesController < ApplicationController
 
     begin
       chest = Chest.find(params[:id])
-      puts "#{Digest::SHA1.hexdigest(key_blade)==chest.key_slot}"
       opened_chest = chest.unlock_with key_blade
-      puts "opened_chest: #{opened_chest}"
       @sql = last_sql
       render partial: "references/query_result", object: opened_chest.to_json
     rescue => e
