@@ -1,0 +1,42 @@
+.treasure-chest-open
+{
+  margin-left:auto;
+  margin-right:auto;
+  display:block;
+  width:201px;
+  height:162.5px;
+  background:url('treasure_chest.png') -201px 0;
+  background-size:200% 100%;
+}
+
+@media only screen and (min-width : 320px) {
+  .teasure-chest-closed
+  {
+    margin-top:60px;
+  }
+
+}
+
+.treasure-chest-closed
+{
+  margin-left:auto;
+  margin-right:auto;
+  display:block;
+  width:100px;
+  height:81px;
+  background:url('treasure_chest.png') 0 0;
+  background-size:200% 100%;
+}
+
+/*
+.treasure-chest-closed:hover
+{
+  margin-left:auto;
+  margin-right:auto;
+  display:block;
+  width:100px;
+  height:81px;
+  background:url('treasure_chest.png') -100px 0;
+  background-size:200% 100%;
+}
+*/

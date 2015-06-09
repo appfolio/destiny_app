@@ -5,7 +5,7 @@ class Chest < ActiveRecord::Base
     if self.key_slot == Digest::SHA1.hexdigest(key)
       return self.item
     else
-      return nil
+      raise "Incorrect Key"
     end
   end
 

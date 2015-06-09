@@ -1,39 +1,5 @@
 $(document).on("ready page:load", set_listeners);
 
-function submit_sqli(action_url)
-{
-  $.ajax({
-    type: "POST",
-    url: action_url,
-    data: { column: $("#sqli").val() }
-  })
-  .done(function(msg){
-    console.log(msg);
-    data = $.parseJSON(msg);
-    $("#display").hide();
-    $("#display-sql").text();
-    $("#display-query").text();
-
-    if(data.result == "success")
-    {
-      console.log(unescapeHtml(data.sql));
-      $("#display").removeClass("alert-danger");
-      $("#display").addClass("alert-success");
-      $("#display-sql").text(unescapeHtml(data.sql));
-      $("#display-query").text(unescapeHtml(data.query));
-    }
-    else
-    {
-      $("#display").removeClass("alert-success");
-      $("#display").addClass("alert-danger");
-      $("#display-sql").text("An Error has occured: ");
-      $("#display-query").text(unescapeHtml(data.error));
-    }
-
-    $("#display").show("fast");
-  });
-}
-
 function set_listeners()
 {
   $("#sqli").keypress(function(event) {
@@ -48,6 +14,30 @@ function set_listeners()
     $("#hint").toggle();
   });
 }
+
+function set_popover_template()
+{
+  var template = [
+    '<div class="popover" style="width:300px;" role="tooltip">',
+      '<div class="popover-content">',
+      '</div>',
+    '</div>'
+  ].join('');
+
+  return template;
+}
+
+$(function () {
+  for(i=1;i<=3;i++)
+  {
+    $("#chest"+i).popover({
+      placement:"top",
+      html:true,
+      content: $("#chest"+i+"-content").html(),
+      template: set_popover_template()
+    });
+  }
+})
 
 function submit_challenge(target_url)
 {
@@ -100,3 +90,37 @@ function showResponseModal(data)
 $(window).on('shown.bs.modal',function(){
   $('#responseModalContinue').focus()
 });
+
+function submit_key(action_url, target_id)
+{
+  $.ajax({
+    type: "POST",
+    url: action_url,
+    data: { column: $("#chest"+target_id+"-value").val(), id: target_id }
+  })
+  .done(function(msg){
+    data = $.parseJSON(msg);
+    $("#display").hide();
+    $("#display-sql").text();
+    $("#display-query").text();
+
+    console.log()
+
+    if(data.result == "success")
+    {
+      $("#display").removeClass("alert-danger");
+      $("#display").addClass("alert-success");
+      $("#display-sql").text(unescapeHtml(data.sql));
+      $("#display-query").text(unescapeHtml(data.query));
+    }
+    else
+    {
+      $("#display").removeClass("alert-success");
+      $("#display").addClass("alert-danger");
+      $("#display-sql").text("An Error has occured: ");
+      $("#display-query").text(unescapeHtml(data.error));
+    }
+
+    $("#display").show("fast");
+  });
+}

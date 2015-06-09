@@ -1,29 +1,29 @@
 <div class="row text-center">
   <div class="col-xs-12">
     <h3>Hmmm.... chests</h3>
-    <p>Going to need a key card for those</p>
+    <p>Going to need a <b>KeyCard</b> for each of those</p>
   </div>
 </div>
 
 <div class="row top-buffer text-center">
-  <div class="col-xs-4">
-    <div class="treasure-chest-closed"></div>
+  <div class="col-xs-6 col-sm-4">
+    <div id="chest1" class="treasure-chest-closed" data-toggle="popover"></div>
   </div>
-  <div class="col-xs-4">
-    <div class="treasure-chest-closed"></div>
+  <div class="col-xs-6 col-sm-4">
+    <div id="chest2" class="treasure-chest-closed" data-toggle="popover"></div>
   </div>
-  <div class="col-xs-4">
-    <div class="treasure-chest-closed"></div>
+  <div class="col-xs-offset-3 col-sm-offset-0 col-xs-6 col-sm-4">
+    <div id="chest3" class="treasure-chest-closed" data-toggle="popover"></div>
   </div>
 </div>
 
-<div class="row top-buffer well" style="background:url(/assets/haystack.jpg);min-height:200px;">
+<div class="row well" style="margin-top:30px;">
   <div class="col-xs-12">
-    <div class="input-group" style="margin-top:63px;">
-      <input type="text" id="sqli" target="haystack_sql"
-      class="form-control" placeholder="Find the needles">
+    <div class="input-group">
+      <input type="text" id="sqli" target="start_sql"
+      class="form-control" placeholder="What's inside?">
       <span class="input-group-btn">
-        <button class="btn btn-default" type="button" onclick="submit_sqli('haystack_sql');">send</button>
+        <button class="btn btn-default" type="button" onclick="submit_sqli('start_sql');">send</button>
       </span>
     </div><!-- /input-group -->
     <div class="alert alert-success" id="display" style="margin-bottom:0;">
@@ -37,6 +37,20 @@
 
 <div class="row top-buffer text-center">
   <div class="col-xs-12">
-    <small>Finding a needle in a haystack</small>
+    <small>Click on the chests to enter the <b>blade</b> of the key.</small>
   </div>
 </div>
+
+<% @chests.each_with_index do |chest, index| %>
+  <div id="chest<%= index+1 %>-content" class="hide">
+    <div class="input-group">
+      <input type="text" id="<%= "chest#{index+1}-value" %>"
+      target="unlock_chest_with" class="form-control" placeholder="enter key here">
+      <span class="input-group-btn">
+        <button class="btn btn-primary" type="button" onclick="submit_key('unlock_chest_with','<%= chest %>')">
+          unlock
+        </button>
+      </span>
+    </div>
+  </div>
+<% end %>

@@ -11,6 +11,6 @@ FactoryGirl.define do
     email "im@appfolio.com"
     encrypted_password "password"
     password_confirmation "password"
-    tables_prefix "123456789"
+    tables_prefix "123456788"
   end
 end

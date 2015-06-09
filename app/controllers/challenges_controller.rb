@@ -6,10 +6,13 @@ class ChallengesController < ApplicationController
 
   def start
     redirect_to :index unless challenges_are_setup
+
+    @chests = Chest.all.map {|chest| chest.id }
   end
 
-  def haystack_sql
+  def start_sql
     input = params[:column]
+
     begin
       raise "You can't directly access the items table." if input.include? "items"
       query = Chest.where(input)
@@ -23,13 +26,30 @@ class ChallengesController < ApplicationController
     end
   end
 
+  def unlock_chest_with
+    key_blade = params[:column]
+
+    begin
+      chest = Chest.find(params[:id])
+      puts "#{Digest::SHA1.hexdigest(key_blade)==chest.key_slot}"
+      opened_chest = chest.unlock_with key_blade
+      puts "opened_chest: #{opened_chest}"
+      @sql = last_sql
+      render partial: "references/query_result", object: opened_chest.to_json
+    rescue => e
+      @error = e
+      @sql = last_sql
+      render partial: "references/query_error"
+    end
+  end
+
   def setup_challenge_environment
     @user = current_user
 
     if @user.tables_prefix
       response_hash = {
         result: :Failure,
-        description: "Your environment is already set up."
+        error: "Your environment is already set up."
       }
 
       render text: response_hash.to_json

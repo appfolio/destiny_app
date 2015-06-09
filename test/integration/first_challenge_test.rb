@@ -20,29 +20,7 @@ class ChallengesControllerTest < ActionController::TestCase
     DatabaseCleaner.clean
   end
 
-  test "assigns the user's unique table name when tables_prefix is present" do
-    sign_in FactoryGirl.create(:user_with_tables_prefix)
-
-    get :index
-    assert_response :success
-    assert_not_nil assigns(@user)
-    assert_equal "123456788_chests", Chest.table_name
-    assert_equal "123456788_items", Item.table_name
-    assert_equal "123456788_key_cards", KeyCard.table_name
-  end
-
-  test "assigns the default table name when tables_prefix is absent" do
-    sign_in FactoryGirl.create(:user)
-
-    get :index
-    assert_response :success
-    assert_not_nil assigns(@user)
-    assert_equal "chests", Chest.table_name
-    assert_equal "items", Item.table_name
-    assert_equal "key_cards", KeyCard.table_name
-  end
-
-  test "generates and seeds challenge tables when tables_prefix is absent" do
+  test "unlocks all chests properly" do
     @user = FactoryGirl.create(:user)
     sign_in @user
 
@@ -71,22 +49,43 @@ class ChallengesControllerTest < ActionController::TestCase
     assert_equal "Purple", Chest.find(2).color, msg
     assert_nil Chest.find(2).item, msg
     assert_response 200
-  end
 
-  # Loading fixtures was causing the mysql error
-  test "does not generate challenge tables when tables_prefix is present" do
-    def set_table_name; ;end
+    get :start
 
-    @user = FactoryGirl.create(:user_with_tables_prefix)
-    sign_in @user
+    Chest.all.zip(KeyCard.all).each do |chest, key|
+      params = {
+        column: key.blade,
+        id: chest.id
+      }
 
-    post :setup_challenge_environment
+      post :unlock_chest_with, params
 
-    hash = JSON.parse response.body
+      hash = JSON.parse response.body
 
-    assert_not_nil @user.tables_prefix
-    assert_equal "Failure", hash["result"]
-    assert_equal "Your environment is already set up.", hash["error"]
-    assert_response 200
+      assert_equal "success", hash["result"]
+      if chest.item
+        assert hash["query"].include?(chest.item.token), "didn't grab correct token"
+      else
+        assert_equal "null", hash["query"]
+      end
+    end
   end
 end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
