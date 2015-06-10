@@ -13,6 +13,8 @@ DestinyApp::Application.routes.draw do
 
   get 'references/' => 'references#index'
   get 'references/sqli' => 'references#sqli'
+  get 'references/xss' => 'references#xss'
+
   get 'challenges/' => 'challenges#index'
   post 'challenges/setup_challenge_environment' => 'challenges#setup_challenge_environment'
   post 'challenges/restart' => 'challenges#restart'

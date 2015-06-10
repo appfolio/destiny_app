@@ -11,6 +11,11 @@ gem 'bootstrap-sass', '~> 3.3.4'
 gem 'coderay'
 gem 'yui-compressor'
 
+# for emulating user visiting and using the app
+# needed for xss challenges/references
+gem 'capybara'
+gem 'poltergeist'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.13'
 

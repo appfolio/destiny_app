@@ -21,6 +21,20 @@ class ReferencesController < ApplicationController
     end
   end
 
+  def xss
+  end
+
+  def xss_visit_page
+    require File.join(Rails.root, "lib/emulate_user.rb")
+    session = Capybara::Session.new(:poltergeist)
+    url = "http://localhost:4000/"
+    puts url
+    Thread.new do
+      session.visit url
+    end
+    render text: session.to_json
+  end
+
   Queries.each do |q|
     class_eval <<-RUBY
       def #{q[:input_form][:action_url]}
