@@ -1,0 +1,12 @@
+<div class="row">
+  <div class="col-xs-12 title">
+    <h1>Welcome <%= current_user.name %></h1>
+    <h2>Cross Site Scripting Reference Page</h2>
+    <hr/>
+  </div>
+  <div class="col-xs-12 title">
+    <p>Show input field for letters</p>
+    <p>Letters content will not be escaped for the reader</p>
+    <%= link_to "test poltergeist", references_xss_visit_page_path, :"data-method" => "POST" %>
+  </div>
+</div>

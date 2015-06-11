@@ -21,6 +21,17 @@ class ReferencesController < ApplicationController
     end
   end
 
+  def xss
+  end
+
+  def xss_visit_page
+    load File.join(Rails.root, "lib/gate_guard.rb")
+
+    GateGuard::sign_in request
+
+    render text: "Signing in"
+  end
+
   Queries.each do |q|
     class_eval <<-RUBY
       def #{q[:input_form][:action_url]}

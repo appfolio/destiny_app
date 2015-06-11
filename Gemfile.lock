@@ -34,6 +34,7 @@ GEM
       multi_json (~> 1.3)
       thread_safe (~> 0.1)
       tzinfo (~> 0.3.37)
+    addressable (2.3.6)
     af_devise (5.3.0)
       af_runtime (~> 5.1)
       devise (~> 3.0)
@@ -88,6 +89,13 @@ GEM
       autoprefixer-rails (>= 5.0.0.1)
       sass (>= 3.2.19)
     builder (3.1.4)
+    capybara (2.4.4)
+      mime-types (>= 1.16)
+      nokogiri (>= 1.3.3)
+      rack (>= 1.0.0)
+      rack-test (>= 0.5.4)
+      xpath (~> 2.0)
+    cliver (0.3.2)
     cobravsmongoose (0.0.2)
     coderay (1.1.0)
     coffee-rails (4.0.1)
@@ -133,11 +141,14 @@ GEM
     jsmin (1.0.1)
     json (1.8.2)
     jwt (1.5.0)
+    launchy (2.4.3)
+      addressable (~> 2.3)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
     metaclass (0.0.4)
     method_source (0.8.1)
     mime-types (2.5)
+    mini_portile (0.6.2)
     minitest (4.7.5)
     minitest-reporters (0.14.24)
       ansi
@@ -150,9 +161,16 @@ GEM
     mysql2 (0.3.15)
     netrc (0.10.3)
     newrelic_rpm (3.9.9.275)
+    nokogiri (1.6.6.2)
+      mini_portile (~> 0.6.0)
     open4 (1.3.4)
     orm_adapter (0.5.0)
     parallel (1.4.1)
+    poltergeist (1.6.0)
+      capybara (~> 2.1)
+      cliver (~> 0.3.1)
+      multi_json (~> 1.0)
+      websocket-driver (>= 0.2.0)
     powerbar (1.0.12)
       ansi (~> 1.5.0)
       hashie (>= 1.1.0)
@@ -230,6 +248,11 @@ GEM
       timeliness (~> 0.3.7)
     warden (1.2.3)
       rack (>= 1.0)
+    websocket-driver (0.5.4)
+      websocket-extensions (>= 0.1.0)
+    websocket-extensions (0.1.2)
+    xpath (2.0.0)
+      nokogiri (~> 1.3)
     yui-compressor (0.12.0)
 
 PLATFORMS
@@ -240,13 +263,16 @@ DEPENDENCIES
   af_rails (~> 11.1)!
   af_runtime (~> 5.18)!
   bootstrap-sass (~> 3.3.4)
+  capybara
   coderay
   coffee-rails (~> 4.0.0)
   database_cleaner
   factory_girl_rails (~> 4.0)
   jbuilder (~> 1.2)
   jquery-rails
+  launchy
   mysql2 (= 0.3.15)
+  poltergeist
   pry
   pry-nav
   rails (= 4.0.13)
