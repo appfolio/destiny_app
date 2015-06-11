@@ -8,7 +8,6 @@ Capybara.register_driver :poltergeist do |app|
     pjs = "macosx"
   end
 
-  #pjs_logger = Rails.env.production? ? nil : STDOUT
   pjs_debug_logger = File.open("#{Rails.root}/log/debug_phantomjs.log", "a")
   pjs_logger = File.open("#{Rails.root}/log/phantomjs.log", "a")
 
