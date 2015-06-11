@@ -16,6 +16,16 @@ module GateGuard
       session.fill_in(:user_email, with: "guard")
       session.fill_in(:user_password, with: "guardafiymecappin")
       session.click_button("Log in")
+      session.first("nav").click_link("Challenges")
+
+      if session.has_button?("Begin")
+        session.click_button("Begin")
+      else
+        session.click_button("Continue")
+      end
+
+      session.click_button("Continue")
+
       session.click_link("Log Out")
     end
   end
