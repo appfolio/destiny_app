@@ -1,0 +1,2 @@
+module CastleHelper
+end
