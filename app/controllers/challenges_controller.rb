@@ -74,15 +74,20 @@ class ChallengesController < ApplicationController
     tables_prefix = user.tables_prefix
 
     if tables_prefix
-      ActiveRecord::Schema.define do
-        drop_table "#{tables_prefix}_chests"
-        drop_table "#{tables_prefix}_items"
-        drop_table "#{tables_prefix}_key_cards"
-        drop_table "#{tables_prefix}_letters"
+      begin
+        ActiveRecord::Schema.define do
+          drop_table "#{tables_prefix}_chests"
+          drop_table "#{tables_prefix}_items"
+          drop_table "#{tables_prefix}_key_cards"
+          drop_table "#{tables_prefix}_letters"
+        end
+      rescue
       end
 
-      Gate.destroy(Gate.where(tables_prefix: tables_prefix))
-      User.destroy(User.where(name:"Guard", tables_prefix: tables_prefix))
+      gate_id = Gate.where(tables_prefix: tables_prefix)
+      Gate.destroy(gate_id) if gate_id.present?
+      guard = User.where(name:"Guard", tables_prefix: tables_prefix)
+      User.destroy(guard) if guard.present?
       user.tables_prefix = nil
       user.save
 
