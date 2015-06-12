@@ -27,7 +27,7 @@ class ReferencesController < ApplicationController
   def xss_visit_page
     load File.join(Rails.root, "lib/gate_guard.rb")
 
-    GateGuard::sign_in request
+    GateGuard::sign_in request, current_user.tables_prefix
 
     render text: "Signing in"
   end

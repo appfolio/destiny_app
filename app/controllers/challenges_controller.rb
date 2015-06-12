@@ -70,18 +70,21 @@ class ChallengesController < ApplicationController
   end
 
   def restart
-    @user = current_user
-    tables_prefix = @user.tables_prefix
+    user = current_user
+    tables_prefix = user.tables_prefix
 
     if tables_prefix
       ActiveRecord::Schema.define do
         drop_table "#{tables_prefix}_chests"
         drop_table "#{tables_prefix}_items"
         drop_table "#{tables_prefix}_key_cards"
+        drop_table "#{tables_prefix}_letters"
       end
 
-      @user.tables_prefix = nil
-      @user.save
+      Gate.destroy(Gate.where(tables_prefix: tables_prefix))
+      User.destroy(User.where(name:"Guard", tables_prefix: tables_prefix))
+      user.tables_prefix = nil
+      user.save
 
       response_hash = {
         result: :Success,
@@ -124,6 +127,11 @@ class ChallengesController < ApplicationController
       end
       create_table "#{tables_prefix}_key_cards" do |t|
         t.string :blade
+
+        t.timestamps
+      end
+      create_table "#{tables_prefix}_letters" do |t|
+        t.string :content
 
         t.timestamps
       end

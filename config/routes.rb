@@ -25,6 +25,11 @@ DestinyApp::Application.routes.draw do
 
   get 'castle/' => 'castle#gate'
   get 'castle/gate' => 'castle#gate'
+  post 'castle/deliver_letter' => 'castle#deliver_letter'
+  post 'castle/knock' => 'castle#knock'
+  get 'castle/read_letters' => 'castle#read_letters'
+  post 'castle/push_gate' => 'castle#push_gate'
+  post 'castle/unlock_the_gate' => 'castle#unlock_the_gate'
 
   Queries.each do |query|
     post "references/#{query[:input_form][:action_url]}" => "references##{query[:input_form][:action_url]}"
