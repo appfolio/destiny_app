@@ -1,0 +1,72 @@
+<div class="row text-center">
+  <div class="col-xs-12">
+    <h3>The Gate</h3>
+    <p>You'll need to get the guard to unlock_the_gate by writing him a letter.</p>
+    <p>This is an exercise in writing persuasive emails.</p>
+  </div>
+</div>
+<div class="row text-center">
+  <div class="col-xs-4 castle-wall castle-top">
+  </div>
+  <div class="col-xs-4 castle-wall castle-top">
+  </div>
+  <div class="col-xs-4 castle-wall castle-top">
+  </div>
+</div>
+<div class="row text-center">
+  <div class="col-xs-4 castle-wall castle-door">
+  </div>
+  <div class="col-xs-4 castle-gate castle-door">
+  </div>
+  <div class="col-xs-4 castle-wall castle-door">
+  </div>
+</div>
+
+<div class="row well" style="margin-top:30px;">
+  <div class="col-xs-12">
+    <div class="input-group">
+      <input type="text" id="sqli" target="deliver_letter"
+      class="form-control" placeholder="Put your pretty please message here">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button" onclick="submit_sqli('deliver_letter');">send</button>
+      </span>
+    </div><!-- /input-group -->
+    <div class="alert alert-success" id="display" style="margin-bottom:0;">
+      <p id="display-sql">
+      </p>
+      <p id="display-query">
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-offset-4 col-xs-4 text-center">
+    <div class="well">
+      <%= button_tag "Knock", class: "btn btn-lg btn-block btn-info", onclick: "knock()" %>
+    </div>
+  </div>
+  <div class="col-xs-offset-4 col-xs-4 text-center">
+    <div class="well">
+      <%= button_tag "Push Gate", class: "btn btn-lg btn-block btn-primary", onclick: "push_gate()" %>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="responseModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="responseModalTitle"></h4>
+      </div>
+      <div class="modal-body">
+        <p id="responseModalBody"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="responseModalContinue" class="btn btn-default"
+          data-dismiss="modal" onclick="">Continue</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

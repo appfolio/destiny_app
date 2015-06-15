@@ -4,7 +4,7 @@ Chest.create([
     size: 'Large',
     color: 'Green',
     key_slot: Digest::SHA1::hexdigest(KeyCard.create(blade: SecureRandom.uuid.gsub('-','').upcase).blade),
-    item: Item.create({name:"map",description:"its a map...", token: "$33m$13git"})
+    item: Item.create({name:"map",description:"go to the castle/gate", token: "$33m$13git"})
   },
   {
     size: 'Small',

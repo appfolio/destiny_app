@@ -48,22 +48,22 @@
     </div>
   </div>
   <div class="col-xs-12">
-    <div class="panel panel-primary">
-      <div class="panel-heading">
+    <div class="panel panel-primary xss-panel">
+      <div class="panel-heading xss-heading">
         <%= link_to references_xss_path, class: "panel-title" do %>
           Cross Site Scripting <span class="glyphicon glyphicon-share-alt"></span>
         <% end %>
       </div>
       <div class="panel-body">
         <p>
-          SQL Injection can be avoided by making sure you are careful with including
-        </p>
-        <p>
-          If you have to use string interpolation for a user provided string in your
+          Cross Site Scripting (XSS) is a vulnerability introduced by showing user
+          input back to other users without proper sanitization. This can lead to
+          the execution of logic in your application via injected javascript by
+          affected users.
         </p>
       </div>
       <div class="panel-footer">
-        <%= link_to "http://guides.rubyonrails.org/security.html#sql-injection",
+        <%= link_to "http://guides.rubyonrails.org/security.html#cross-site-scripting-xss",
           target: "_blank" do %>
           Documentation <span class="glyphicon glyphicon-book"></span>
         <% end %>

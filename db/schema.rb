@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150604213901) do
+ActiveRecord::Schema.define(version: 20150612171308) do
 
   create_table "chests", force: true do |t|
     t.string   "size"
@@ -19,6 +19,13 @@ ActiveRecord::Schema.define(version: 20150604213901) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "key_slot"
+  end
+
+  create_table "gates", force: true do |t|
+    t.boolean  "is_locked"
+    t.string   "tables_prefix"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "items", force: true do |t|
@@ -32,6 +39,12 @@ ActiveRecord::Schema.define(version: 20150604213901) do
 
   create_table "key_cards", force: true do |t|
     t.string   "blade"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "letters", force: true do |t|
+    t.string   "content"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

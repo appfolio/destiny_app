@@ -29,6 +29,7 @@ class ChallengesControllerTest < ActionController::TestCase
     assert_equal "123456788_chests", Chest.table_name
     assert_equal "123456788_items", Item.table_name
     assert_equal "123456788_key_cards", KeyCard.table_name
+    assert_equal "123456788_letters", Letter.table_name
   end
 
   test "assigns the default table name when tables_prefix is absent" do
@@ -40,11 +41,13 @@ class ChallengesControllerTest < ActionController::TestCase
     assert_equal "chests", Chest.table_name
     assert_equal "items", Item.table_name
     assert_equal "key_cards", KeyCard.table_name
+    assert_equal "letters", Letter.table_name
   end
 
   test "generates and seeds challenge tables when tables_prefix is absent" do
     @user = FactoryGirl.create(:user)
     sign_in @user
+
 
     #stub out generation of tables_prefix
     def SecureRandom.uuid; "123456788"; end
@@ -59,6 +62,7 @@ class ChallengesControllerTest < ActionController::TestCase
     assert_equal "123456788_chests", Chest.table_name, msg
     assert_equal "123456788_items", Item.table_name, msg
     assert_equal "123456788_key_cards", KeyCard.table_name, msg
+    assert_equal "123456788_letters", Letter.table_name, msg
 
     msg = "Not seeding correctly"
     assert_equal "Large", Chest.first.size, msg
