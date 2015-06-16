@@ -24,7 +24,7 @@ def exec_sqli
   output = Chest.where("size = '\#{params[:column]}'")
 
   # Still unsafe, 1=1 will cause all records from the model's
-  # table to be shown. Good example of where sanitizing
+  # table to be selected. Good example of where sanitizing
   # does not always protect you. Be explicit on what columns
   # are to be checked like on line 18.
   output = Chest.where(ActiveRecord::Base::sanitize(params[:column]))
