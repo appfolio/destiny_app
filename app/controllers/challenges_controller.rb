@@ -80,6 +80,7 @@ class ChallengesController < ApplicationController
           drop_table "#{tables_prefix}_items"
           drop_table "#{tables_prefix}_key_cards"
           drop_table "#{tables_prefix}_letters"
+          drop_table "#{tables_prefix}_reference_letters"
         end
       rescue
       end

@@ -14,7 +14,8 @@ DestinyApp::Application.routes.draw do
   get 'references/' => 'references#index'
   get 'references/sqli' => 'references#sqli'
   get 'references/xss' => 'references#xss'
-  post 'references/xss_visit_page' => 'references#xss_visit_page'
+  get 'references/xss_read_letters' => 'references#xss_read_letters'
+  post 'references/xss_deliver_letter' => 'references#xss_deliver_letter'
 
   get 'challenges/' => 'challenges#index'
   post 'challenges/setup_challenge_environment' => 'challenges#setup_challenge_environment'

@@ -4,10 +4,90 @@
     <h2>Cross Site Scripting Reference Page</h2>
     <hr/>
   </div>
-  <div class="col-xs-12 title">
-    <p>Show input field for letters</p>
-    <p>Allow the user to inject javascript that they will execute on themselves</p>
-    <p>Only show letters with matching table prefix</p>
-    <p>Provide an action to delete user created letters</p>
+</div>
+
+<div class="row">
+  <div class="col-xs-8">
+    <div class="input-group well">
+      <input type="text" id="sqli" target="xss_deliver_letter"
+      class="form-control" placeholder="Insert contents of letter here">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button" onclick="submit_sqli('xss_deliver_letter');">send</button>
+      </span>
+    </div><!-- /input-group -->
+  </div>
+  <div class="col-xs-offset-0 col-xs-4 title">
+    <div class="well">
+      <%= button_tag "Read Letters", class: "btn btn-md btn-block btn-primary",
+        onclick: "window.location.href='#{references_xss_read_letters_path}'" %>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <div class="alert alert-success" style="margin-top:0" id="display">
+      <p id="display-sql">
+      </p>
+      <p id="display-query">
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <div class="panel panel-default">
+      <div class="panel-heading text-right">
+        <b class="pull-left">XSS Explanation</b>
+        <%= link_to "http://guides.rubyonrails.org/security.html#cross-site-scripting-xss", target: "_blank" do %>
+          Documentation <span class="glyphicon glyphicon-book"></span>
+        <% end %>
+      </div>
+      <div class="panel-body">
+        <p>
+          This input box is simulating a user input to an action that will take
+          your input into the content of a letter record that will be displayed
+          back to you when you press the Read Letters button.
+        </p>
+        <p>
+          Cross site scripting can be more complicated based off of the web application's
+          logic and how it is handling user input. Be aware that javascript can be
+          injected through a variety of vectors, including custom CSS.
+          <em>See <%=link_to "css injection",
+          "http://guides.rubyonrails.org/security.html#css-injection",
+          target: "_blank" %>, some examples will only work in certain versions
+          of certain browsers</em>.
+        </p>
+        <p>
+          Be especially careful of displaying unsanitized output from AJAX requests.
+          If you are going to pass unescaped input back to the user in response to
+          an AJAX request make sure you know it hasn't been touched by user input.
+          If you know it may include unescaped user input, escape it in the controller
+          before passing it in the AJAX response. Escape any user input using
+          the <kbd>h()</kbd> method.
+        </p>
+        <p>
+          <h4>Countermeasure:</h4>
+          Any data coming from the client side can be modified and/or malicious.
+          Always escape data from the client before displaying it. Press the read
+          letters button after submitting javascript in the input field for the
+          examples of safe and unsafe displaying of data.
+        </p>
+      </div>
+      <div class="panel-footer">
+        <span class="label label-info clickable" id="hint-toggle-link">Examples</span>
+        <div style="display:none;margin-top:10px;" id="hint">
+            <p><kbd><%= "<script>console.log('hi');</script>" %></kbd></p>
+            <p><kbd><%= "<script>jQuery.ajax({type:'GET',url:'/'})</script>" %></kbd></p>
+            <p><kbd><%= "<style>body{background:blue;}</style>" %></kbd></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xs-12 text-center">
+    <p><b>Additional Sources</b></p>
+    <p><%= link_to "https://www.owasp.org/index.php/Cross-site_Scripting_(XSS)",
+      "https://www.owasp.org/index.php/Cross-site_Scripting_(XSS)" %></p>
   </div>
 </div>

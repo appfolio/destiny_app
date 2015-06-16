@@ -33,7 +33,8 @@ class ChallengesControllerTest < ActionController::TestCase
   end
 
   test "assigns the default table name when tables_prefix is absent" do
-    sign_in FactoryGirl.create(:user)
+    user = FactoryGirl.create(:user)
+    sign_in user
 
     get :index
     assert_response :success
@@ -41,7 +42,7 @@ class ChallengesControllerTest < ActionController::TestCase
     assert_equal "chests", Chest.table_name
     assert_equal "items", Item.table_name
     assert_equal "key_cards", KeyCard.table_name
-    assert_equal "letters", Letter.table_name
+    assert_equal "#{user.id}_reference_letters", Letter.table_name
   end
 
   test "generates and seeds challenge tables when tables_prefix is absent" do
