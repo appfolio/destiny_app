@@ -22,15 +22,43 @@ class ReferencesController < ApplicationController
   end
 
   def xss
+    id = current_user.id
+    unless ActiveRecord::Base.connection.table_exists? "#{id}_reference_letters"
+      ActiveRecord::Schema.define do
+        create_table "#{id}_reference_letters" do |t|
+          t.string :content
+
+          t.timestamps
+        end
+      end
+    end
+
+    set_table_name
   end
 
-  def xss_visit_page
-    load File.join(Rails.root, "lib/gate_guard.rb")
+  def xss_deliver_letter
+    input = params[:column]
 
-    #TODO this reference is incomplete
-    #GateGuard::sign_in request, current_user.tables_prefix
+    begin
+      query = Letter.new(content: input)
+      query.save
+      @sql = last_sql
+      hash = {
+        result: "success",
+        sql: @sql,
+        query: "Your letter has been sent! "+
+        "There are #{Letter.all.size} letter(s) in the inbox."
+      }
+      render text: hash.to_json
+    rescue => e
+      @error = e
+      @sql = last_sql
+      render partial: "references/query_error"
+    end
+  end
 
-    render text: "Signing in"
+  def xss_read_letters
+    @letters = Letter.destroy_all
   end
 
   Queries.each do |q|

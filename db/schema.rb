@@ -11,7 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150612171308) do
+ActiveRecord::Schema.define(version: 20150616184919) do
+
+  create_table "135138680_reference_letters", force: true do |t|
+    t.string   "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "chests", force: true do |t|
     t.string   "size"
@@ -39,12 +45,6 @@ ActiveRecord::Schema.define(version: 20150612171308) do
 
   create_table "key_cards", force: true do |t|
     t.string   "blade"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "letters", force: true do |t|
-    t.string   "content"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

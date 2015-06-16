@@ -24,10 +24,11 @@ class ApplicationController < ActionController::Base
       KeyCard.table_name = "#{current_user.tables_prefix}_key_cards"
       Letter.table_name = "#{current_user.tables_prefix}_letters"
     else
+      #for references controller
       Chest.table_name = "chests"
       Item.table_name = "items"
       KeyCard.table_name = "key_cards"
-      Letter.table_name = "letters"
+      Letter.table_name = "#{current_user.id}_reference_letters"
     end
   end
 
