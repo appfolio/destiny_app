@@ -61,6 +61,24 @@ class ReferencesController < ApplicationController
     @letters = Letter.destroy_all
   end
 
+  def mass_assignment
+  end
+
+  def mass_assignment_create_chest
+    #TODO these could be re-written to be a method
+    #that accepts a block, yield to what query to run
+    #look for returned value of the query
+    begin
+      chest = Chest.create(params)
+      @sql = last_sql
+      render partial: "query_result", object: chest
+    rescue => e
+      @error = e
+      @sql = last_sql
+      render partial: "query_error"
+    end
+  end
+
   Queries.each do |q|
     class_eval <<-RUBY
       def #{q[:input_form][:action_url]}
