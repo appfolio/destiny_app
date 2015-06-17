@@ -62,6 +62,21 @@ class ReferencesController < ApplicationController
   end
 
   def mass_assignment
+    @refs = MassAssignments
+    if params[:ref_num]
+      ref_num = params[:ref_num].to_i
+
+      unless ref_num.between?(0,MassAssignments.size-1)
+        flash[:error] = "That page does not exist"
+        redirect_to references_mass_assignments_path
+      end
+
+      @ref = MassAssignments[ref_num]
+      @ref_num = ref_num
+    else
+      @ref = MassAssignments[0]
+      @ref_num = 0
+    end
   end
 
   def mass_assignment_create_chest
@@ -79,19 +94,16 @@ class ReferencesController < ApplicationController
     end
   end
 
-  Queries.each do |q|
-    class_eval <<-RUBY
-      def #{q[:input_form][:action_url]}
-        begin
-          query = #{q[:query]}
-          result = #{q[:output]}
-          @sql = last_sql
-          render partial: "query_result", object: result
-        rescue => e
-          @error = e
-          @sql = last_sql
-          render partial: "query_error"
-        end
+  MassAssignments.each do |ma|
+    ReferencesController.class_eval <<-RUBY
+      def safe_#{ma[:name]}
+        #{ma[:safe_code]}
+
+        reset_db
+      end
+
+      def vulnerable_#{ma[:name]}
+        #{ma[:vuln_code]}
 
         reset_db
       end

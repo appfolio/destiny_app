@@ -1,0 +1,95 @@
+<div class="well">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="input-group">
+        <span class="input-group-addon alert-success" id="basic-addon1">Size (allowed)</span>
+        <input type="text" id="ma_size" target="mass_assignment_create_chest"
+          class="form-control" placeholder="The attribute meant to be assigned">
+      </div><!-- /input-group -->
+    </div>
+  </div>
+  <div class="row top-buffer">
+    <div class="col-xs-12">
+      <div class="input-group">
+        <span class="input-group-addon alert-danger" id="basic-addon1">Key Hole (sensitive)</span>
+        <input type="text" id="ma_key_hole" class="form-control"
+          placeholder="The attribute that is NOT meant to be assigned">
+      </div>
+    </div>
+  </div>
+  <div class="row top-buffer">
+    <div class="col-xs-6">
+      <div class="input-group">
+        <button class="btn btn-default" type="button" onclick="submit_ma_sqli('mass_assignment_create_chest');">send</button>
+      </div>
+    </div>
+    <div class="col-xs-6">
+      <div class="input-group pull-right">
+        <div class="btn-group" data-toggle="buttons">
+          <label class="btn btn-default active">
+            <input type="radio" name="options" id="option1" autocomplete="off" checked>
+            Safe
+          </label>
+          <label class="btn btn-default">
+            <input type="radio" name="options" id="option3" autocomplete="off">
+            Vulnerable
+          </label>
+        </div>
+        <!--
+        <ul class="pagination risk-toggler">
+          <li class="alert-success">
+            <a href="#" aria-label="Previous">
+              <span aria-hidden="true">Safe</span>
+            </a>
+          </li>
+          <li class="alert-danger">
+            <a href="#" aria-label="Next">
+              <span aria-hidden="true">Vulnerable</span>
+            </a>
+          </li>
+        </ul>
+        -->
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <div class="alert alert-success" style="margin-top:0" id="display">
+      <p id="display-sql">
+      </p>
+      <p id="display-query">
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <div class="panel panel-default">
+      <div class="panel-heading text-right">
+        <b class="pull-left"><%= ref[:title] %></b>
+        <%= link_to ref[:documentation_link], target: "_blank" do %>
+          Documentation <span class="glyphicon glyphicon-book"></span>
+        <% end %>
+      </div>
+      <div class="panel-body">
+        <%= ref[:info] %>
+      </div>
+      <div class="panel-footer">
+        <span class="label label-info clickable" id="hint-toggle-link">Examples</span>
+        <div style="display:none;margin-top:10px;" id="hint">
+          <% ref[:examples].each do |ex| %>
+            <p><kbd><%= ex %></kbd></p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <%= raw CodeRay.scan(ref[:displayed_code],:ruby).div(line_numbers: :table) %>
+  </div>
+</div>

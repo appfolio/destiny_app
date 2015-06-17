@@ -1,5 +1,4 @@
 #Assumption is that everything in this file is html_safe
-#
 Queries = [
   {
     input_form: {action_url: :where},

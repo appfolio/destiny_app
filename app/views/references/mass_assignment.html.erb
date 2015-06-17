@@ -4,7 +4,8 @@ function submit_ma_sqli(target)
   $.ajax({
     type:"POST",
     url: target,
-    size: $("#ma_sqli")
+    size: $("#ma_size"),
+    key_hole: $("#ma_key_hole")
   }).always(function(msg){
     console.log(msg);
     data = $.parseJSON(msg);
@@ -33,10 +34,17 @@ function submit_ma_sqli(target)
 
 function set_listeners()
 {
-  $("#ma_sqli").keypress(function(event) {
+  $("#ma_size").keypress(function(event) {
     if(event.keyCode == 13)
     {
-      var target = $("#ma_sqli").attr('target');
+      var target = $("#ma_size").attr('target');
+      submit_ma_sqli(target);
+    }
+  });
+  $("#ma_key_hole").keypress(function(event) {
+    if(event.keyCode == 13)
+    {
+      var target = $("#ma_size").attr('target');
       submit_ma_sqli(target);
     }
   });
@@ -46,8 +54,9 @@ function set_listeners()
   });
 }
 
-$(document).ready(set_listeners);
+$(document).ready(set_listeners());
 </script>
+
 <div class="row">
   <div class="col-xs-12 title">
     <h1>Welcome <%= current_user.name %></h1>
@@ -58,54 +67,40 @@ $(document).ready(set_listeners);
 
 <div class="row">
   <div class="col-xs-12">
-    <div class="input-group well">
-      <input type="text" id="ma_sqli" target="mass_assignment_create_chest"
-      class="form-control" placeholder="Er... mass assignment dough">
-      <span class="input-group-btn">
-        <button class="btn btn-default" type="button" onclick="submit_ma_sqli('mass_assignment_create_chest');">send</button>
-      </span>
-    </div><!-- /input-group -->
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-xs-12">
-    <div class="alert alert-success" style="margin-top:0" id="display">
-      <p id="display-sql">
-      </p>
-      <p id="display-query">
-      </p>
-    </div>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-xs-12">
-    <div class="panel panel-default">
-      <div class="panel-heading text-right">
-        <b class="pull-left">Mass Assignment Explanation</b>
-        <%= link_to "#", target: "_blank" do %>
-          Documentation <span class="glyphicon glyphicon-book"></span>
+    <nav>
+      <ul class="pager">
+        <% if @ref_num == 0 %>
+          <li class="previous disabled">
+            <%= link_to "<span aria-hidden='true'>&larr;</span> Previous".html_safe,
+              "#", html_options: {class: "disabled"} %>
+          </li>
+        <% else %>
+          <li class="previous">
+            <%= link_to "<span aria-hidden='true'>&larr;</span> Previous".html_safe,
+              references_mass_assignment_path(ref_num: @ref_num - 1) %>
+          </li>
         <% end %>
-      </div>
-      <div class="panel-body">
-        <p>
-          Mass Assignment becomes a vulnerability in different ways depending on
-          whether or not you are using strong parameters.
-        </p>
-        <p>
-          <h4>Proper use of mass assignment without strong parameters:</h4>
-          <h4>Proper use of mass assignment with strong parameters:</h4>
-        </p>
-      </div>
-      <div class="panel-footer">
-        <span class="label label-info clickable" id="hint-toggle-link">Examples</span>
-        <div style="display:none;margin-top:10px;" id="hint">
-            <p><kbd>Not finished BLARBBLLLARRGH</kbd></p>
-        </div>
-      </div>
-    </div>
+
+        <% if @ref_num == @refs.size-1 %>
+          <li class="next disabled">
+            <%= link_to "Next <span aria-hidden='true'>&rarr;</span>".html_safe,
+              "#", html_options: {class: "disabled", onclick: "reset_submit_listener()" } %>
+          </li>
+        <% else %>
+          <li class="next">
+            <%= link_to "Next <span aria-hidden='true'>&rarr;</span>".html_safe,
+              references_mass_assignment_path(ref_num: @ref_num + 1) %>
+          </li>
+        <% end %>
+      </ul>
+    </nav>
+    <hr/>
   </div>
+</div>
+
+<%= render partial: "mass_assignment_reference", locals: { ref: @ref } %>
+
+<div class="row top-buffer">
   <div class="col-xs-12 text-center">
     <p><b>Additional Sources</b></p>
     <p><%= link_to "http://blog.remarkablelabs.com/2012/12/strong-parameters-rails-4-countdown-to-2013",
