@@ -67,7 +67,8 @@
       </div>
       <div class="panel-body">
           Mass assignment used in an unsecured way can allow sensitive
-          attributes to be over-written with user input.
+          attributes to be over-written with user input. Make sure you never mass
+          assign with a hash object if it can contain user input.
       </div>
       <div class="panel-footer">
         <%= link_to "#",

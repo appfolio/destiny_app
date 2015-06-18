@@ -19,4 +19,12 @@ class ReferencesControllerTest < ActionController::TestCase
     assert_equal "key_cards", KeyCard.table_name
     assert_equal "#{user.id}_reference_letters", Letter.table_name
   end
+
+  test "mass assignment should work" do
+    user = FactoryGirl.create(:user)
+    sign_in user
+
+    get :index
+    post :vulnerable_wsp, chest:{size:"Large",color:"Orange"}
+  end
 end

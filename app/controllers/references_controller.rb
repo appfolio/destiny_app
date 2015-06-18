@@ -97,13 +97,29 @@ class ReferencesController < ApplicationController
   MassAssignments.each do |ma|
     ReferencesController.class_eval <<-RUBY
       def safe_#{ma[:name]}
-        #{ma[:safe_code]}
+        begin
+          #{ma[:safe_code]}
+          @sql = last_sql
+          render partial: "query_result", object: chest
+        rescue => e
+          @error = e
+          @sql = last_sql
+          render partial: "query_error"
+        end
 
         reset_db
       end
 
       def vulnerable_#{ma[:name]}
-        #{ma[:vuln_code]}
+        begin
+          #{ma[:vuln_code]}
+          @sql = last_sql
+          render partial: "query_result", object: chest
+        rescue => e
+          @error = e
+          @sql = last_sql
+          render partial: "query_error"
+        end
 
         reset_db
       end

@@ -38,4 +38,9 @@ DestinyApp::Application.routes.draw do
     post "references/#{query[:input_form][:action_url]}" => "references##{query[:input_form][:action_url]}"
   end
 
+  MassAssignments.each do |ma|
+    name = ma[:name]
+    post "references/safe_#{name}" => "references#safe_#{name}"
+    post "references/vulnerable_#{name}" => "references#vulnerable_#{name}"
+  end
 end
