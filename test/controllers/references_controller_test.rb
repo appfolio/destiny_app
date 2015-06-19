@@ -24,7 +24,6 @@ class ReferencesControllerTest < ActionController::TestCase
     user = FactoryGirl.create(:user)
     sign_in user
 
-    get :index
-    post :vulnerable_wsp, chest:{size:"Large",color:"Orange"}
+    post :safe_wosp, chest:{size:"Large",color:"Orange"}
   end
 end

@@ -55,12 +55,12 @@ function submit_ma_sqli(target)
   <div class="col-xs-12 title">
     <h1>Welcome <%= current_user.name %></h1>
     <h2>Mass Assignment Reference Page</h2>
-    <hr/>
   </div>
 </div>
 
 <div class="row">
   <div class="col-xs-12">
+    <hr/>
     <nav>
       <ul class="pager">
         <% if @ref_num == 0 %>
@@ -88,7 +88,6 @@ function submit_ma_sqli(target)
         <% end %>
       </ul>
     </nav>
-    <hr/>
   </div>
 </div>
 

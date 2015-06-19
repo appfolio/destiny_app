@@ -1,5 +1,6 @@
 class ReferencesController < ApplicationController
   before_action :set_table_name
+  include ShieldsUp
 
   def index
   end
