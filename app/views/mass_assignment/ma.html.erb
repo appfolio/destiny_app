@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-xs-12 title">
     <h1>Welcome <%= current_user.name %></h1>
-    <h2>SQL Injection Reference Page</h2>
+    <h2>Mass Assignment Reference Page</h2>
   </div>
 </div>
 
@@ -18,11 +18,11 @@
         <% else %>
           <li class="previous">
             <%= link_to "<span aria-hidden='true'>&larr;</span> Previous".html_safe,
-              references_sqli_path(ref_num: @ref_num - 1) %>
+              mass_assignment_ma_path(ref_num: @ref_num - 1) %>
           </li>
         <% end %>
 
-        <% if @ref_num == Queries.size-1 %>
+        <% if @ref_num == @refs.size-1 %>
           <li class="next disabled">
             <%= link_to "Next <span aria-hidden='true'>&rarr;</span>".html_safe,
               "#", html_options: {class: "disabled", onclick: "reset_submit_listener()" } %>
@@ -30,7 +30,7 @@
         <% else %>
           <li class="next">
             <%= link_to "Next <span aria-hidden='true'>&rarr;</span>".html_safe,
-              references_sqli_path(ref_num: @ref_num + 1) %>
+              mass_assignment_ma_path(ref_num: @ref_num + 1) %>
           </li>
         <% end %>
       </ul>
@@ -38,8 +38,14 @@
   </div>
 </div>
 
-<div class="row">
-  <div class="col-xs-12">
-    <%= render partial: "query_reference", locals: { query: @query } %>
+<%= render partial: "mass_assignment_reference", locals: { ref: @ref } %>
+
+<div class="row top-buffer">
+  <div class="col-xs-12 text-center">
+    <p><b>Additional Sources</b></p>
+    <p><%= link_to "http://code.tutsplus.com/tutorials/mass-assignment-rails-and-you--net-31695",
+      "http://code.tutsplus.com/tutorials/mass-assignment-rails-and-you--net-31695" %></p>
+    <p><%= link_to "http://www.happybearsoftware.com/how-i-avoid-the-rails-mass-assignment-security-mistake.html",
+      "http://www.happybearsoftware.com/how-i-avoid-the-rails-mass-assignment-security-mistake.html" %></p>
   </div>
 </div>

@@ -80,13 +80,6 @@ function go_to_challenge()
   window.location.href="challenges/start"
 }
 
-function showResponseModal(data)
-{
-  $("#responseModalTitle").text(data.result);
-  $("#responseModalBody").text(data.description);
-  $("#responseModal").modal('show');
-}
-
 $(window).on('shown.bs.modal',function(){
   $('#responseModalContinue').focus()
 });

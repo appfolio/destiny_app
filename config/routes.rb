@@ -12,12 +12,24 @@ DestinyApp::Application.routes.draw do
   end
 
   get 'references/' => 'references#index'
-  get 'references/sqli' => 'references#sqli'
-  get 'references/xss' => 'references#xss'
-  get 'references/xss_read_letters' => 'references#xss_read_letters'
-  post 'references/xss_deliver_letter' => 'references#xss_deliver_letter'
-  get 'references/mass_assignment' => 'references#mass_assignment'
-  post 'references/mass_assignment_create_chest' => 'references#mass_assignment_create_chest'
+
+  get 'cross_site_scripting/' => 'cross_site_scripting#index'
+  get 'cross_site_scripting/read_letters' => 'cross_site_scripting#read_letters'
+  post 'cross_site_scripting/deliver_letter' => 'cross_site_scripting#deliver_letter'
+
+  get 'sql_injection/' => 'sql_injection#index'
+  get 'sql_injection/sqli' => 'sql_injection#sqli'
+  Queries.each do |query|
+    post "sql_injection/#{query[:input_form][:action_url]}" => "sql_injection##{query[:input_form][:action_url]}"
+  end
+
+  get 'mass_assignment/ma' => 'mass_assignment#ma'
+  post 'mass_assignment/create_chest' => 'mass_assignment#create_chest'
+  MassAssignments.each do |ma|
+    name = ma[:name]
+    post "mass_assignment/safe_#{name}" => "mass_assignment#safe_#{name}"
+    post "mass_assignment/vulnerable_#{name}" => "mass_assignment#vulnerable_#{name}"
+  end
 
   get 'challenges/' => 'challenges#index'
   post 'challenges/setup_challenge_environment' => 'challenges#setup_challenge_environment'
@@ -33,14 +45,4 @@ DestinyApp::Application.routes.draw do
   get 'castle/read_letters' => 'castle#read_letters'
   post 'castle/push_gate' => 'castle#push_gate'
   post 'castle/unlock_the_gate' => 'castle#unlock_the_gate'
-
-  Queries.each do |query|
-    post "references/#{query[:input_form][:action_url]}" => "references##{query[:input_form][:action_url]}"
-  end
-
-  MassAssignments.each do |ma|
-    name = ma[:name]
-    post "references/safe_#{name}" => "references#safe_#{name}"
-    post "references/vulnerable_#{name}" => "references#vulnerable_#{name}"
-  end
 end

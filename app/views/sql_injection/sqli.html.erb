@@ -1,0 +1,45 @@
+<div class="row">
+  <div class="col-xs-12 title">
+    <h1>Welcome <%= current_user.name %></h1>
+    <h2>SQL Injection Reference Page</h2>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <hr/>
+    <nav>
+      <ul class="pager">
+        <% if @ref_num == 0 %>
+          <li class="previous disabled">
+            <%= link_to "<span aria-hidden='true'>&larr;</span> Previous".html_safe,
+              "#", html_options: {class: "disabled"} %>
+          </li>
+        <% else %>
+          <li class="previous">
+            <%= link_to "<span aria-hidden='true'>&larr;</span> Previous".html_safe,
+              sql_injection_sqli_path(ref_num: @ref_num - 1) %>
+          </li>
+        <% end %>
+
+        <% if @ref_num == Queries.size-1 %>
+          <li class="next disabled">
+            <%= link_to "Next <span aria-hidden='true'>&rarr;</span>".html_safe,
+              "#", html_options: {class: "disabled", onclick: "reset_submit_listener()" } %>
+          </li>
+        <% else %>
+          <li class="next">
+            <%= link_to "Next <span aria-hidden='true'>&rarr;</span>".html_safe,
+              sql_injection_sqli_path(ref_num: @ref_num + 1) %>
+          </li>
+        <% end %>
+      </ul>
+    </nav>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <%= render partial: "query_reference", locals: { query: @query } %>
+  </div>
+</div>

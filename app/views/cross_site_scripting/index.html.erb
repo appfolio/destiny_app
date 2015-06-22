@@ -9,17 +9,17 @@
 <div class="row">
   <div class="col-xs-8">
     <div class="input-group well">
-      <input type="text" id="sqli" target="xss_deliver_letter"
+      <input type="text" id="sqli" target="cross_site_scripting/deliver_letter"
       class="form-control" placeholder="Insert contents of letter here">
       <span class="input-group-btn">
-        <button class="btn btn-default" type="button" onclick="submit_sqli('xss_deliver_letter');">send</button>
+        <button class="btn btn-default" type="button" onclick="submit_sqli('cross_site_scripting/deliver_letter');">send</button>
       </span>
     </div><!-- /input-group -->
   </div>
   <div class="col-xs-offset-0 col-xs-4 title">
     <div class="well">
       <%= button_tag "Read Letters", class: "btn btn-md btn-block btn-primary",
-        onclick: "window.location.href='#{references_xss_read_letters_path}'" %>
+        onclick: "window.location.href='#{cross_site_scripting_read_letters_path}'" %>
     </div>
   </div>
 </div>
@@ -76,11 +76,14 @@
         </p>
       </div>
       <div class="panel-footer">
-        <span class="label label-info clickable" id="hint-toggle-link">Examples</span>
-        <div style="display:none;margin-top:10px;" id="hint">
-            <p><kbd><%= "<script>console.log('hi');</script>" %></kbd></p>
-            <p><kbd><%= "<script>jQuery.ajax({type:'GET',url:'/'})</script>" %></kbd></p>
-            <p><kbd><%= "<style>body{background:blue;}</style>" %></kbd></p>
+        <button class="btn-xs btn-info" type="button" data-toggle="collapse" data-target="#hint" aria-expanded="false" aria-controls="collapseExample">
+          Examples
+        </button>
+        <div class="collapse" id="hint">
+          <br/>
+          <p><kbd><%= "<script>console.log('hi');</script>" %></kbd></p>
+          <p><kbd><%= "<script>jQuery.ajax({type:'GET',url:'/'})</script>" %></kbd></p>
+          <p><kbd><%= "<style>body{background:blue;}</style>" %></kbd></p>
         </div>
       </div>
     </div>
