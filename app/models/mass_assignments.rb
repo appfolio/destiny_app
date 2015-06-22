@@ -2,15 +2,13 @@
 
 #with out strong parameters
 wosp_safecode = <<-SAFECODE
-  chest = nil
   params.with_shields_down do
-    chest = Chest.create(params.permit(:chest=>[:size,:color])[:chest])
+    @chest = Chest.create(params.permit(:chest=>[:size,:color])[:chest])
   end
 SAFECODE
 wosp_vulncode = <<-VULNCODE
-  chest = nil
   params.with_shields_down do
-    chest = Chest.create(params[:chest].to_hash)
+    @chest = Chest.create(params[:chest].to_hash)
   end
 VULNCODE
 wosp_dispcode = <<-DISPCODE
@@ -53,23 +51,21 @@ DISPCODE
 
 #with strong parameters
 wsp_safecode = <<-SAFECODE
-  chest = nil
   params.with_shields_down do
     chest_params_check = params.require(:chest).permit(:size,:color)
     chest_default_vals = {"color" => "Brown", "size" => "Large"}
     chest_params = chest_default_vals.merge chest_params_check
 
-    chest = Chest.create(chest_params)
+    @chest = Chest.create(chest_params)
   end
 SAFECODE
 #TODO get this vulnerable
 wsp_vulncode = <<-VULNCODE
-  chest = nil
   params.with_shields_down do
     chest_default_vals = {"color"=> "Brown", "size"=>"Large"}
     chest_params = chest_default_vals.merge params[:chest]
 
-    chest = Chest.create(chest_params) #mass assignment!
+    @chest = Chest.create(chest_params) #mass assignment!
   end
 VULNCODE
 wsp_dispcode = <<-DISPCODE
@@ -110,14 +106,14 @@ wsu_safecode = <<-SAFECODE
   #this will cause a stringify keys method missing error
   #TODO maybe this should be a named exception instead
   #chest = Chest.create(params[:chest])
-  chest = Chest.create(params.permit(:chest=>[:size,:color])[:chest])
+  @chest = Chest.create(params.permit(:chest=>[:size,:color])[:chest])
 SAFECODE
 wsu_vulncode = <<-VULNCODE
   chest_default_vals = {"color"=> "Brown", "size"=>"Large"}
   chest_params = params.instance_variable_get(:@params)["chest"]
   chest_attrs = chest_default_vals.merge chest_params
 
-  chest = Chest.create(chest_attrs)
+  @chest = Chest.create(chest_attrs)
 VULNCODE
 wsu_dispcode = <<-DISPCODE
 def with_shields_up_action

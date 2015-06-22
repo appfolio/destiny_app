@@ -25,7 +25,7 @@ MassAssignments.each do |ma|
         begin
       #{ma[:safe_code]}
           @sql = last_sql
-          render partial: "query_result", object: chest
+          render partial: "query_result", object: @chest
         rescue => e
           @error = e
           @sql = last_sql
@@ -39,7 +39,7 @@ MassAssignments.each do |ma|
         begin
       #{ma[:vuln_code]}
           @sql = last_sql
-          render partial: "query_result", object: chest
+          render partial: "query_result", object: @chest
         rescue => e
           @error = e
           @sql = last_sql
