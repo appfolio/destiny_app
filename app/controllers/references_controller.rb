@@ -2,6 +2,8 @@ class ReferencesController < ApplicationController
   before_action :set_table_name
   include ShieldsUp
 
+  #metaprogrammed actions defined in config/initializers/references.rb
+
   def index
   end
 
@@ -93,38 +95,6 @@ class ReferencesController < ApplicationController
       @sql = last_sql
       render partial: "query_error"
     end
-  end
-
-  MassAssignments.each do |ma|
-    ReferencesController.class_eval <<-RUBY
-      def safe_#{ma[:name]}
-        begin
-          #{ma[:safe_code]}
-          @sql = last_sql
-          render partial: "query_result", object: chest
-        rescue => e
-          @error = e
-          @sql = last_sql
-          render partial: "query_error"
-        end
-
-        reset_db
-      end
-
-      def vulnerable_#{ma[:name]}
-        begin
-          #{ma[:vuln_code]}
-          @sql = last_sql
-          render partial: "query_result", object: chest
-        rescue => e
-          @error = e
-          @sql = last_sql
-          render partial: "query_error"
-        end
-
-        reset_db
-      end
-    RUBY
   end
 
   private

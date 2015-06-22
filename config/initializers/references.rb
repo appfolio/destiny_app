@@ -1,3 +1,4 @@
+#Queries defined in models/queries.rb
 Queries.each do |q|
   ReferencesController.class_eval <<-RUBY
       def #{q[:input_form][:action_url]}
@@ -15,4 +16,37 @@ Queries.each do |q|
         reset_db
       end
   RUBY
+end
+
+#MassAssignments defined in models/mass_assignments.rb
+MassAssignments.each do |ma|
+  ReferencesController.class_eval <<-RUBY
+      def safe_#{ma[:name]}
+        begin
+      #{ma[:safe_code]}
+          @sql = last_sql
+          render partial: "query_result", object: chest
+        rescue => e
+          @error = e
+          @sql = last_sql
+          render partial: "query_error"
+        end
+
+        reset_db
+      end
+
+      def vulnerable_#{ma[:name]}
+        begin
+      #{ma[:vuln_code]}
+          @sql = last_sql
+          render partial: "query_result", object: chest
+        rescue => e
+          @error = e
+          @sql = last_sql
+          render partial: "query_error"
+        end
+
+        reset_db
+      end
+      RUBY
 end

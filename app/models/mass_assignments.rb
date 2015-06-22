@@ -141,7 +141,6 @@ DISPCODE
 
 MassAssignments = [
   {
-    index: 0,
     name: "wosp", #used for metaprogramming the safe and vuln actions
     title: "Without Strong Parameters or Shields Up",
     info: "<p>Rails 4 by default has the strong parameters gem installed, so this is a"+
@@ -169,7 +168,6 @@ MassAssignments = [
     displayed_code: wosp_dispcode
   },
   {
-    index: 1,
     name: "wsp", #used for metaprogramming the safe and vuln actions
     title: "With Strong Parameters",
     info: "<p>With strong parameters enabled Mass Assignment vulnerabilities require"+
@@ -189,7 +187,6 @@ MassAssignments = [
     displayed_code: wsp_dispcode
   },
   {
-    index: 2,
     name: "wsu", #used for metaprogramming the safe and vuln actions
     title: "With Shields Up Parameters",
     info: "<p>Using Shields Up parameters is the preferred way to mitigate risk from
