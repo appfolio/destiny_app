@@ -16,6 +16,8 @@ DestinyApp::Application.routes.draw do
   get 'references/xss' => 'references#xss'
   get 'references/xss_read_letters' => 'references#xss_read_letters'
   post 'references/xss_deliver_letter' => 'references#xss_deliver_letter'
+  get 'references/mass_assignment' => 'references#mass_assignment'
+  post 'references/mass_assignment_create_chest' => 'references#mass_assignment_create_chest'
 
   get 'challenges/' => 'challenges#index'
   post 'challenges/setup_challenge_environment' => 'challenges#setup_challenge_environment'
@@ -36,4 +38,9 @@ DestinyApp::Application.routes.draw do
     post "references/#{query[:input_form][:action_url]}" => "references##{query[:input_form][:action_url]}"
   end
 
+  MassAssignments.each do |ma|
+    name = ma[:name]
+    post "references/safe_#{name}" => "references#safe_#{name}"
+    post "references/vulnerable_#{name}" => "references#vulnerable_#{name}"
+  end
 end

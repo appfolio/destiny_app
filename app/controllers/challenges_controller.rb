@@ -47,7 +47,7 @@ class ChallengesController < ApplicationController
     if @user.tables_prefix
       response_hash = {
         result: :Failure,
-        error: "Your environment is already set up."
+        description: "Your environment is already set up."
       }
 
       render text: response_hash.to_json

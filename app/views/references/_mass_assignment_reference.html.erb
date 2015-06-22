@@ -1,0 +1,126 @@
+<div class="row">
+</div>
+
+<div class="well">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="input-group">
+        <span class="input-group-addon alert-success" id="basic-addon1">Size (permitted)</span>
+        <input type="text" id="ma_size" target="<%= ref[:name] %>"
+          class="form-control" placeholder="An attribute meant to be assigned">
+        <span class="input-group-addon">
+          <input type="checkbox" id="ma_send_size" aria-label="...">
+        </span>
+      </div><!-- /input-group -->
+    </div>
+  </div>
+  <div class="row top-buffer">
+    <div class="col-xs-12">
+      <div class="input-group">
+        <span class="input-group-addon alert-success" id="basic-addon1">Color (permitted)</span>
+        <input type="text" id="ma_color" target="<%= ref[:name] %>"
+          class="form-control" placeholder="An attribute meant to be assigned">
+        <span class="input-group-addon">
+          <input type="checkbox" id="ma_send_color" aria-label="...">
+        </span>
+      </div><!-- /input-group -->
+    </div>
+  </div>
+  <div class="row top-buffer">
+    <div class="col-xs-12">
+      <div class="input-group">
+        <span class="input-group-addon alert-danger" id="basic-addon1">Key Slot (sensitive)</span>
+        <input type="text" id="ma_key_slot" class="form-control"
+          placeholder="The attribute that is NOT meant to be assigned">
+        <span class="input-group-addon">
+          <input type="checkbox" id="ma_send_key_slot" aria-label="...">
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="row top-buffer">
+    <div class="col-xs-6">
+      <div class="input-group">
+        <div class="btn-group" data-toggle="buttons">
+          <label id="safe_action" class="btn btn-default active">
+            <input type="radio" name="options" autocomplete="off" checked>
+            <span class="text-success">Send to Safe Action</span>
+          </label>
+          <label id="vulnerable_action" class="btn btn-default">
+            <input type="radio" name="options" autocomplete="off">
+            <span class="text-danger">Send to Vulnerable Action</span>
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-6">
+      <div class="input-group pull-right">
+        <button class="btn btn-default" type="button" onclick="submit_ma_sqli('<%= ref[:name] %>');">send</button>
+      </div>
+    </div>
+  </div>
+  <div class="row top-buffer">
+    <div class="col-xs-12">
+      <button class="btn-xs btn-info" type="button" data-toggle="collapse" data-target="#form_hint" aria-expanded="false" aria-controls="collapseExample">
+        How to use this form
+      </button>
+      <div class="collapse" id="form_hint">
+        <div class="top-buffer">
+          <p class="text-info">
+            You can choose which controller action you will be requesting against
+            with the toggle buttons. The checkbox in each field determines
+            if that parameter will be sent in the request. There are default values
+            for Size and Color in the with strong parameters and shields up references.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <div class="alert alert-success" style="margin-top:0" id="display">
+      <p id="display-sql">
+      </p>
+      <p id="display-query">
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <div class="panel panel-default">
+      <div class="panel-heading text-right">
+        <b class="pull-left"><%= ref[:title] %></b>
+        <%= link_to ref[:documentation_link], target: "_blank" do %>
+          Documentation <span class="glyphicon glyphicon-book"></span>
+        <% end %>
+      </div>
+      <div class="panel-body">
+        <%= ref[:info].html_safe %>
+      </div>
+      <% if ref[:examples].size > 0 %>
+        <div class="panel-footer">
+          <button class="btn-xs btn-info" type="button" data-toggle="collapse"
+            data-target="#hint" aria-expanded="false" aria-controls="collapseExample">
+            Hints
+          </button>
+          <div class="collapse" id="hint">
+            <br/>
+            <% ref[:examples].each do |ex| %>
+              <p><kbd><%= ex %></kbd></p>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <%= raw CodeRay.scan(ref[:displayed_code],:ruby).div(line_numbers: :table) %>
+  </div>
+</div>

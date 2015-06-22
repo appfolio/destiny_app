@@ -1,5 +1,8 @@
 class ReferencesController < ApplicationController
   before_action :set_table_name
+  include ShieldsUp
+
+  #metaprogrammed actions defined in config/initializers/references.rb
 
   def index
   end
@@ -61,23 +64,37 @@ class ReferencesController < ApplicationController
     @letters = Letter.destroy_all
   end
 
-  Queries.each do |q|
-    class_eval <<-RUBY
-      def #{q[:input_form][:action_url]}
-        begin
-          query = #{q[:query]}
-          result = #{q[:output]}
-          @sql = last_sql
-          render partial: "query_result", object: result
-        rescue => e
-          @error = e
-          @sql = last_sql
-          render partial: "query_error"
-        end
+  def mass_assignment
+    @refs = MassAssignments
+    if params[:ref_num]
+      ref_num = params[:ref_num].to_i
 
-        reset_db
+      unless ref_num.between?(0,MassAssignments.size-1)
+        flash[:error] = "That page does not exist"
+        redirect_to references_mass_assignments_path
       end
-    RUBY
+
+      @ref = MassAssignments[ref_num]
+      @ref_num = ref_num
+    else
+      @ref = MassAssignments[0]
+      @ref_num = 0
+    end
+  end
+
+  def mass_assignment_create_chest
+    #TODO these could be re-written to be a method
+    #that accepts a block, yield to what query to run
+    #look for returned value of the query
+    begin
+      chest = Chest.create(params)
+      @sql = last_sql
+      render partial: "query_result", object: chest
+    rescue => e
+      @error = e
+      @sql = last_sql
+      render partial: "query_error"
+    end
   end
 
   private

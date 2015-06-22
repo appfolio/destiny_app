@@ -27,12 +27,15 @@
         <% end %>
       </div>
       <div class="panel-body">
-        <%= query[:desc] %>
+        <%= query[:desc].html_safe %>
       </div>
 
       <div class="panel-footer">
-        <span class="label label-info clickable" id="hint-toggle-link">Examples</span>
-        <div style="display:none;margin-top:10px;" id="hint">
+        <button class="btn-xs btn-info" type="button" data-toggle="collapse" data-target="#hint" aria-expanded="false" aria-controls="collapseExample">
+          Examples
+        </button>
+        <div class="collapse" id="hint">
+          <br/>
           <% if query[:hint][:input][:name] %>
             <p>The following input is for <%= query[:hint][:input][:name] %></p>
           <% end %>

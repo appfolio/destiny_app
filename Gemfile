@@ -16,6 +16,9 @@ gem 'yui-compressor'
 gem 'capybara'
 gem 'poltergeist'
 
+# for mass assignment protection
+gem 'shields_up'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.13'
 
