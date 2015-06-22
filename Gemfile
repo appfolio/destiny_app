@@ -19,6 +19,9 @@ gem 'poltergeist'
 # for mass assignment protection
 gem 'shields_up'
 
+# for throttling
+gem 'rack-attack'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.13'
 
