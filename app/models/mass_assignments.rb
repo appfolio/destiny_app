@@ -158,7 +158,7 @@ MassAssignments = [
     " to have protected_attributes included in an app that needs to use strong_parameters"+
     " as well)</b>",
     examples: [],
-    documentation_link: "#",
+    documentation_link: "https://github.com/rails/protected_attributes",
     safe_code: wosp_safecode,
     vuln_code: wosp_vulncode,
     displayed_code: wosp_dispcode
@@ -177,7 +177,7 @@ MassAssignments = [
     " the parameters that were permitted will be passed into the calling method.</b>",
     examples: ["Passing in a key_slot value to the safe action will not assign the key_slot",
                "Passing in a key_slot value to the vulnerable action will assign the key_slot"],
-    documentation_link: "#",
+    documentation_link: "https://github.com/rails/strong_parameters",
     safe_code: wsp_safecode,
     vuln_code: wsp_vulncode,
     displayed_code: wsp_dispcode
@@ -190,7 +190,7 @@ MassAssignments = [
     " permit, require and the [] operator on the Parameters object.</p>This protects"+
     " from developers accidentally passing a hash to an Active Record method call.",
     examples: [],
-    documentation_link: "#",
+    documentation_link: "https://github.com/appfolio/shields_up",
     safe_code: wsu_safecode,
     vuln_code: wsu_vulncode,
     displayed_code: wsu_dispcode
