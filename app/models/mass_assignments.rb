@@ -1,6 +1,6 @@
 #Assumption is that everything in this file is html_safe
 
-#TODO with out strong parameters
+#with out strong parameters
 wosp_safecode = <<-SAFECODE
   chest = nil
   params.with_shields_down do
@@ -51,7 +51,7 @@ def vulnerable_with_out_strong_parameters
 end
 DISPCODE
 
-#TODO with strong parameters
+#with strong parameters
 wsp_safecode = <<-SAFECODE
   chest = nil
   params.with_shields_down do
@@ -105,10 +105,10 @@ def vulnerable_with_strong_params
 end
 DISPCODE
 
-#TODO with shields up parameters
+#with shields up parameters
 wsu_safecode = <<-SAFECODE
   #this will cause a stringify keys method missing error
-  #TODO maybe this should be a name exception instead
+  #TODO maybe this should be a named exception instead
   #chest = Chest.create(params[:chest])
   chest = Chest.create(params.permit(:chest=>[:size,:color])[:chest])
 SAFECODE
@@ -120,6 +120,11 @@ wsu_vulncode = <<-VULNCODE
   chest = Chest.create(chest_attrs)
 VULNCODE
 wsu_dispcode = <<-DISPCODE
+def with_shields_up_action
+  #you need to include ShieldsUp in the controller you intend
+  #to use it in
+end
+
 def safe_with_shields_up
   #will not log a warning for the unpermitted parameters
   chest = Chest.create(params.permit(:chest=>[:size,:color])[:chest])
@@ -138,7 +143,7 @@ MassAssignments = [
   {
     index: 0,
     name: "wosp", #used for metaprogramming the safe and vuln actions
-    title: "Without Strong Parameters",
+    title: "Without Strong Parameters or Shields Up",
     info: "<p>Rails 4 by default has the strong parameters gem installed, so this is a"+
     " reference to a very uncommon occurence, most likely seen in legacy apps (and maybe"+
     " some that have even been upgraded)."+
@@ -157,7 +162,7 @@ MassAssignments = [
     " an application that isn't using strong parameters. (Wouldn't make sense"+
     " to have protected_attributes included in an app that needs to use strong_parameters"+
     " as well)</b>",
-    examples: ["here is an example for BLALDSKJADKJSD","nother one"],
+    examples: [],
     documentation_link: "#",
     safe_code: wosp_safecode,
     vuln_code: wosp_vulncode,
@@ -187,8 +192,11 @@ MassAssignments = [
     index: 2,
     name: "wsu", #used for metaprogramming the safe and vuln actions
     title: "With Shields Up Parameters",
-    info: "without strong parameters you do BLAARRRRGGHGGHGHGGHGHHG",
-    examples: ["here is an example for BLALDSKJADKJSD","nother one"],
+    info: "<p>Using Shields Up parameters is the preferred way to mitigate risk from
+    mass assignment vulnerabilities. When using Shields Up you can only use "+
+    " permit, require and the [] operator on the Parameters object.</p>This protects"+
+    " from developers accidentally passing a hash to an Active Record method call.",
+    examples: [],
     documentation_link: "#",
     safe_code: wsu_safecode,
     vuln_code: wsu_vulncode,

@@ -70,7 +70,7 @@
             You can choose which controller action you will be requesting against
             with the toggle buttons. The checkbox in each field determines
             if that parameter will be sent in the request. There are default values
-            for Size and Color.
+            for Size and Color in the with strong parameters and shields up references.
           </p>
         </div>
       </div>
@@ -101,18 +101,20 @@
       <div class="panel-body">
         <%= ref[:info].html_safe %>
       </div>
-      <div class="panel-footer">
-        <button class="btn-xs btn-info" type="button" data-toggle="collapse"
-          data-target="#hint" aria-expanded="false" aria-controls="collapseExample">
-          Hints
-        </button>
-        <div class="collapse" id="hint">
-          <br/>
-          <% ref[:examples].each do |ex| %>
-            <p><kbd><%= ex %></kbd></p>
-          <% end %>
+      <% if ref[:examples].size > 0 %>
+        <div class="panel-footer">
+          <button class="btn-xs btn-info" type="button" data-toggle="collapse"
+            data-target="#hint" aria-expanded="false" aria-controls="collapseExample">
+            Hints
+          </button>
+          <div class="collapse" id="hint">
+            <br/>
+            <% ref[:examples].each do |ex| %>
+              <p><kbd><%= ex %></kbd></p>
+            <% end %>
+          </div>
         </div>
-      </div>
+      <% end %>
     </div>
   </div>
 </div>
