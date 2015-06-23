@@ -24,7 +24,19 @@ class ApplicationController < ActionController::Base
       KeyCard.table_name = "#{current_user.tables_prefix}_key_cards"
       Letter.table_name = "#{current_user.tables_prefix}_letters"
     else
-      #for references controller
+      #for references controllers
+      #
+      id = current_user.id
+      unless ActiveRecord::Base.connection.table_exists? "#{id}_reference_letters"
+        ActiveRecord::Schema.define do
+          create_table "#{id}_reference_letters" do |t|
+            t.string :content
+
+            t.timestamps
+          end
+        end
+      end
+
       Chest.table_name = "chests"
       Item.table_name = "items"
       KeyCard.table_name = "key_cards"

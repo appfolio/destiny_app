@@ -91,7 +91,7 @@ class ChallengesControllerTest < ActionController::TestCase
 
     assert_not_nil @user.tables_prefix
     assert_equal "Failure", hash["result"]
-    assert_equal "Your environment is already set up.", hash["error"]
+    assert_equal "Your environment is already set up.", hash["description"]
     assert_response 200
   end
 end

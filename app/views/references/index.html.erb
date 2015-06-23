@@ -19,7 +19,7 @@
   <div class="col-xs-12">
     <div class="panel panel-primary">
       <div class="panel-heading">
-        <%= link_to references_sqli_path, class: "panel-title" do %>
+        <%= link_to sql_injection_path, class: "panel-title" do %>
           SQL Injection <span class="glyphicon glyphicon-share-alt"></span>
         <% end %>
       </div>
@@ -40,7 +40,7 @@
   <div class="col-xs-12">
     <div class="panel panel-primary xss-panel">
       <div class="panel-heading xss-heading">
-        <%= link_to references_xss_path, class: "panel-title" do %>
+        <%= link_to cross_site_scripting_path, class: "panel-title" do %>
           Cross Site Scripting <span class="glyphicon glyphicon-share-alt"></span>
         <% end %>
       </div>
@@ -61,7 +61,7 @@
   <div class="col-xs-12">
     <div class="panel panel-primary xss-panel">
       <div class="panel-heading xss-heading">
-        <%= link_to references_mass_assignment_path, class: "panel-title" do %>
+        <%= link_to mass_assignment_ma_path, class: "panel-title" do %>
           Mass Assignment <span class="glyphicon glyphicon-share-alt"></span>
         <% end %>
       </div>
@@ -71,7 +71,7 @@
           assign with a hash object if it can contain user input.
       </div>
       <div class="panel-footer">
-        <%= link_to "#",
+        <%= link_to "https://github.com/appfolio/shields_up",
           target: "_blank" do %>
           Documentation <span class="glyphicon glyphicon-book"></span>
         <% end %>

@@ -39,10 +39,3 @@ function push_gate()
   });
   ajax_post("push_gate");
 }
-
-function showResponseModal(data)
-{
-  $("#responseModalTitle").text(data.result);
-  $("#responseModalBody").text(data.description);
-  $("#responseModal").modal('show');
-}

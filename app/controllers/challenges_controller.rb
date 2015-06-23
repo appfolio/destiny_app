@@ -18,11 +18,11 @@ class ChallengesController < ApplicationController
       query = Chest.where(input)
       result = query.to_a
       @sql = last_sql
-      render partial: "references/query_result", object: result
+      render partial: "sql_injection/query_result", object: result
     rescue => e
       @error = e
       @sql = last_sql
-      render partial: "references/query_error"
+      render partial: "sql_injection/query_error"
     end
   end
 
@@ -33,11 +33,11 @@ class ChallengesController < ApplicationController
       chest = Chest.find(params[:id])
       opened_chest = chest.unlock_with key_blade
       @sql = last_sql
-      render partial: "references/query_result", object: opened_chest.to_json
+      render partial: "sql_injection/query_result", object: opened_chest.to_json
     rescue => e
       @error = e
       @sql = last_sql
-      render partial: "references/query_error"
+      render partial: "sql_injection/query_error"
     end
   end
 
