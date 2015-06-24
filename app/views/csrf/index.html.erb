@@ -1,0 +1,86 @@
+<div class="row">
+  <div class="col-xs-12 title">
+    <h1>Welcome <%= current_user.name %></h1>
+    <h2>Cross Site Request Forgery Page</h2>
+    <hr/>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <div class="panel panel-default">
+      <div class="panel-heading text-right">
+        <b class="pull-left">CSRF Explanation</b>
+        <%= link_to "http://guides.rubyonrails.org/security.html#cross-site-scripting-xss", target: "_blank" do %>
+          Documentation <span class="glyphicon glyphicon-book"></span>
+        <% end %>
+      </div>
+      <div class="panel-body">
+        <p>
+          Cross Site Request Forgery is when a attacker causes the victim to send
+          a request from one domain to another domain. This can be done on page
+          load through a script or image tag, or the user could be tricked into
+          submitting a malicious form.
+        </p>
+        <p>
+          <em>The user's cookie is sent with each of these requests. If the
+            action they are hitting requires them to be logged in and they
+            <b>are</b> logged in then the CSRF attack will work.</em>
+        </p>
+        <p>
+          Actions responding to GET requests can always be reached by CSRF (provided
+          the victim has an open session with the target). img and script tags will
+          hit their src attributes on page load through the GET method. If the
+          GET action executes business logic CSRF could lead to damaging results.
+        </p>
+        <p>
+          NON-GET requests can be submitted cross origin through normal forms.
+          Without acquiring a CSRF token first, the request from the malicious
+          form will receive a 401 response.  If the action didn't require a CSRF
+          token the NON-GET request would be processed successfully. (Provided
+          the user's session is still open with the server).
+        </p>
+        <p>
+          If you take <kbd>$.ajax({type:"GET",url:"http://www.google.com"})</kbd>
+          to a page with jQuery loaded and execute it in your browser's
+          javascript console you'll see that Cross Origin Policy is enforced on all
+          AJAX requests. You can change the type parameter between POST and GET
+          to see that the Cross Origin Policy is enforced on both HTTP methods.
+        </p>
+        <p>
+          <h4>Countermeasures:</h4>
+          Abide by conventions set by the HTTP and only use the GET method on actions
+          that do not modify a resource. Use CSRF tokens in your application by
+          placing the <kbd>protect_from_forgery</kbd> method in the Application 
+          Controller to protect NON-GET requests from CSRF.
+        </p>
+      </div>
+      <div class="panel-footer">
+        <button class="btn-xs btn-info" type="button" data-toggle="collapse" data-target="#hint" aria-expanded="false" aria-controls="collapseExample">
+          Examples
+        </button>
+        <div class="collapse" id="hint">
+          <br/>
+          <p>Run in a javascript console with jQuery loaded <kbd>$.ajax({type:"GET",url:"http://www.google.com"})</kbd></p>
+          <p>Run this link from another domain
+            <a href="http://www.harmless.com/" onclick="
+              var f = document.createElement('form');
+              f.style.display = 'none';
+              this.parentNode.appendChild(f);
+              f.method = 'POST';
+              f.action =
+              'http://localhost:4000/sql_injection/where?column=blah';
+              f.submit();
+              return false;">POST to Destiny Action</a>
+            (You can copy and paste the source for the link in a html file on your filesystem)
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xs-12 text-center">
+    <p><b>Additional Sources</b></p>
+    <p><%= link_to "https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)",
+      "https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)" %></p>
+  </div>
+</div>

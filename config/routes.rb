@@ -13,6 +13,8 @@ DestinyApp::Application.routes.draw do
 
   get 'references/' => 'references#index'
 
+  get 'csrf/' => 'csrf#index'
+
   get 'cross_site_scripting/' => 'cross_site_scripting#index'
   get 'cross_site_scripting/read_letters' => 'cross_site_scripting#read_letters'
   post 'cross_site_scripting/deliver_letter' => 'cross_site_scripting#deliver_letter'
