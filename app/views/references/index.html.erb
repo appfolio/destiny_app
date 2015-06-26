@@ -78,4 +78,25 @@
       </div>
     </div>
   </div>
+  <div class="col-xs-12">
+    <div class="panel panel-primary xss-panel">
+      <div class="panel-heading xss-heading">
+        <%= link_to csrf_path, class: "panel-title" do %>
+          Cross Site Request Forgery <span class="glyphicon glyphicon-share-alt"></span>
+        <% end %>
+      </div>
+      <div class="panel-body">
+        Cross Site Request Forgery (CSRF) is when malicious requests are sent
+        across origin from a domain that is succeptible to malicious input. CSRF
+        vulnerabilites are not prevalent and NON-GET requests can be easily
+        protected by CSRF tokens.
+      </div>
+      <div class="panel-footer">
+        <%= link_to "https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)",
+          target: "_blank" do %>
+          Documentation <span class="glyphicon glyphicon-book"></span>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>
