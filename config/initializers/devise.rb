@@ -84,9 +84,9 @@ Devise.setup do |config|
 
   # Setup a pepper to generate the encrypted password.
   if Rails.env.production?
-    appfolio_env = YAML.load_file("/etc/appfolio/#{Rails.application.name}_environment.yml")
-    config.pepper = appfolio_env['pepper']
-    config.secret_key = appfolio_env['secret_key']
+    #TODO get rid of hardcoded creds
+    config.pepper = "f5a53ecb8f04ed693adb818a9b94460a87d9097de1d8908bb62639e731184a2dc48e08a3213aab771be3fe8e3f89dd81e6f78ffde897a14e250fbaa5ac4ce3fa"
+    config.secret_key = '574063f67643d5c4ba7e494e86e2592ff8ac367190ef7e5e6a2c82c8c61625d76d3049259857ab665ecce76910b987a2cba41683474ab4ba90845a143b60580b'
   else
     config.pepper = "f5a53ecb8f04ed693adb818a9b94460a87d9097de1d8908bb62639e731184a2dc48e08a3213aab771be3fe8e3f89dd81e6f78ffde897a14e250fbaa5ac4ce3fa"
     config.secret_key = '574063f67643d5c4ba7e494e86e2592ff8ac367190ef7e5e6a2c82c8c61625d76d3049259857ab665ecce76910b987a2cba41683474ab4ba90845a143b60580b'
@@ -133,7 +133,7 @@ Devise.setup do |config|
   # The time you want to timeout the user session without activity. After this
   # time the user will be asked for credentials again. Default is 30 minutes.
   # config.timeout_in = 30.minutes
-  
+
   # If true, expires auth token on session timeout.
   # config.expire_auth_token_on_timeout = false
 
@@ -223,10 +223,6 @@ Devise.setup do |config|
   #   manager.intercept_401 = false
   #   manager.default_strategies(:scope => :user).unshift :some_external_strategy
   # end
-  config.warden do |manager|
-    manager.default_strategies(:scope => :user).delete(:database_authenticatable)
-    manager.default_strategies(:scope => :user) << :remote_authenticatable
-  end
 
   # ==> Mountable engine configurations
   # When using Devise inside an engine, let's call it `MyEngine`, and this engine

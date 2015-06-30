@@ -1,10 +1,7 @@
 source 'https://rubygems.org'
 
-source "https://gemini.atl.appfolio.net" do
-  gem 'af_devise'
-  gem 'af_rails', '~> 11.1'
-  gem 'af_runtime', '~> 5.18'
-end
+#auth
+gem 'devise'
 
 # Front end
 gem 'bootstrap-sass', '~> 3.3.4'

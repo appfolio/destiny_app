@@ -17,3 +17,6 @@
 
 # Ignore tag file
 tags
+
+# Ignore dockerfiles
+Dockerfile
