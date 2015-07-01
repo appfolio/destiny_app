@@ -84,12 +84,11 @@ Devise.setup do |config|
 
   # Setup a pepper to generate the encrypted password.
   if Rails.env.production?
-    #TODO get rid of hardcoded creds
-    config.pepper = "f5a53ecb8f04ed693adb818a9b94460a87d9097de1d8908bb62639e731184a2dc48e08a3213aab771be3fe8e3f89dd81e6f78ffde897a14e250fbaa5ac4ce3fa"
-    config.secret_key = '574063f67643d5c4ba7e494e86e2592ff8ac367190ef7e5e6a2c82c8c61625d76d3049259857ab665ecce76910b987a2cba41683474ab4ba90845a143b60580b'
+    config.pepper = ENV["PEPPER"]
+    config.secret_key = ENV["SECRET_KEY"]
   else
     config.pepper = "f5a53ecb8f04ed693adb818a9b94460a87d9097de1d8908bb62639e731184a2dc48e08a3213aab771be3fe8e3f89dd81e6f78ffde897a14e250fbaa5ac4ce3fa"
-    config.secret_key = '574063f67643d5c4ba7e494e86e2592ff8ac367190ef7e5e6a2c82c8c61625d76d3049259857ab665ecce76910b987a2cba41683474ab4ba90845a143b60580b'
+    config.secret_key = "574063f67643d5c4ba7e494e86e2592ff8ac367190ef7e5e6a2c82c8c61625d76d3049259857ab665ecce76910b987a2cba41683474ab4ba90845a143b60580b"
   end
 
   # ==> Configuration for :confirmable
