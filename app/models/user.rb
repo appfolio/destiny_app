@@ -1,49 +1,29 @@
-# == Schema Information
-#
-# Table name: users
-#
-#  id                   :integer          not null, primary key
-#  email                :string(255)      default(""), not null
-#  encrypted_password   :string(128)      default(""), not null
-#  remember_created_at  :datetime
-#  sign_in_count        :integer          default(0)
-#  current_sign_in_at   :datetime
-#  last_sign_in_at      :datetime
-#  current_sign_in_ip   :string(255)
-#  last_sign_in_ip      :string(255)
-#  authentication_token :string(255)
-#  created_at           :datetime
-#  updated_at           :datetime
-#  name                 :string(255)
-#  mobile_number        :string(255)
-#  tables_prefix        :string(255)
-#
+#+------------------------+--------------+------+-----+---------+----------------+
+#| Field                  | Type         | Null | Key | Default | Extra          |
+#+------------------------+--------------+------+-----+---------+----------------+
+#| id                     | int(11)      | NO   | PRI | NULL    | auto_increment |
+#| email                  | varchar(255) | NO   | UNI |         |                |
+#| encrypted_password     | varchar(128) | NO   |     |         |                |
+#| remember_created_at    | datetime     | YES  |     | NULL    |                |
+#| sign_in_count          | int(11)      | YES  |     | 0       |                |
+#| current_sign_in_at     | datetime     | YES  |     | NULL    |                |
+#| last_sign_in_at        | datetime     | YES  |     | NULL    |                |
+#| current_sign_in_ip     | varchar(255) | YES  |     | NULL    |                |
+#| last_sign_in_ip        | varchar(255) | YES  |     | NULL    |                |
+#| name                   | varchar(255) | YES  |     | NULL    |                |
+#| mobile_number          | varchar(255) | YES  |     | NULL    |                |
+#| created_at             | datetime     | YES  |     | NULL    |                |
+#| updated_at             | datetime     | YES  |     | NULL    |                |
+#| tables_prefix          | varchar(255) | YES  |     | NULL    |                |
+#| reset_password_token   | varchar(255) | YES  | UNI | NULL    |                |
+#| reset_password_sent_at | datetime     | YES  |     | NULL    |                |
+#| confirmation_token     | varchar(255) | YES  | UNI | NULL    |                |
+#| confirmed_at           | datetime     | YES  |     | NULL    |                |
+#| confirmation_sent_at   | datetime     | YES  |     | NULL    |                |
+#+------------------------+--------------+------+-----+---------+----------------+
 
 class User < ActiveRecord::Base
-  attr_accessor :remote_login
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable,
+    :trackable, :validatable, :confirmable, :timeoutable, :timeout_in => 4.hours
 
-  devise :database_authenticatable, :rememberable, :trackable, :timeoutable, :timeout_in => 4.hours
-
-  scope :notifiable, -> { where("mobile_number IS NOT NULL") }
-
-  def password_required?
-    false
-  end
-
-  def after_remote_authentication(remote_user)
-    self.name       = "#{remote_user.first_name} #{remote_user.last_name}"
-    current_user = self
-  end
-
-  def to_json(options = {})
-    super(self.class.format_options.merge(options))
-  end
-
-  def to_xml(options = {})
-    super(self.class.format_options.merge(options))
-  end
-
-  def self.format_options
-    { :methods => :name, :only => [:email, :id, :mobile_number, :user_roles] }
-  end
 end

@@ -1,44 +1,18 @@
-# == Schema Information
-#
-# Table name: users
-#
-#  id                   :integer          not null, primary key
-#  email                :string(255)      default(""), not null
-#  encrypted_password   :string(128)      default(""), not null
-#  remember_created_at  :datetime
-#  sign_in_count        :integer          default(0)
-#  current_sign_in_at   :datetime
-#  last_sign_in_at      :datetime
-#  current_sign_in_ip   :string(255)
-#  last_sign_in_ip      :string(255)
-#  authentication_token :string(255)
-#  created_at           :datetime
-#  updated_at           :datetime
-#  name                 :string(255)
-#  mobile_number        :string(255)
-#  user_roles           :string(255)
-#
-
-# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
-
-# This model initially had no columns defined.  If you add columns to the
-# model remove the '{}' from the fixture names and add the columns immediately
-# below each fixture, per the syntax in the comments below
-#
-
 <%
   users_hash = {
     'admin' => {
       :email              => 'admin@appfolio.com',
       :name               => 'Bob User',
       :mobile_number      => '805-555-1212',
-      :encrypted_password => User.new(:password => 'Appfolio55%').encrypted_password
+      :encrypted_password => User.new(:password => 'Appfolio55%').encrypted_password,
+      :confirmed_at       => DateTime.now
     },
     'guest' => {
       :email              => 'guest@appfolio.com',
       :name               => 'Bobby User',
       :mobile_number      => '805-555-1212',
-      :encrypted_password => User.new(:password => 'Appfolio55%').encrypted_password
+      :encrypted_password => User.new(:password => 'Appfolio55%').encrypted_password,
+      :confirmed_at       => DateTime.now
     }
   }
 %>

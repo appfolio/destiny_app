@@ -1,6 +1,12 @@
 DestinyApp::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  # TODO populate the host name, maybe through environment variable passed
+  # into docker container on run.
+  config.action_mailer.delivery_method = :sendmail
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.default_url_options = { host: '52.27.180.52', port: 80 }
+
   # Code is not reloaded between requests.
   config.cache_classes = true
 
