@@ -8,6 +8,9 @@ gem 'bootstrap-sass', '~> 3.3.4'
 gem 'coderay'
 gem 'yui-compressor'
 
+# view logs
+gem 'browserlog', '~> 0.0.2'
+
 # for emulating user visiting and using the app
 # needed for xss challenges/references
 gem 'capybara'

@@ -18,5 +18,7 @@
 # Ignore tag file
 tags
 
-# Ignore dockerfiles
+# Ignore dockerfiles/etc
 Dockerfile
+supervisord.conf
+setup.sh

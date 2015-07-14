@@ -1,4 +1,6 @@
 DestinyApp::Application.routes.draw do
+  mount Browserlog::Engine => '/logs'
+
   devise_for :users
 
   devise_scope :user do
