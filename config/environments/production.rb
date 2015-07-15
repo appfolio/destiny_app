@@ -1,9 +1,11 @@
 DestinyApp::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
-  config.after_initialize do
-    Devise::RemoteAuthenticatable::RemoteResource.site = "https://login.admin.appfolio.com"
-  end
+  # TODO populate the host name, maybe through environment variable passed
+  # into docker container on run.
+  config.action_mailer.delivery_method = :sendmail
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.default_url_options = { host: ENV["HOST"], port: ENV["PORT"] }
 
   # Code is not reloaded between requests.
   config.cache_classes = true
