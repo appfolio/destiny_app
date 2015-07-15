@@ -5,7 +5,7 @@ DestinyApp::Application.configure do
   # into docker container on run.
   config.action_mailer.delivery_method = :sendmail
   config.action_mailer.perform_deliveries = true
-  config.action_mailer.default_url_options = { host: '52.27.180.52', port: 80 }
+  config.action_mailer.default_url_options = { host: ENV["HOST"], port: ENV["PORT"] }
 
   # Code is not reloaded between requests.
   config.cache_classes = true
