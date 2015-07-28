@@ -3,14 +3,33 @@
     <div class="col-xs-12 text-center">
       <h1>Hello, this is the CSRF email!</h1>
 
-      <img alt="I am not a real image lol" src="<%= "#{@url}/csrf/target?hi=ha" %>" />
+      <p>
+        Use an html inspector to take a look at each of the CSRF vectors below.
+        This should give you a good idea on what is filtered by your email service
+        and what is not.
+      </p>
+      <br/>
 
-      <script src="<%= "#{@url}/csrf/check" %>"></script>
+      <p>
+        Pressing the CSRFIFY ME CAPN button will execute a post cross origin to
+        where you have destiny running (depending on what email service you are
+        using).
+      </p>
 
       <form action="<%= "#{@url}/csrf/target"%>" method="post">
         <input type="hidden" name="authenticity_token" value="<%= @csrf_token %>"/>
-        <input type="submit" value="CSRFIFY ME CAPN" />
+        <input type="submit" value="CSRFIFY ME CAPN"/>
       </form>
+      <br/>
+
+      <p>
+        This link is an example of how you can create a form and submit it in javascript
+        only. The request generated from the form in the onlick attribute of this
+        link will get a 401 response from rails applications that have
+        protect_from_forgery since it does not contain an authenticity token matching
+        the token in your session. The onclick attribute may be removed by your
+        email service.
+      </p>
 
       <p>
         <a href="http://www.harmless.com/" onclick="
@@ -18,11 +37,19 @@
           f.style.display = 'none';
           this.parentNode.appendChild(f);
           f.method = 'POST';
-          f.action =
-          'http://localhost:4000/sql_injection/where?column=blah';
+          f.action = 'http://localhost:4000/csrf/target';
           f.submit();
           return false;">To the harmless survey</a>
       </p>
+      <br/>
+
+      <p>
+        The image below is an example of using a img tag to hit a get request
+        cross origin. Your email service may proxy your requests, if so this will
+        not hit destiny running on your localhost.
+        (It will try to hit <%= "#{@url}/csrf/target?hi=ha" %>)
+      </p>
+      <img alt="I am not a real image" src="<%= "#{@url}/csrf/target?hi=ha" %>" />
     </div>
   </div>
 </div>

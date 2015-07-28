@@ -5,7 +5,6 @@ function send_csrf_email()
     url:"csrf/send_csrf_email"
   })
   .done(function(msg){
-    console.log(msg);
     $("#csrf-status").removeClass("btn-danger");
     $("#csrf-status").addClass("btn-success");
     check_for_read();
