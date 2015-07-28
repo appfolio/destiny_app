@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 text-center">
+      <h1>Hello, this is the CSRF email!</h1>
+
+      <img alt="I am not a real image lol" src="<%= "#{@url}/csrf/target?hi=ha" %>" />
+
+      <script src="<%= "#{@url}/csrf/check" %>"></script>
+
+      <form action="<%= "#{@url}/csrf/target"%>" method="post">
+        <input type="hidden" name="authenticity_token" value="<%= @csrf_token %>"/>
+        <input type="submit" value="CSRFIFY ME CAPN" />
+      </form>
+
+      <p>
+        <a href="http://www.harmless.com/" onclick="
+          var f = document.createElement('form');
+          f.style.display = 'none';
+          this.parentNode.appendChild(f);
+          f.method = 'POST';
+          f.action =
+          'http://localhost:4000/sql_injection/where?column=blah';
+          f.submit();
+          return false;">To the harmless survey</a>
+      </p>
+    </div>
+  </div>
+</div>

@@ -6,7 +6,46 @@
   </div>
 </div>
 
-<div class="row">
+<div class="panel panel-default">
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-xs-offset-1 col-xs-4 title">
+        <div class="well">
+          <%= button_tag "Send Email", class: "btn btn-lg btn-block btn-primary",
+            onclick: "send_csrf_email()" %>
+        </div>
+      </div>
+      <div class="col-xs-offset-2 col-xs-4 title">
+        <div class="well">
+          <%= button_tag "CSRF Status", class: "btn btn-lg btn-block btn-success",
+            disabled: "disabled", id: "csrf-status" %>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 title">
+        <button class="btn-xs btn-info" type="button" data-toggle="collapse" data-target="#form_hint" aria-expanded="false" aria-controls="collapseExample">
+          How to use this form
+        </button>
+        <div class="collapse" id="form_hint">
+          <div class="top-buffer">
+            <p class="text-info">
+              CSRF Status will go red when the CSRF attack successfully hit the
+              server using your session.
+              Google mail proxies requests for images so if you are running on localhost
+              the action will not be hit at all. Yahoo mail will not render images
+              immediately, but if you press show images the original url will be loaded
+              without a proxy. (Meaning this will work properly if you use a yahoo 
+              email address and show images)
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row top-buffer">
   <div class="col-xs-12">
     <div class="panel panel-default">
       <div class="panel-heading text-right">
@@ -31,7 +70,7 @@
           Actions responding to GET requests can always be reached by CSRF (provided
           the victim has an open session with the target). img and script tags will
           hit their src attributes on page load through the GET method. If the
-          GET action executes business logic CSRF could lead to damaging results.
+          GET action executes business logic CSRF could have damaging results.
         </p>
         <p>
           NON-GET requests can be submitted cross origin through normal forms.
@@ -43,17 +82,20 @@
         <p>
           If you take <kbd>$.ajax({type:"GET",url:"http://www.google.com"})</kbd>
           to a page with jQuery loaded and execute it in your browser's
-          javascript console you'll see that Cross Origin Policy is enforced on all
+          javascript console you'll see that Same-origin policy is enforced on all
           AJAX requests. You can change the type parameter between POST and GET
-          to see that the Cross Origin Policy is enforced on both HTTP methods.
+          to see that the Same-origin policy is enforced on both HTTP methods.
         </p>
-        <p>
-          <h4>Countermeasures:</h4>
-          Abide by conventions set by the HTTP and only use the GET method on actions
-          that do not modify a resource. Use CSRF tokens in your application by
-          placing the <kbd>protect_from_forgery</kbd> method in the Application 
-          Controller to protect NON-GET requests from CSRF.
-        </p>
+        <h4>Countermeasures:</h4>
+        Abide by conventions set by the HTTP and only use the GET method on actions
+        that do not modify a resource. Use CSRF tokens in your application by
+        placing the <kbd>protect_from_forgery</kbd> method in the Application 
+        Controller to protect NON-GET requests from CSRF. This works by placing
+        an authenticity token in the forms you are going to submit to 
+        the server. This same token is also placed in your session cookie (if
+        you are using cookie store) which is signed by the server with the 
+        applications secret key. The token in the session is used to verify
+        the authenticity of the token from the form in the request.
       </div>
       <div class="panel-footer">
         <button class="btn-xs btn-info" type="button" data-toggle="collapse" data-target="#hint" aria-expanded="false" aria-controls="collapseExample">
