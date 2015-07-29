@@ -11,7 +11,50 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150706182129) do
+ActiveRecord::Schema.define(version: 20150728184503) do
+
+  create_table "59A1C2C0FBB74AF8BC12C3CA1FE1FE63_chests", force: true do |t|
+    t.string   "size"
+    t.string   "color"
+    t.string   "key_slot"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "59A1C2C0FBB74AF8BC12C3CA1FE1FE63_key_cards", force: true do |t|
+    t.string   "blade"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "59A1C2C0FBB74AF8BC12C3CA1FE1FE63_letters", force: true do |t|
+    t.string   "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "59a1c2c0fbb74af8bc12c3ca1fe1fe63_items", force: true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.string   "token"
+    t.integer  "chest_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "59a1c2c0fbb74af8bc12c3ca1fe1fe63_items", ["chest_id"], name: "index_59A1C2C0FBB74AF8BC12C3CA1FE1FE63_items_on_chest_id", using: :btree
+
+  create_table "8_reference_letters", force: true do |t|
+    t.string   "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "9_reference_letters", force: true do |t|
+    t.string   "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "chests", force: true do |t|
     t.string   "size"
@@ -46,8 +89,8 @@ ActiveRecord::Schema.define(version: 20150706182129) do
   end
 
   create_table "users", force: true do |t|
-    t.string   "email",                              default: "", null: false
-    t.string   "encrypted_password",     limit: 128, default: "", null: false
+    t.string   "email",                              default: "",    null: false
+    t.string   "encrypted_password",     limit: 128, default: "",    null: false
     t.datetime "remember_created_at"
     t.integer  "sign_in_count",                      default: 0
     t.datetime "current_sign_in_at"
@@ -65,6 +108,7 @@ ActiveRecord::Schema.define(version: 20150706182129) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
+    t.boolean  "csrf_email_read",                    default: false, null: false
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree

@@ -16,6 +16,9 @@ DestinyApp::Application.routes.draw do
   get 'references/' => 'references#index'
 
   get 'csrf/' => 'csrf#index'
+  get 'csrf/check' => 'csrf#check'
+  post 'csrf/target' => 'csrf#target'
+  post 'csrf/send_csrf_email' => 'csrf#send_csrf_email'
 
   get 'cross_site_scripting/' => 'cross_site_scripting#index'
   get 'cross_site_scripting/read_letters' => 'cross_site_scripting#read_letters'
