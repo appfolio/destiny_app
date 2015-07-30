@@ -21,6 +21,15 @@ function ajax_post(target_url)
 
     data = $.parseJSON(msg);
 
+    console.log(data);
+    if(data.result=="success")
+    {
+      setTimeout(function(){
+        $("#gate").removeClass("castle-gate-closed");
+        $("#gate").addClass("castle-gate-open");
+      },550);
+    }
+
     showResponseModal(data);
 
   });

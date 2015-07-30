@@ -49,3 +49,5 @@ destiny_app makes use of [phantomjs](https://github.com/ariya/phantomjs) with [p
 [![phantomjs](http://phantomjs.org/img/phantomjs-logo.png)](http://phantomjs.org/)
 
 Sql Injection Reference section was inspired by the [Inject Some SQL](http://rails-sqli.org/) project.
+
+Image used in Challenge taken from [Clip Art Lord](http://www.clipartlord.com/free-cartoon-castle-clip-art-2/).

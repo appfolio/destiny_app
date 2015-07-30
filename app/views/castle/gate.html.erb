@@ -2,23 +2,14 @@
   <div class="col-xs-12">
     <h3>The Gate</h3>
     <p>You'll need to get the guard to unlock_the_gate by writing him a letter.</p>
+    <p>Knock on the gate when you are done delivering letters</p>
     <p>This is an exercise in writing persuasive emails.</p>
   </div>
 </div>
 <div class="row text-center">
-  <div class="col-xs-4 castle-wall castle-top">
-  </div>
-  <div class="col-xs-4 castle-wall castle-top">
-  </div>
-  <div class="col-xs-4 castle-wall castle-top">
-  </div>
-</div>
-<div class="row text-center">
-  <div class="col-xs-4 castle-wall castle-door">
-  </div>
-  <div class="col-xs-4 castle-gate castle-door">
-  </div>
-  <div class="col-xs-4 castle-wall castle-door">
+  <div class="col-xs-12 title">
+    <div class="castle"></div>
+    <div class="castle-gate-closed" id="gate"></div>
   </div>
 </div>
 
@@ -28,7 +19,7 @@
       <input type="text" id="sqli" target="deliver_letter"
       class="form-control" placeholder="Put your pretty please message here">
       <span class="input-group-btn">
-        <button class="btn btn-default" type="button" onclick="submit_sqli('deliver_letter');">send</button>
+        <button class="btn btn-default" type="button" onclick="submit_sqli('deliver_letter');">deliver letter</button>
       </span>
     </div><!-- /input-group -->
     <div class="alert alert-success" id="display" style="margin-bottom:0;">
