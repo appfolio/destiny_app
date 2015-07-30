@@ -2,7 +2,38 @@ class MassAssignmentController < ApplicationController
   before_action :set_table_name
   include ShieldsUp
 
-  #metaprogrammed actions defined in config/initializers/references.rb
+  #MassAssignments defined in models/mass_assignments.rb
+  MassAssignments.each do |ma|
+    MassAssignmentController.class_eval <<-RUBY
+      def safe_#{ma[:name]}
+        begin
+      #{ma[:safe_code]}
+          @sql = last_sql
+          render partial: "sql_injection/query_result", object: @chest
+        rescue => e
+          @error = e
+          @sql = last_sql
+          render partial: "sql_injection/query_error"
+        end
+
+        reset_db
+      end
+
+      def vulnerable_#{ma[:name]}
+        begin
+      #{ma[:vuln_code]}
+          @sql = last_sql
+          render partial: "sql_injection/query_result", object: @chest
+        rescue => e
+          @error = e
+          @sql = last_sql
+          render partial: "sql_injection/query_error"
+        end
+
+        reset_db
+      end
+      RUBY
+  end
 
   def ma
     @refs = MassAssignments

@@ -27,7 +27,7 @@ docker run -e HOST=$HOST \
 ```
 
 ## Experimenting with Sqlmap
-After gaining a good understanding of the basics from the SQL Injection Reference you can learn about Sqlmap to get a thorough guideline for digging deeper into SQLI. Here's a sample command to run against destiny with Sqlmap.
+After gaining a good understanding of the basics from the SQL Injection Reference you can learn about Sqlmap to get a thorough guideline for digging deeper into SQLI. Here's a sample command to run against destiny with Sqlmap. Your CSRF token in the header and session cookie will be different.
 
 ```bash
 python sqlmap.py -u http://localhost:4000/sql_injection/where \
@@ -48,4 +48,4 @@ destiny_app makes use of [phantomjs](https://github.com/ariya/phantomjs) with [p
 
 [![phantomjs](http://phantomjs.org/img/phantomjs-logo.png)](http://phantomjs.org/)
 
-Sql Injection Reference section was inspired by the [](http://rails-sqli.org/) project.
+Sql Injection Reference section was inspired by the [Inject Some SQL](http://rails-sqli.org/) project.

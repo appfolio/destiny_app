@@ -153,10 +153,9 @@ MassAssignments = [
     " <b>The output you receive from the safe code method is not caused by the"+
     " same type of countermeasures you would actually use in this situation."+
     " This is due to the fact that this is a Rails 4 application and I can not"+
-    " emulate the needed environment to use the same countermeasures as you would in"+
-    " an application that isn't using strong parameters. (Wouldn't make sense"+
-    " to have protected_attributes included in an app that needs to use strong_parameters"+
-    " as well)</b>",
+    " use the same countermeasures as you would in"+
+    " an application that isn't using strong parameters. (This is due to conflict"+
+    " between protected_attributes and strong_parameters)</b>",
     examples: [],
     documentation_link: "https://github.com/rails/protected_attributes",
     safe_code: wosp_safecode,
@@ -187,8 +186,9 @@ MassAssignments = [
     title: "With Shields Up Parameters",
     info: "<p>Using Shields Up parameters is the preferred way to mitigate risk from
     mass assignment vulnerabilities. When using Shields Up you can only use "+
-    " permit, require and the [] operator on the Parameters object.</p>This protects"+
-    " from developers accidentally passing a hash to an Active Record method call.",
+    " permit, require and the [] operator on the Parameters object.</p>This is"+
+    " intended to protect developers from accidentally passing a hash to an"+
+    " Active Record method call.",
     examples: [],
     documentation_link: "https://github.com/appfolio/shields_up",
     safe_code: wsu_safecode,
