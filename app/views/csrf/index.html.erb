@@ -29,16 +29,20 @@
         </button>
         <div class="collapse" id="form_hint">
           <div class="top-buffer">
+            <p>
+              Pressing the "Send Email" button will send an email containing a
+              few different CSRF attacks with explanations on them to you. These
+              attacks will hit an action on this server. If it hits
+              successfully the CSRF Status button will go red.
+            </p>
             <p class="text-info">
-              CSRF Status will go red when the CSRF attack successfully hit the
-              server using your session.
               Google mail proxies requests for images so if you are running on localhost
               the action will not be hit at all. Yahoo mail will not render images
               immediately, but if you press show images the original url will be loaded
               without a proxy. (Meaning this will work properly if you use a yahoo
               email address and show images). It can be useful to monitor the network
-              traffic on the tab that you open your email in to see how/what is
-              being executed.
+              traffic on the tab that you open your email in to see how the attack
+              behaves.
             </p>
           </div>
         </div>
@@ -70,9 +74,10 @@
         </p>
         <p>
           Actions responding to GET requests can always be reached by CSRF (provided
-          the victim has an open session with the target). img and script tags will
-          hit their src attributes on page load through the GET method. If the
-          GET action executes business logic CSRF could have damaging results.
+          the victim has an open session with the target when required).
+          img and script tags will hit their src attributes on page load through
+          the GET method. If the GET action executes business logic CSRF could
+          have damaging results.
         </p>
         <p>
           NON-GET requests can be submitted cross origin through normal forms.
@@ -95,10 +100,10 @@
           placing the <kbd>protect_from_forgery</kbd> method in the Application
           Controller to protect NON-GET requests from CSRF. This works by placing
           an authenticity token in the forms you are going to submit to
-          the server. This same token is also placed in your session cookie (if
-          you are using cookie store) which is signed by the server with the
-          applications secret key. The token in the session is used to verify
-          the authenticity of the token from the form in the request.
+          the server. This same token is also placed in your session which is
+          signed by the server with the applications secret key. The token in
+          the session is used to verify the authenticity of the token from the
+          form in the request.
         </p>
         Be wary of using <kbd>skip_before_action :verify_authenticity_token</kbd>
         in your controllers, this will take away your CSRF protection. If you find

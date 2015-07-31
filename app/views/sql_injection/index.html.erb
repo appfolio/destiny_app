@@ -1,11 +1,8 @@
-<div class="row">
+<div class="row" id="vertically_centered_row">
   <div class="col-xs-12 title">
     <h1>Welcome <%= current_user.name %></h1>
     <h2>SQL Injection Reference Page</h2>
   </div>
-</div>
-
-<div class="row">
   <div class="col-xs-12">
     <hr/>
         <p class="lead">
@@ -31,8 +28,8 @@
           method call (AKA query stacking).
           However, you can still use comment delimiters like '#'
           and '-- ' for mysql to comment out the rest of the query. Make sure you
-          parameterize your input to every Active Record method, or use a hash
-          to pass in values. See the countermeasures code.
+          parameterize your input to every Active Record method. 
+          See the countermeasures code on the practice pages.
         </p>
   </div>
   <div class="col-xs-offset-3 col-xs-6 col-md-offset-4 col-md-4">

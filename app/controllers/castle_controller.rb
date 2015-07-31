@@ -1,6 +1,5 @@
 class CastleController < ApplicationController
   before_action :set_table_name
-  layout "castle"
 
   def gate
     gate = Gate.where(tables_prefix: current_user.tables_prefix)
@@ -59,7 +58,8 @@ class CastleController < ApplicationController
     if !gate.is_locked
       hash = {
         result: "success",
-        description: "The gate is now open!"
+        description: "Congratulations the gate is now open! You have"+
+                     " completed the challenge section!"
       }
 
       render text: hash.to_json

@@ -7,7 +7,7 @@ Queries = [
     link: "http://api.rubyonrails.org/classes/ActiveRecord/QueryMethods.html#method-i-where",
     query: 'Chest.where("size = \'#{params[:column]}\'")',
     hint: {
-      input: {name: "params[:column]", example: ["') OR ('1'='1", "Large') UNION select id, email, encrypted_password, name, mobile_number from users where ('1'='1"]},
+      input: {name: "params[:column]", example: ["') OR ('1'='1", "') UNION select id,email,encrypted_password,created_at,confirmed_at,tables_prefix from users where ('1'='1"]},
       text: "This example returns all records, and the union query returns user information."
     },
     footer: {
@@ -50,7 +50,7 @@ end
     query: 'Chest.calculate(:sum, params[:column])',
     hint: {
       input: {name: "params[:column]. This will allow a read from the users table.",
-              example: ["`id`) AS sum_id FROM `users`#","id) from users#"]}
+              example: ["id) FROM users#"]}
     },
     footer: {
       sources: ["https://dev.mysql.com/doc/refman/5.1/en/grant.html"],

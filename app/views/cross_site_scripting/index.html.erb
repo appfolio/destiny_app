@@ -22,11 +22,8 @@
         onclick: "window.location.href='#{cross_site_scripting_read_letters_path}'" %>
     </div>
   </div>
-</div>
-
-<div class="row">
   <div class="col-xs-12">
-    <div class="alert alert-success" style="margin-top:0" id="display">
+    <div class="alert alert-success" id="display" style="margin-bottom:20px;">
       <p id="display-sql">
       </p>
       <p id="display-query">
@@ -92,6 +89,8 @@
   <div class="col-xs-12 text-center">
     <p><b>Additional Sources</b></p>
     <p><%= link_to "https://www.owasp.org/index.php/Cross-site_Scripting_(XSS)",
-      "https://www.owasp.org/index.php/Cross-site_Scripting_(XSS)" %></p>
+      "https://www.owasp.org/index.php/Cross-site_Scripting_(XSS)", target: "_blank" %></p>
+    <p><%= link_to "http://guides.rubyonrails.org/security.html#ajax-injection",
+      "http://guides.rubyonrails.org/security.html#ajax-injection", target: "_blank" %></p>
   </div>
 </div>

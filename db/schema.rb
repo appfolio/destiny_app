@@ -21,6 +21,17 @@ ActiveRecord::Schema.define(version: 20150728184503) do
     t.datetime "updated_at"
   end
 
+  create_table "59A1C2C0FBB74AF8BC12C3CA1FE1FE63_items", force: true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.string   "token"
+    t.integer  "chest_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "59a1c2c0fbb74af8bc12c3ca1fe1fe63_items", ["chest_id"], name: "index_59A1C2C0FBB74AF8BC12C3CA1FE1FE63_items_on_chest_id", using: :btree
+
   create_table "59A1C2C0FBB74AF8BC12C3CA1FE1FE63_key_cards", force: true do |t|
     t.string   "blade"
     t.datetime "created_at"
@@ -32,17 +43,6 @@ ActiveRecord::Schema.define(version: 20150728184503) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  create_table "59a1c2c0fbb74af8bc12c3ca1fe1fe63_items", force: true do |t|
-    t.string   "name"
-    t.string   "description"
-    t.string   "token"
-    t.integer  "chest_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "59a1c2c0fbb74af8bc12c3ca1fe1fe63_items", ["chest_id"], name: "index_59A1C2C0FBB74AF8BC12C3CA1FE1FE63_items_on_chest_id", using: :btree
 
   create_table "8_reference_letters", force: true do |t|
     t.string   "content"

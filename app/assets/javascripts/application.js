@@ -6,6 +6,24 @@
 //= require bootstrap
 //= require turbolinks
 
+function vertically_center()
+{
+  row = $("#vertically_centered_row");
+  row_height = row.height();
+  row.css("margin-top",($(window).height()-$(".navbar").height())/2-row_height/2);
+}
+
+$(document).ready(function(){
+  if($("#vertically_centered_row").length)
+  {
+    vertically_center();
+
+    $(window).resize(function(){
+      vertically_center();
+    });
+  }
+});
+
 function unescapeHtml(safe) {
     return $('<div />').html(safe).text();
 }

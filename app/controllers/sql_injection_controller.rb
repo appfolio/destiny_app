@@ -2,7 +2,25 @@ class SqlInjectionController < ApplicationController
   before_action :set_table_name
   include ShieldsUp
 
-  #metaprogrammed actions defined in config/initializers/references.rb
+  #Queries defined in models/queries.rb
+  Queries.each do |q|
+    SqlInjectionController.class_eval <<-RUBY
+      def #{q[:input_form][:action_url]}
+        begin
+          query = #{q[:query]}
+          result = #{q[:output]}
+          @sql = last_sql
+          render partial: "query_result", object: result
+        rescue => e
+          @error = e
+          @sql = last_sql
+          render partial: "query_error"
+        end
+
+        reset_db
+      end
+          RUBY
+  end
 
   def index
   end
