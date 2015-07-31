@@ -22,7 +22,7 @@ function ajax_post(target_url)
     data = $.parseJSON(msg);
 
     console.log(data);
-    if(data.result=="success")
+    if(target_url=="push_gate" && data.result=="success")
     {
       setTimeout(function(){
         $("#gate").removeClass("castle-gate-closed");
