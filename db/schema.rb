@@ -19,6 +19,37 @@ ActiveRecord::Schema.define(version: 20150728184503) do
     t.datetime "updated_at"
   end
 
+  create_table "14ECDCF23CBF41618D9BEF9FC5A9CE15_chests", force: true do |t|
+    t.string   "size"
+    t.string   "color"
+    t.string   "key_slot"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "14ECDCF23CBF41618D9BEF9FC5A9CE15_items", force: true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.string   "token"
+    t.integer  "chest_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "14ecdcf23cbf41618d9bef9fc5a9ce15_items", ["chest_id"], name: "index_14ECDCF23CBF41618D9BEF9FC5A9CE15_items_on_chest_id", using: :btree
+
+  create_table "14ECDCF23CBF41618D9BEF9FC5A9CE15_key_cards", force: true do |t|
+    t.string   "blade"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "14ECDCF23CBF41618D9BEF9FC5A9CE15_letters", force: true do |t|
+    t.string   "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "2F84B0244D2E45ABA5EF7BD8B5F85509_chests", force: true do |t|
     t.string   "size"
     t.string   "color"
@@ -45,37 +76,6 @@ ActiveRecord::Schema.define(version: 20150728184503) do
   end
 
   create_table "2F84B0244D2E45ABA5EF7BD8B5F85509_letters", force: true do |t|
-    t.string   "content"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "52101D5ECFE04067A5AA6EFEF11B0AF3_chests", force: true do |t|
-    t.string   "size"
-    t.string   "color"
-    t.string   "key_slot"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "52101D5ECFE04067A5AA6EFEF11B0AF3_items", force: true do |t|
-    t.string   "name"
-    t.string   "description"
-    t.string   "token"
-    t.integer  "chest_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "52101d5ecfe04067a5aa6efef11b0af3_items", ["chest_id"], name: "index_52101D5ECFE04067A5AA6EFEF11B0AF3_items_on_chest_id", using: :btree
-
-  create_table "52101D5ECFE04067A5AA6EFEF11B0AF3_key_cards", force: true do |t|
-    t.string   "blade"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "52101D5ECFE04067A5AA6EFEF11B0AF3_letters", force: true do |t|
     t.string   "content"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -138,11 +138,11 @@ ActiveRecord::Schema.define(version: 20150728184503) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "tables_prefix"
-    t.string   "unconfirmed_email"
     t.boolean  "csrf_email_read",                    default: false, null: false
     t.string   "mobile_number"
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
+    t.string   "unconfirmed_email"
     t.string   "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"

@@ -1,7 +1,9 @@
 DestinyApp::Application.routes.draw do
   mount Browserlog::Engine => '/logs'
 
-  devise_for :users
+  devise_for :users, controllers: {
+    sessions: 'users/sessions'
+  }
 
   devise_scope :user do
     authenticated :user do
@@ -9,7 +11,7 @@ DestinyApp::Application.routes.draw do
     end
 
     unauthenticated :user do
-      root 'devise/sessions#new', as: :unauthenticated_root
+      root 'users/sessions#new', as: :unauthenticated_root
     end
   end
 
