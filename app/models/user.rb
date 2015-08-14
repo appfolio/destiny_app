@@ -23,7 +23,7 @@
 #+------------------------+--------------+------+-----+---------+----------------+
 
 class User < ActiveRecord::Base
-  devise :database_authenticatable, :registerable, :recoverable, :rememberable,
-    :trackable, :validatable, :confirmable, :timeoutable, :timeout_in => 4.hours
+  devise :openid_authenticatable, :rememberable, :trackable,
+         :timeoutable, :timeout_in => 4.hours
 
 end

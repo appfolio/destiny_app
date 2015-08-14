@@ -26,6 +26,12 @@ docker run -e HOST=$HOST \
 		   -p 80:80 appfolio/destiny_app:prod > /dev/null &
 ```
 
+If you want to run the app in development mode in a docker container (not recommended) you can use the following command. If you are using boot2docker the links in the confirmation email will point to localhost still, which won't work.
+
+```bash
+docker run -p 80:4000 -it appfolio/destiny_app:dev
+```
+
 ## Experimenting with Sqlmap
 After gaining a good understanding of the basics from the SQL Injection Reference you can learn about Sqlmap to get a thorough guideline for digging deeper into SQLI. Here's a sample command to run against destiny with Sqlmap. Your CSRF token in the header and session cookie will be different.
 

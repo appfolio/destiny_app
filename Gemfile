@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 #auth
 gem 'devise'
+gem 'devise_openid_authenticatable'
 
 # Front end
 gem 'bootstrap-sass', '~> 3.3.4'

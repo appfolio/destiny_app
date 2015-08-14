@@ -105,7 +105,7 @@ class CastleControllerTest < ActionController::TestCase
     assert_response 200
     resp = JSON.parse response.body
     assert_equal "success", resp["result"]
-    assert_equal "The gate is now open!", resp["description"]
+    assert_equal "Congratulations the gate is now open! You have completed the challenge section!", resp["description"]
 
   end
 

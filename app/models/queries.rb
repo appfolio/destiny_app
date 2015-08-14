@@ -38,7 +38,7 @@ end
     },
     desc: <<-HTML
           The where method will not sanitize a string passed in, if you use string interpolation
-          here you will be introducing an sql vulnerability.
+          here you will be introducing an sql injection vulnerability.
     HTML
   },
 
@@ -74,10 +74,8 @@ end
     },
     desc: <<-HTML
       The calculate method will not santize a query string passed in. You can
-      use sql injection to access unauthorized information. It is a little more
-      limited than the where command, the idea here is to change the
-      data you are doing calculations on. Depending on the DB user priviledges
-      you can read data from other tables and databases.
+      use sql injection to access unauthorized information. Depending on the
+      DB user priviledges you can read data from other tables and databases.
     HTML
   },
 
