@@ -12,6 +12,13 @@ module DestinyApp
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
 
+    #If you want to only allow OmniAuth registration
+    ENV["ALLOW_REGISTRATION"] == "TRUE" ? config.allow_registration = true :
+                                          config.allow_registration = false
+
+    config.allowed_domains = YAML.load_file('config/allowed_domains.yml')
+
+
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
     # config.time_zone = 'Central Time (US & Canada)'

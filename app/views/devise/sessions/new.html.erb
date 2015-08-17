@@ -1,6 +1,5 @@
 <div class="row">
   <div class="col-xs-12">
-
     <%= form_for(resource, as: resource_name, url: session_path(resource_name),
                  html: {class:"form-horizontal"}) do |f| %>
       <div class="row text-center">
@@ -22,23 +21,16 @@
         </div>
       </div>
 
-      <% if devise_mapping.rememberable? -%>
-        <div class="form-group">
-          <div class="col-xs-offset-2 col-xs-10">
-            <div class="checkbox">
-              <%= f.label :remember_me do %>
-                <%= f.check_box :remember_me %> Remember me
-              <% end %>
-            </div>
-          </div>
-        </div>
-      <% end -%>
-
       <div class="form-group">
-        <div class="col-xs-offset-2 col-xs-10">
-          <%= f.submit "Log in", class: "btn btn-default" %>
+        <div class="col-xs-offset-2 col-xs-4">
+          <%= link_to "Sign in with Google", user_omniauth_authorize_path(:google_oauth2),
+            class: "btn btn-default" %>
+        </div>
+        <div class="col-xs-offset-2 col-xs-4">
+          <%= f.submit "Log in", class: "btn btn-default pull-right" %>
         </div>
       </div>
+
     <% end %>
 
     <%= render "devise/shared/links" %>

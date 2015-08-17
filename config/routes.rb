@@ -1,7 +1,16 @@
 DestinyApp::Application.routes.draw do
   mount Browserlog::Engine => '/logs'
 
-  devise_for :users
+  #TODO don't generate registration, confirmation, or recovery unless
+  #do this using a before_action filter
+  devise_for :users, controllers: {
+    omniauth_callbacks: "users/omniauth_callbacks",
+    registrations: "users/registrations",
+    confirmations: "users/confirmations",
+    passwords: "users/passwords",
+    sessions: "users/sessions"
+  }
+
 
   devise_scope :user do
     authenticated :user do
@@ -9,7 +18,7 @@ DestinyApp::Application.routes.draw do
     end
 
     unauthenticated :user do
-      root 'devise/sessions#new', as: :unauthenticated_root
+      root 'users/sessions#new', as: :unauthenticated_root
     end
   end
 
