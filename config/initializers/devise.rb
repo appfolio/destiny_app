@@ -15,6 +15,12 @@ Devise.setup do |config|
   # available as additional gems.
   require 'devise/orm/active_record'
 
+  require 'omniauth-google-oauth2'
+  config.omniauth :google_oauth2,
+    "341947969570-q0gshv440bmretcte96u1pde37rmjs0b.apps.googleusercontent.com",
+    "FqUkt9AfOWIsuoG_3qTnGuFz",
+    { access_type: "offline", approval_prompt: "" }
+
   # ==> Configuration for any authentication mechanism
   # Configure which keys are used when authenticating a user. The default is
   # just :email. You can configure it to use [:username, :subdomain], so for
@@ -106,17 +112,6 @@ Devise.setup do |config|
 
   # Defines which key will be used when confirming an account
   # config.confirmation_keys = [ :email ]
-
-  # ==> Configuration for :rememberable
-  # The time the user will be remembered without asking for credentials again.
-  # config.remember_for = 2.weeks
-
-  # If true, extends the user's remember period when remembered via cookie.
-  # config.extend_remember_period = false
-
-  # Options to be passed to the created cookie. For instance, you can set
-  # :secure => true in order to force SSL only cookies.
-  config.rememberable_options = {:secure => true}
 
   # ==> Configuration for :validatable
   # Range for password length. Default is 6..128.

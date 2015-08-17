@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 #auth
 gem 'devise'
+gem 'omniauth-google-oauth2'
 
 # Front end
 gem 'bootstrap-sass', '~> 3.3.4'

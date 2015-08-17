@@ -13,4 +13,10 @@ module ApplicationHelper
     end
     nil
   end
+
+  def registration_allowed?
+    unless DestinyApp::Application.config.allow_registration
+      redirect_to  unauthenticated_root_path
+    end
+  end
 end

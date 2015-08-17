@@ -11,6 +11,17 @@ variables.
 - PEPPER
 - GUARD_PASS
 
+Additional parameters that you can set in all environments...
+
+- ALLOW_REGISTRATION (FALSE by default)
+	* TRUE allows registration through registerable and omniauthable.
+	* FALSE allows registration through omniauthable only.
+
+YAML Files you may want to modify...
+
+- allowed_domains.yml
+	* Contains an array of strings that are domains that users are allowed to authenticate through omniauthable from. The default domain is "gmail.com", so everyone with an address ending in that will be able to authenticate.
+
 ## Running Destiny with Docker
 
 destiny_app has docker image builds, check out it's [docker hub page](https://registry.hub.docker.com/u/appfolio/destiny_app/).
@@ -19,11 +30,12 @@ Example docker run command (Don't forget to set those environment variables)
 
 ```bash
 docker run -e HOST=$HOST \
-		   -e PORT=$PORT \ 
-		   -e SECRET_KEY=$SECRET_KEY \
-		   -e PEPPER=$PEPPER \
-		   -e GUARD_PASS=$GUARD_PASS \
-		   -p 80:80 appfolio/destiny_app:prod > /dev/null &
+           -e PORT=$PORT \
+           -e SECRET_KEY=$SECRET_KEY \
+           -e PEPPER=$PEPPER \
+           -e GUARD_PASS=$GUARD_PASS \
+           -e ALLOW_REGISTRATION=$ALLOW_REGISTRATION \
+           -p 80:80 appfolio/destiny_app:prod > /dev/null &
 ```
 
 If you want to run the app in development mode in a docker container (not recommended) you can use the following command. If you are using boot2docker the links in the confirmation email will point to localhost still, which won't work.

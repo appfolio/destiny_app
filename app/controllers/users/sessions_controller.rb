@@ -8,13 +8,7 @@ class Users::SessionsController < Devise::SessionsController
 
   # POST /resource/sign_in
   def create
-    #require 'pry-nav'
-    #require 'pry';binding.pry
-    super do |resource|
-      puts "THE RESOURCE"
-      puts resource
-      puts "THE END"
-    end
+    super
   end
 
   # DELETE /resource/sign_out

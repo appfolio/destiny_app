@@ -35,7 +35,9 @@
           <li><%= link_to "Challenges", challenges_path %></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
+          <% if DestinyApp::Application.config.allow_registration %>
           <li><%= link_to "Manage Account", edit_user_registration_path %></li>
+          <% end %>
           <li><%= link_to "Log Out", destroy_user_session_path %></li>
         </ul>
       </div><!-- /.navbar-collapse -->
