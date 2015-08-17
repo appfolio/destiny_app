@@ -15,10 +15,12 @@ Devise.setup do |config|
   # available as additional gems.
   require 'devise/orm/active_record'
 
+  oauth_secrets = YAML.load_file('config/google_oauth_secrets.yml')
+
   require 'omniauth-google-oauth2'
   config.omniauth :google_oauth2,
-    "341947969570-q0gshv440bmretcte96u1pde37rmjs0b.apps.googleusercontent.com",
-    "FqUkt9AfOWIsuoG_3qTnGuFz",
+    oauth_secrets["client_id"],
+    oauth_secrets["client_secret"],
     { access_type: "offline", approval_prompt: "" }
 
   # ==> Configuration for any authentication mechanism

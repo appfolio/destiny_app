@@ -3,7 +3,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   # devise :omniauthable, omniauth_providers: [:twitter]
   def google_oauth2
     @user = User.find_for_google_oauth2(request.env["omniauth.auth"], current_user)
-    email_domain = @user.slice('@').last
+
+    email_domain = @user.email[@user.email.index("@")+1..@user.email.size]
     allowed_domains = DestinyApp::Application.config.allowed_domains
 
     if Rails.env.production? && allowed_domains.contains(email_domain)

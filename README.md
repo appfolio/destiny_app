@@ -19,7 +19,7 @@ Additional parameters that you can set in all environments...
 
 YAML Files you may want to modify...
 
-- allowed_domains.yml
+- allowed_domains.yml (will only be applied in production environment)
 	* Contains an array of strings that are domains that users are allowed to authenticate through omniauthable from. The default domain is "gmail.com", so everyone with an address ending in that will be able to authenticate.
 
 ## Running Destiny with Docker
