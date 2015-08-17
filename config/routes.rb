@@ -1,8 +1,6 @@
 DestinyApp::Application.routes.draw do
   mount Browserlog::Engine => '/logs'
 
-  #TODO don't generate registration, confirmation, or recovery unless
-  #do this using a before_action filter
   devise_for :users, controllers: {
     omniauth_callbacks: "users/omniauth_callbacks",
     registrations: "users/registrations",

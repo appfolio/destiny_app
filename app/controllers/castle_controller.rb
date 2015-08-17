@@ -51,9 +51,6 @@ class CastleController < ApplicationController
 
   #ran by the user
   def push_gate
-    #TODO If the gate is unlocked then make it open client side with the link
-    #to the next page
-    #else respond to the client the door is locked
     gate = Gate.where(tables_prefix: current_user.tables_prefix).first
     if !gate.is_locked
       hash = {

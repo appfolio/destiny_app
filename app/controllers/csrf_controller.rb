@@ -10,14 +10,14 @@ class CsrfController < ApplicationController
     render nothing: true
   end
 
-  #TODO gets hit from the csrf email
+  # Gets hit from the csrf email
   def target
     current_user.csrf_email_read = true
     current_user.save!
     render nothing: true
   end
 
-  #TODO tells user if the csrf email has hit the target
+  # Tells user if the csrf email has hit the target
   def check
     read = current_user.csrf_email_read
     json = { read: read }

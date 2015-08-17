@@ -42,9 +42,5 @@ function knock()
 
 function push_gate()
 {
-  $("#responseModal").focusout(function(event){
-    //TODO run javascript to open the gate visually
-    //and generate a link to the next challenge
-  });
   ajax_post("push_gate");
 }
