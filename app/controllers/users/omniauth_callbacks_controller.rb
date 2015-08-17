@@ -7,7 +7,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     email_domain = @user.email[@user.email.index("@")+1..@user.email.size]
     allowed_domains = DestinyApp::Application.config.allowed_domains["allowed_domains"]
 
-    if Rails.env.production? && allowed_domains.include?(email_domain)
+    if Rails.env.production? && !allowed_domains.include?(email_domain)
       flash[:alert] = "You must log in from an #{allowed_domains} address"
       redirect_to new_user_session_path
     else
