@@ -6,6 +6,10 @@ class ApplicationController < ActionController::Base
 
   protected
 
+  def registration_allowed?
+    config.allow_registration
+  end
+
   def reset_db seeds_file="db/seeds.rb"
     Chest.delete_all
     Item.delete_all
