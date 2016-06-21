@@ -19,6 +19,8 @@ DestinyApp::Application.configure do
   # Allow the mailer to send in development env
   config.action_mailer.delivery_method = :sendmail
   config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.default_options = { from: 'destiny_app@localhost' }
   config.action_mailer.default_url_options = { host: 'localhost', port: 4000 }
 
   # Print deprecation notices to the Rails logger.

@@ -1,5 +1,4 @@
 class CsrfMailer < ActionMailer::Base
-  default from: "do-not-reply@destiny_app.com"
 
   def csrf_email(user, request, csrf_token)
     @user = user
