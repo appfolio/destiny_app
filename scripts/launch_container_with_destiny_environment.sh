@@ -2,7 +2,7 @@ SECRET_KEY="28f7132fbb97b1d3cf76e3724b8b087078f71056afc19777e6cf402a673b15906d06
 PEPPER="76a2e2b71236df91a6162886a1020ab17143c9a19043f6d11734112f369492e5b51cc55d378a2e4a0588a08a512c3ac5906da1d1fb38a994b032ae483660ccb5"
 GUARD_PASS="5b3bda0984fc3fbb698ea6b137"
 HOST="localhost"
-PORT="4000"
+PORT="80"
 ALLOW_REGISTRATION="TRUE"
 
 docker run -e HOST=$HOST \
@@ -11,4 +11,4 @@ docker run -e HOST=$HOST \
            -e PEPPER=$PEPPER \
            -e GUARD_PASS=$GUARD_PASS \
            -e ALLOW_REGISTRATION=$ALLOW_REGISTRATION \
-           -p 4000:4000 appfolio/destiny_app:prod > /dev/null &
+           -p 4000:80 appfolio/destiny_app:prod > /dev/null &
