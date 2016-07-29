@@ -4,6 +4,8 @@ destiny_app is a web application security training tool with a focus on [ruby on
 
 ## Quick Start
 
+Prereqs: _install ruby, rails, and mysql for this app to work without modification._
+
 You can run the rails destiny_app locally by...
 
 `git clone git@github.com:appfolio/destiny_app.git`
@@ -38,7 +40,6 @@ client_secret: "yoursecret"
 When running in production you will need to set the following environment
 variables.
 
-- HOST (Host and port for confirmation email links to point to)
 - PORT
 - SECRET_KEY (Can be generated with `rake secret`)
 - PEPPER

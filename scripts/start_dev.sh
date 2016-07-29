@@ -1,11 +1,6 @@
-#setting up your own google api keys for oauth
-#setup your own credentials
-#https://console.developers.google.com
-#add them to config/google_oauth_secrets.yml
+#You can pass in other arguments for the rails command as you see fit
 
-GUARD_PASS="guardpassword"
-HOST="localhost"
-PORT="4000"
-ALLOW_REGISTRATION="TRUE"
+export PORT="4000"
+export ALLOW_REGISTRATION="TRUE"
 
 rails s -e development -p $PORT

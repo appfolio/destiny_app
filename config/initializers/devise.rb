@@ -15,13 +15,19 @@ Devise.setup do |config|
   # available as additional gems.
   require 'devise/orm/active_record'
 
-  oauth_secrets = YAML.load_file('config/google_oauth_secrets.yml')
+  begin
+    oauth_secrets = YAML.load_file('config/google_oauth_secrets.yml')
 
-  require 'omniauth-google-oauth2'
-  config.omniauth :google_oauth2,
-    oauth_secrets["client_id"],
-    oauth_secrets["client_secret"],
-    { access_type: "offline", approval_prompt: "" }
+    require 'omniauth-google-oauth2'
+
+    config.omniauth :google_oauth2,
+      oauth_secrets["client_id"],
+      oauth_secrets["client_secret"],
+      { access_type: "offline", approval_prompt: "" }
+  rescue => e
+    puts "Warning: No credentials in config/google_oauth_secrets.yml"
+    puts e
+  end
 
   # ==> Configuration for any authentication mechanism
   # Configure which keys are used when authenticating a user. The default is
@@ -92,10 +98,7 @@ Devise.setup do |config|
   # Setup a pepper to generate the encrypted password.
   if Rails.env.production?
     config.pepper = ENV["PEPPER"]
-    config.secret_key = ENV["SECRET_KEY"]
-  else
-    config.pepper = "f5a53ecb8f04ed693adb818a9b94460a87d9097de1d8908bb62639e731184a2dc48e08a3213aab771be3fe8e3f89dd81e6f78ffde897a14e250fbaa5ac4ce3fa"
-    config.secret_key = "574063f67643d5c4ba7e494e86e2592ff8ac367190ef7e5e6a2c82c8c61625d76d3049259857ab665ecce76910b987a2cba41683474ab4ba90845a143b60580b"
+    config.secret_key_base = ENV["SECRET_KEY"]
   end
 
   # ==> Configuration for :confirmable
