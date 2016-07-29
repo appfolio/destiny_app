@@ -1,0 +1,45 @@
+table.CodeRay
+{
+  width: 100%;
+  border:1px solid #dddddd;
+}
+
+td.line-numbers
+{
+  text-align:center;
+  width:38px;
+  border-right:1px solid #dddddd;
+}
+
+.CodeRay pre
+{
+  border-radius:0;
+  border:none;
+  margin:0;
+}
+
+.title
+{text-align:center;}
+
+.sql-example
+{
+  padding-left:30px;
+  padding-right:30px;
+}
+
+#display
+{
+  display: none;
+  margin-top:20px;
+}
+
+.panel > .xss-heading
+{
+  // background-color: #35EDD8;
+  // border-color: #35EDD8;
+}
+
+.xss-panel
+{
+  // border-color:#35EDD8;
+}

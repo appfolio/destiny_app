@@ -1,0 +1,2 @@
+module SqlInjectionHelper
+end

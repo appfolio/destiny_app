@@ -1,0 +1,141 @@
+<div class="row">
+  <div class="col-xs-12 title">
+    <h1>Welcome <%= current_user.name %></h1>
+    <h2>Cross Site Request Forgery Page</h2>
+    <hr/>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-md-offset-1 col-md-4 col-sm-12 title">
+        <div class="well">
+          <%= button_tag "Send Email", class: "btn btn-lg btn-block btn-primary",
+            onclick: "send_csrf_email()" %>
+        </div>
+      </div>
+      <div class="col-md-offset-2 col-md-4 col-sm-12 title">
+        <div class="well">
+          <%= button_tag "CSRF Status", class: "btn btn-lg btn-block btn-success",
+            disabled: "disabled", id: "csrf-status" %>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 title">
+        <button class="btn-xs btn-info" type="button" data-toggle="collapse" data-target="#form_hint" aria-expanded="false" aria-controls="collapseExample">
+          How to use this form
+        </button>
+        <div class="collapse" id="form_hint">
+          <div class="top-buffer">
+            <p>
+              Pressing the "Send Email" button will send an email containing a
+              few different CSRF attacks with explanations on them to you. These
+              attacks will hit an action on this server. If it hits
+              successfully the CSRF Status button will go red.
+            </p>
+            <p class="text-info">
+              Google mail proxies requests for images so if you are running on localhost
+              the action will not be hit at all. Yahoo mail will not render images
+              immediately, but if you press show images the original url will be loaded
+              without a proxy. (Meaning this will work properly if you use a yahoo
+              email address and show images). It can be useful to monitor the network
+              traffic on the tab that you open your email in to see how the attack
+              behaves.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row top-buffer">
+  <div class="col-xs-12">
+    <div class="panel panel-default">
+      <div class="panel-heading text-right">
+        <b class="pull-left">CSRF Explanation</b>
+        <%= link_to "http://guides.rubyonrails.org/security.html#cross-site-scripting-xss", target: "_blank" do %>
+          Documentation <span class="glyphicon glyphicon-book"></span>
+        <% end %>
+      </div>
+      <div class="panel-body">
+        <p>
+          Cross Site Request Forgery is when a attacker causes the victim to send
+          a request from one domain to another domain. This can be done on page
+          load through a script or image tag, or the user could be tricked into
+          submitting a malicious form.
+        </p>
+        <p>
+          <em>The user's cookie is sent with each of these requests. If the
+            action they are hitting requires them to be logged in and they
+            <b>are</b> logged in then the CSRF attack will work.</em>
+        </p>
+        <p>
+          Actions responding to GET requests can always be reached by CSRF (provided
+          the victim has an open session with the target when required).
+          img and script tags will hit their src attributes on page load through
+          the GET method. If the GET action executes business logic CSRF could
+          have damaging results.
+        </p>
+        <p>
+          NON-GET requests can be submitted cross origin through normal forms.
+          Without acquiring a CSRF token first, the request from the malicious
+          form will receive a 401 response.  If the action didn't require a CSRF
+          token the NON-GET request would be processed successfully. (Provided
+          the user's session is still open with the server).
+        </p>
+        <p>
+          If you take <kbd>$.ajax({type:"GET",url:"http://www.google.com"})</kbd>
+          to a page with jQuery loaded and execute it in your browser's
+          javascript console you'll see that <b>Same-origin policy</b> is enforced on all
+          AJAX requests. You can change the type parameter between POST and GET
+          to see that the <b>Same-origin policy</b> is enforced on both HTTP methods.
+        </p>
+        <h4>Countermeasures:</h4>
+        <p>
+          Abide by conventions set by the HTTP and only use the GET method on actions
+          that do not modify a resource. Use CSRF tokens in your application by
+          placing the <kbd>protect_from_forgery</kbd> method in the Application
+          Controller to protect NON-GET requests from CSRF. This works by placing
+          an authenticity token in the forms you are going to submit to
+          the server. This same token is also placed in your session which is
+          signed by the server with the applications secret key. The token in
+          the session is used to verify the authenticity of the token from the
+          form in the request.
+        </p>
+        Be wary of using <kbd>skip_before_action :verify_authenticity_token</kbd>
+        in your controllers, this will take away your CSRF protection. If you find
+        yourself needing to use this feature make sure you are fully aware of
+        the security implications.
+      </div>
+      <div class="panel-footer">
+        <button class="btn-xs btn-info" type="button" data-toggle="collapse" data-target="#hint" aria-expanded="false" aria-controls="collapseExample">
+          Examples
+        </button>
+        <div class="collapse" id="hint">
+          <br/>
+          <p>Run in a javascript console with jQuery loaded <kbd>$.ajax({type:"GET",url:"http://www.google.com"})</kbd></p>
+          <p>Run this link from another domain
+            <a href="http://www.harmless.com/" onclick="
+              var f = document.createElement('form');
+              f.style.display = 'none';
+              this.parentNode.appendChild(f);
+              f.method = 'POST';
+              f.action =
+              'http://localhost:4000/sql_injection/where?column=blah';
+              f.submit();
+              return false;">POST to Destiny Action</a>
+            (You can copy and paste the source for the link in a html file on your filesystem)
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xs-12 text-center">
+    <p><b>Additional Sources</b></p>
+    <p><%= link_to "https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)",
+      "https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)" %></p>
+  </div>
+</div>
