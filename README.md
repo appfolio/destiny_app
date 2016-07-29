@@ -1,6 +1,39 @@
 # destiny_app
 
-destiny_app is a web application security training tool with a focus on [ruby on rails](http://rubyonrails.org/) applications that can be run locally on your mac or most linux boxes. It covers relevant security issues from [OWASP's Top Ten Project](https://www.owasp.org/index.php/Category:OWASP_Top_Ten_Project) and the [Rails Security Guide](http://guides.rubyonrails.org/security.html) for rails 4.
+destiny_app is a web application security training tool with a focus on [ruby on rails](http://rubyonrails.org/) applications that can be ran locally on your mac or linux box. It covers relevant security issues from [OWASP's Top Ten Project](https://www.owasp.org/index.php/Category:OWASP_Top_Ten_Project) and the [Rails Security Guide](http://guides.rubyonrails.org/security.html) for rails 4.
+
+## Quick Start
+
+You can run the rails destiny_app locally by...
+
+`git clone git@github.com:appfolio/destiny_app.git`
+
+`cd destiny_app && bundle`
+
+`rake db:create && rake db:migrate`
+
+`./script/start_dev`
+
+And navigating to http://localhost:4000
+
+###Google API Keys
+
+[Setup your own keys for google oauth](https://github.com/zquestz/omniauth-google-oauth2#google-api-setup) at the [Google Developer Console](https://console.developers.google.com)
+
+With the Authorized redirect URI as `http://localhost:4000/users/auth/google_oauth2/callback`
+
+Place the credentials in config/google\_oauth_secrets.yml
+
+```yaml
+#config/google_oauth_secrets.yml
+
+client_id: "your-credentials.apps.googleusercontent.com"
+client_secret: "yoursecret"
+```
+
+
+
+## Setting up destiny in production
 
 When running in production you will need to set the following environment
 variables.
@@ -10,6 +43,7 @@ variables.
 - SECRET_KEY (Can be generated with `rake secret`)
 - PEPPER
 - GUARD_PASS
+
 
 Additional parameters that you can set in all environments...
 
@@ -36,12 +70,6 @@ docker run -e HOST=$HOST \
            -e GUARD_PASS=$GUARD_PASS \
            -e ALLOW_REGISTRATION=$ALLOW_REGISTRATION \
            -p 80:80 appfolio/destiny_app:prod > /dev/null &
-```
-
-If you want to run the app in development mode in a docker container (not recommended) you can use the following command. If you are using boot2docker the links in the confirmation email will point to localhost still, which won't work.
-
-```bash
-docker run -p 80:4000 -it appfolio/destiny_app:dev
 ```
 
 If you want to run the app in development mode in a docker container (not recommended) you can use the following command. If you are using boot2docker the links in the confirmation email will point to localhost still, which won't work.
