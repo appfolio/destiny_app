@@ -23,8 +23,10 @@
 
       <div class="form-group">
         <div class="col-xs-offset-2 col-xs-4">
-          <%= link_to "Sign in with Google", user_omniauth_authorize_path(:google_oauth2),
-            class: "btn btn-default" %>
+          <% if DestinyApp::Application.config.oauth_configured %>
+            <%= link_to "Sign in with Google", user_omniauth_authorize_path(:google_oauth2),
+              class: "btn btn-default" %>
+          <% end %>
         </div>
         <div class="col-xs-offset-2 col-xs-4">
           <%= f.submit "Log in", class: "btn btn-default pull-right" %>

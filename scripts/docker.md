@@ -7,6 +7,7 @@ Example docker run command (Don't forget to set those environment variables)
 ```bash
 docker run -e HOST=$HOST \
            -e PORT=$PORT \
+           -e SECRET_KEY_BASE=$SECRET_KEY_BASE
            -e SECRET_KEY=$SECRET_KEY \
            -e PEPPER=$PEPPER \
            -e GUARD_PASS=$GUARD_PASS \
