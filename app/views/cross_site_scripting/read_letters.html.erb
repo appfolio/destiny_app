@@ -1,0 +1,49 @@
+<div class="row">
+  <div class="col-xs-12 title">
+    <h1>Welcome <%= current_user.name %></h1>
+    <h2>Cross Site Scripting Reference Page</h2>
+    <h3>Displaying letters</h3>
+    <br/><p class="lead">Be careful with what you mark as html_safe!</p>
+    <hr/>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-6">
+    <h3>Source for escaped output</h3>
+    <div class="row" style="padding-bottom:20px;">
+      <div class="col-xs-12">
+        <p class="lead text-center">The view code...</p>
+        <%= raw CodeRay.scan("\<\%= letter.content \%\>", :erb).div(line_numbers: :table) %>
+      </div>
+    </div>
+  </div>
+  <div class="col-xs-6">
+    <ul class="list-group">
+    <% @letters.each do |letter| %>
+      <li class="list-group-item"><%= letter.content %></li>
+    <% end %>
+    </ul>
+  </div>
+</div>
+
+<hr/>
+
+<div class="row">
+  <div class="col-xs-6">
+    <h3>Source for unescaped output</h3>
+    <div class="row" style="padding-bottom:20px;">
+      <div class="col-xs-12">
+        <p class="lead text-center">The view code...</p>
+        <%= raw CodeRay.scan("\<\%= letter.content.html_safe \%\>", :erb).div(line_numbers: :table) %>
+      </div>
+    </div>
+  </div>
+  <div class="col-xs-6">
+    <ul class="list-group">
+    <% @letters.each do |letter| %>
+      <li class="list-group-item"><%= letter.content.html_safe %></li>
+    <% end %>
+    </ul>
+  </div>
+</div>

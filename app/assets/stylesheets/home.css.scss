@@ -1,0 +1,70 @@
+/* Extra small devices (phones, less than 768px) */
+/* No media query since this is the default in Bootstrap */
+/* Custom, iPhone Retina */
+.big-icon
+{
+  font-size:250px;
+}
+
+.big-ref-icon:hover
+{
+  color: rgba(236,167, 98,1);
+}
+
+.big-chal-icon:hover
+{
+  color: rgba(236, 98, 98,1);
+}
+
+.floaty-box
+{
+  box-shadow:none;
+  display:table;
+  table-layout:fixed;
+  margin-top:0;
+  margin-bottom:60px;
+}
+
+@media only screen and (min-width : 320px) {
+  .floaty-box
+  {
+    height:280px;
+  }
+
+}
+
+/* Extra Small Devices, Phones */
+@media only screen and (min-width : 480px) {
+  .floaty-box
+  {
+    height:360px;
+  }
+
+}
+
+/* Small Devices, Tablets */
+@media only screen and (min-width : 768px) {
+  .floaty-box
+  {
+    height:320px;
+  }
+
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (min-width : 992px) {
+  .floaty-box
+  {
+    height:360px;
+  }
+
+}
+
+/* Large Devices, Wide Screens */
+@media only screen and (min-width : 1200px) {
+  .floaty-box
+  {
+    height:400px;
+  }
+
+}

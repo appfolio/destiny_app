@@ -1,0 +1,51 @@
+<div class="row">
+  <div class="col-xs-12 title">
+    <h1>Welcome <%= current_user.name %></h1>
+    <h2>Mass Assignment Reference Page</h2>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <hr/>
+    <nav>
+      <ul class="pager">
+        <% if @ref_num == 0 %>
+          <li class="previous disabled">
+            <%= link_to "<span aria-hidden='true'>&larr;</span> Previous".html_safe,
+              "#", html_options: {class: "disabled"} %>
+          </li>
+        <% else %>
+          <li class="previous">
+            <%= link_to "<span aria-hidden='true'>&larr;</span> Previous".html_safe,
+              mass_assignment_ma_path(ref_num: @ref_num - 1) %>
+          </li>
+        <% end %>
+
+        <% if @ref_num == @refs.size-1 %>
+          <li class="next disabled">
+            <%= link_to "Next <span aria-hidden='true'>&rarr;</span>".html_safe,
+              "#", html_options: {class: "disabled", onclick: "reset_submit_listener()" } %>
+          </li>
+        <% else %>
+          <li class="next">
+            <%= link_to "Next <span aria-hidden='true'>&rarr;</span>".html_safe,
+              mass_assignment_ma_path(ref_num: @ref_num + 1) %>
+          </li>
+        <% end %>
+      </ul>
+    </nav>
+  </div>
+</div>
+
+<%= render partial: "mass_assignment_reference", locals: { ref: @ref } %>
+
+<div class="row top-buffer">
+  <div class="col-xs-12 text-center">
+    <p><b>Additional Sources</b></p>
+    <p><%= link_to "http://code.tutsplus.com/tutorials/mass-assignment-rails-and-you--net-31695",
+      "http://code.tutsplus.com/tutorials/mass-assignment-rails-and-you--net-31695" %></p>
+    <p><%= link_to "http://www.happybearsoftware.com/how-i-avoid-the-rails-mass-assignment-security-mistake.html",
+      "http://www.happybearsoftware.com/how-i-avoid-the-rails-mass-assignment-security-mistake.html" %></p>
+  </div>
+</div>

@@ -1,0 +1,20 @@
+<%
+  users_hash = {
+    'admin' => {
+      :email              => 'admin@appfolio.com',
+      :name               => 'Bob User',
+      :mobile_number      => '805-555-1212',
+      :encrypted_password => User.new(:password => 'Appfolio55%').encrypted_password,
+      :confirmed_at       => DateTime.now
+    },
+    'guest' => {
+      :email              => 'guest@appfolio.com',
+      :name               => 'Bobby User',
+      :mobile_number      => '805-555-1212',
+      :encrypted_password => User.new(:password => 'Appfolio55%').encrypted_password,
+      :confirmed_at       => DateTime.now
+    }
+  }
+%>
+
+<%= users_hash.to_yaml %>
