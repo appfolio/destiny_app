@@ -22,3 +22,4 @@ tags
 Dockerfile
 supervisord.conf
 setup.sh
+config/google_oauth_secrets.yml
