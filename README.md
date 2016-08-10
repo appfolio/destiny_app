@@ -1,10 +1,10 @@
 # destiny_app
 
-destiny_app is a web application security training tool with a focus on [ruby on rails](http://rubyonrails.org/) applications that can be ran locally on your mac or linux box. It covers relevant security issues from [OWASP's Top Ten Project](https://www.owasp.org/index.php/Category:OWASP_Top_Ten_Project) and the [Rails Security Guide](http://guides.rubyonrails.org/security.html) for rails 4.
+destiny_app is a web application security training tool with a focus on [ruby on rails](http://rubyonrails.org/) applications that can be ran locally on your mac or linux box. It covers relevant security issues from [OWASP's Top Ten Project](https://www.owasp.org/index.php/Category:OWASP_Top_Ten_Project) and the [Rails Security Guide](http://guides.rubyonrails.org/security.html) for rails 4. It also has [Docker images](docker/) that are plug and play!
 
 ## Quick Start
 
-Prereqs: _install ruby, rails, and mysql for this app to work without modification._
+Prereqs: _install ruby, rails, and mysql for this app to work without modification._ (using the [Docker images](docker/) may be easier and quicker)
 
 You can run the rails destiny_app locally by...
 
@@ -35,15 +35,17 @@ client_secret: "yoursecret"
 
 
 
-## Setting up destiny in production
+## Running destiny_app in production
 
 When running in production you will need to set the following environment
 variables.
 
+- HOST
 - PORT
+- SECRET\_KEY_BASE (Can be generated with `rake secret`)
 - SECRET_KEY (Can be generated with `rake secret`)
-- PEPPER
-- GUARD_PASS
+- PEPPER (Can be generated with `rake secret`)
+- GUARD_PASS (Can be generated with `rake secret`)
 
 
 Additional parameters that you can set in all environments...
@@ -58,7 +60,7 @@ YAML Files you may want to modify...
 	* Contains an array of strings that are domains that users are allowed to authenticate through omniauthable from. The default domain is "gmail.com", so everyone with an address ending in that will be able to authenticate.
 
 ## Experimenting with Sqlmap
-After gaining a good understanding of the basics from the SQL Injection Reference you can learn about Sqlmap to get a thorough guideline for digging deeper into SQLI. Here's a sample command to run against destiny with Sqlmap. Your CSRF token in the header and session cookie will be different.
+After gaining a good understanding of the basics from the SQL Injection Reference you can learn about Sqlmap to get a thorough guideline for digging deeper into SQLI. Here's a sample command to run against destiny_app with Sqlmap. Your CSRF token in the header and session cookie will be different.
 
 ```bash
 python sqlmap.py -u http://localhost:4000/sql_injection/where \
@@ -71,7 +73,7 @@ python sqlmap.py -u http://localhost:4000/sql_injection/where \
 				 --string="success"
 
 ```
-Sqlmap has a lot of great features that I leave to you to take a look into, check out the site [here](http://sqlmap.org/).
+Sqlmap has a lot of great features, check out the site [here](http://sqlmap.org/).
 
 ## Sources and Credit
 
